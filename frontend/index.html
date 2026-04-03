@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>theatron — session recordings</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: monospace; background: #1a1a2e; color: #e0e0e0; padding: 20px; }
+    h1 { color: #00d4aa; margin-bottom: 20px; }
+    .controls { margin-bottom: 20px; display: flex; gap: 10px; align-items: center; }
+    .controls input, .controls button, .controls select {
+      font-family: monospace; padding: 8px 12px; background: #16213e;
+      border: 1px solid #0f3460; color: #e0e0e0; border-radius: 4px;
+    }
+    .controls button { cursor: pointer; background: #0f3460; }
+    .controls button:hover { background: #00d4aa; color: #1a1a2e; }
+    #key-input { width: 500px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #16213e; }
+    th { color: #00d4aa; }
+    tr:hover { background: #16213e; cursor: pointer; }
+    #terminal { background: #0a0a1a; padding: 16px; border-radius: 8px;
+      white-space: pre-wrap; word-wrap: break-word; font-size: 14px;
+      line-height: 1.4; min-height: 400px; display: none; overflow: auto; }
+    .status { color: #888; margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <h1>theatron</h1>
+
+  <div class="controls">
+    <input id="key-input" type="password" placeholder="age secret key (AGE-SECRET-KEY-...)">
+    <button id="btn-refresh">refresh</button>
+    <label>speed: <select id="speed">
+      <option value="0.5">0.5x</option>
+      <option value="1" selected>1x</option>
+      <option value="2">2x</option>
+      <option value="5">5x</option>
+      <option value="10">10x</option>
+    </select></label>
+  </div>
+
+  <div id="list"></div>
+  <div id="status" class="status"></div>
+  <div id="terminal"></div>
+
+  <script type="module">
+    const API = window.location.origin;
+    let recordings = [];
+
+    document.getElementById('btn-refresh').addEventListener('click', loadRecordings);
+
+    async function loadRecordings() {
+      const res = await fetch(`${API}/api/recordings`);
+      const data = await res.json();
+      recordings = data.recordings;
+      renderList();
+    }
+
+    function renderList() {
+      const list = document.getElementById('list');
+      list.textContent = '';
+
+      if (!recordings.length) {
+        const p = document.createElement('p');
+        p.className = 'status';
+        p.textContent = 'No recordings found.';
+        list.appendChild(p);
+        return;
+      }
+
+      const table = document.createElement('table');
+      const thead = document.createElement('tr');
+      for (const h of ['user', 'file', 'size', 'date']) {
+        const th = document.createElement('th');
+        th.textContent = h;
+        thead.appendChild(th);
+      }
+      table.appendChild(thead);
+
+      for (const r of recordings) {
+        const tr = document.createElement('tr');
+        const date = new Date(r.modified * 1000).toISOString().slice(0, 19).replace('T', ' ');
+        const size = (r.size / 1024).toFixed(1) + ' KB';
+
+        const cells = [r.user, r.filename + (r.filename.endsWith('.age') ? ' [encrypted]' : ''), size, date];
+        for (const val of cells) {
+          const td = document.createElement('td');
+          td.textContent = val;
+          tr.appendChild(td);
+        }
+        tr.addEventListener('click', () => playRecording(r.user, r.filename));
+        table.appendChild(tr);
+      }
+      list.appendChild(table);
+    }
+
+    async function playRecording(user, filename) {
+      const status = document.getElementById('status');
+      const terminal = document.getElementById('terminal');
+      terminal.style.display = 'block';
+      terminal.textContent = '';
+      status.textContent = 'Loading...';
+
+      const res = await fetch(`${API}/api/recordings/${encodeURIComponent(user)}/${encodeURIComponent(filename)}`);
+      if (!res.ok) {
+        status.textContent = `Error: ${res.status}`;
+        return;
+      }
+
+      let text;
+      if (filename.endsWith('.age')) {
+        const key = document.getElementById('key-input').value.trim();
+        if (!key) {
+          status.textContent = 'Enter your age secret key to decrypt.';
+          return;
+        }
+        status.textContent = 'Decrypting...';
+        try {
+          const encrypted = new Uint8Array(await res.arrayBuffer());
+          const { Decrypter } = await import('./age-decrypt.js');
+          text = await Decrypter.decrypt(encrypted, key);
+        } catch (e) {
+          status.textContent = `Decryption failed: ${e.message}`;
+          return;
+        }
+      } else {
+        text = await res.text();
+      }
+
+      const lines = text.split('\n').filter(l => l.trim());
+      if (!lines.length) {
+        status.textContent = 'Empty recording.';
+        return;
+      }
+
+      try {
+        const header = JSON.parse(lines[0]);
+        let info = `Terminal: ${header.width}x${header.height}`;
+        if (header.epitropos) {
+          info += ` | Host: ${header.epitropos.host} | Rec: ${header.epitropos.rec}`;
+        }
+        status.textContent = info;
+      } catch {
+        status.textContent = 'Playing...';
+      }
+
+      const speed = parseFloat(document.getElementById('speed').value) || 1;
+      let prevTime = 0;
+      for (let i = 1; i < lines.length; i++) {
+        let event;
+        try { event = JSON.parse(lines[i]); } catch { continue; }
+        if (!Array.isArray(event) || event.length < 3) continue;
+
+        const [elapsed, type, data] = event;
+        const delay = (elapsed - prevTime) / speed;
+        if (delay > 0 && delay < 30) {
+          await new Promise(r => setTimeout(r, delay * 1000));
+        }
+        prevTime = elapsed;
+
+        if (type === 'o') {
+          terminal.textContent += data;
+          terminal.scrollTop = terminal.scrollHeight;
+        }
+      }
+      status.textContent += ' (finished)';
+    }
+
+    loadRecordings();
+  </script>
+</body>
+</html>
