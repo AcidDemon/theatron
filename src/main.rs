@@ -31,7 +31,7 @@ struct RecordingList {
 async fn main() {
     let args: Vec<String> = std::env::args().collect();
     let mut recordings_dir = "/var/log/ssh-sessions".to_string();
-    let mut static_dir = "./frontend/dist".to_string();
+    let mut static_dir = "./frontend".to_string();
     let mut bind = "127.0.0.1:3000".to_string();
 
     let mut i = 1;
@@ -55,9 +55,7 @@ async fn main() {
                 eprintln!(
                     "  -d, --dir <PATH>      Recordings directory (default: /var/log/ssh-sessions)"
                 );
-                eprintln!(
-                    "  --static <PATH>        Static frontend files (default: ./frontend/dist)"
-                );
+                eprintln!("  --static <PATH>        Static frontend files (default: ./frontend)");
                 eprintln!("  -b, --bind <ADDR>      Listen address (default: 127.0.0.1:3000)");
                 std::process::exit(0);
             }

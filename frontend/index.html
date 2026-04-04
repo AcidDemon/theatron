@@ -1,174 +1,1089 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>theatron — session recordings</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: monospace; background: #1a1a2e; color: #e0e0e0; padding: 20px; }
-    h1 { color: #00d4aa; margin-bottom: 20px; }
-    .controls { margin-bottom: 20px; display: flex; gap: 10px; align-items: center; }
-    .controls input, .controls button, .controls select {
-      font-family: monospace; padding: 8px 12px; background: #16213e;
-      border: 1px solid #0f3460; color: #e0e0e0; border-radius: 4px;
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>THEATRON | Session Recordings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "secondary-fixed-dim": "#56e15b",
+        "inverse-surface": "#e5e2e1",
+        "surface-bright": "#3a3939",
+        "error": "#ffb4ab",
+        "outline": "#84967e",
+        "primary": "#ebffe2",
+        "surface-container-highest": "#353534",
+        "on-primary-container": "#007117",
+        "surface-container-high": "#2a2a2a",
+        "surface-container-lowest": "#0e0e0e",
+        "primary-container": "#00ff41",
+        "on-secondary-fixed": "#002203",
+        "on-surface-variant": "#b9ccb2",
+        "on-secondary": "#003908",
+        "on-error": "#690005",
+        "inverse-on-surface": "#313030",
+        "surface-dim": "#131313",
+        "on-secondary-container": "#003506",
+        "error-container": "#93000a",
+        "surface": "#131313",
+        "on-primary": "#003907",
+        "on-tertiary-fixed-variant": "#005311",
+        "outline-variant": "#3b4b37",
+        "secondary-fixed": "#74ff74",
+        "surface-variant": "#353534",
+        "on-tertiary-fixed": "#002203",
+        "on-background": "#e5e2e1",
+        "on-error-container": "#ffdad6",
+        "tertiary-fixed-dim": "#86da80",
+        "tertiary": "#ecffe4",
+        "secondary-container": "#03ab2b",
+        "surface-container": "#201f1f",
+        "on-tertiary": "#003909",
+        "tertiary-fixed": "#a1f79a",
+        "on-primary-fixed": "#002203",
+        "tertiary-container": "#9cf195",
+        "on-tertiary-container": "#1c7024",
+        "inverse-primary": "#006e16",
+        "primary-fixed-dim": "#00e639",
+        "surface-tint": "#00e639",
+        "on-surface": "#e5e2e1",
+        "surface-container-low": "#1c1b1b",
+        "secondary": "#56e15b",
+        "primary-fixed": "#72ff70",
+        "on-primary-fixed-variant": "#00530e",
+        "on-secondary-fixed-variant": "#00530f",
+        "background": "#131313"
+      },
+      borderRadius: {
+        DEFAULT: "0.125rem",
+        lg: "0.25rem",
+        xl: "0.5rem",
+        full: "0.75rem"
+      },
+      fontFamily: {
+        headline: ["Space Grotesk"],
+        body: ["Inter"],
+        label: ["Space Grotesk"],
+        mono: ["Share Tech Mono"]
+      }
     }
-    .controls button { cursor: pointer; background: #0f3460; }
-    .controls button:hover { background: #00d4aa; color: #1a1a2e; }
-    #key-input { width: 500px; }
-    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-    th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #16213e; }
-    th { color: #00d4aa; }
-    tr:hover { background: #16213e; cursor: pointer; }
-    #terminal { background: #0a0a1a; padding: 16px; border-radius: 8px;
-      white-space: pre-wrap; word-wrap: break-word; font-size: 14px;
-      line-height: 1.4; min-height: 400px; display: none; overflow: auto; }
-    .status { color: #888; margin: 10px 0; }
-  </style>
+  }
+};
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block; line-height: 1; text-transform: none;
+    letter-spacing: normal; word-wrap: normal; white-space: nowrap; direction: ltr;
+  }
+  body { background-color: #131313; color: #e5e2e1; font-family: 'Inter', sans-serif; }
+  .glass-panel { background: rgba(53, 53, 52, 0.4); backdrop-filter: blur(24px); }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: #0e0e0e; }
+  ::-webkit-scrollbar-thumb { background: #3b4b37; }
+  ::-webkit-scrollbar-thumb:hover { background: #00ff41; }
+  .view-section { display: none; }
+  .view-section.active { display: block; }
+  .nav-link.active-nav { color: #00FF41; background: #131313; border-left: 2px solid #00FF41; }
+  .nav-link:not(.active-nav) { color: rgba(86, 225, 91, 0.4); border-left: 2px solid transparent; }
+</style>
 </head>
-<body>
-  <h1>theatron</h1>
+<body class="flex min-h-screen font-body selection:bg-primary-container selection:text-on-primary">
 
-  <div class="controls">
-    <input id="key-input" type="password" placeholder="age secret key (AGE-SECRET-KEY-...)">
-    <button id="btn-refresh">refresh</button>
-    <label>speed: <select id="speed">
-      <option value="0.5">0.5x</option>
-      <option value="1" selected>1x</option>
-      <option value="2">2x</option>
-      <option value="5">5x</option>
-      <option value="10">10x</option>
-    </select></label>
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-8 bg-[#0E0E0E] w-64 z-50">
+  <div class="px-6 mb-10">
+    <h2 class="text-[#00FF41] font-bold font-mono tracking-wider text-sm">TERMINAL ARCHITECT</h2>
+    <p class="text-[#56E15B]/40 text-[10px] font-mono mt-1 tracking-[0.2em]">SESSION_ARCHIVE</p>
+  </div>
+  <nav class="flex-1 space-y-1" id="sidebar-nav">
+    <a href="#" data-view="dashboard" class="nav-link active-nav flex items-center gap-3 px-4 py-3 font-mono uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all">
+      <span class="material-symbols-outlined text-lg">dashboard</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="#" data-view="sessions" class="nav-link flex items-center gap-3 px-4 py-3 font-mono uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all">
+      <span class="material-symbols-outlined text-lg">list_alt</span>
+      <span>Sessions</span>
+    </a>
+    <a href="#" data-view="viewer" class="nav-link flex items-center gap-3 px-4 py-3 font-mono uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all">
+      <span class="material-symbols-outlined text-lg">terminal</span>
+      <span>Viewer</span>
+    </a>
+    <a href="#" data-view="exports" class="nav-link flex items-center gap-3 px-4 py-3 font-mono uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all">
+      <span class="material-symbols-outlined text-lg">download</span>
+      <span>Exports</span>
+    </a>
+  </nav>
+  <div class="mt-auto border-t border-[#00FF41]/5 pt-4">
+    <a href="#" class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-mono uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all">
+      <span class="material-symbols-outlined text-lg">menu_book</span>
+      <span>Docs</span>
+    </a>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="ml-64 flex-1 flex flex-col bg-[#131313]">
+  <!-- Top Header -->
+  <header class="flex justify-between items-center w-full px-8 h-16 bg-[#131313] border-b border-[#00FF41]/10 sticky top-0 z-40">
+    <div class="flex items-center gap-6">
+      <span class="text-xl font-bold text-[#00FF41] tracking-widest font-headline">THEATRON</span>
+      <div class="relative group hidden md:block">
+        <span class="absolute inset-y-0 left-3 flex items-center text-[#56E15B]/40">
+          <span class="material-symbols-outlined text-sm">search</span>
+        </span>
+        <input id="global-search" class="bg-surface-container-lowest border-none text-xs font-mono py-2 pl-10 pr-4 w-64 focus:ring-1 focus:ring-[#00FF41] rounded-sm placeholder-[#56E15B]/20" placeholder="CMD_LINE_SEARCH..." type="text"/>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <button id="btn-decrypt-toggle" class="p-2 text-[#56E15B]/60 hover:bg-[#00FF41]/5 hover:text-[#00FF41] transition-colors rounded-sm" title="Decryption key">
+        <span class="material-symbols-outlined">key</span>
+      </button>
+      <button class="p-2 text-[#56E15B]/60 hover:bg-[#00FF41]/5 hover:text-[#00FF41] transition-colors rounded-sm">
+        <span class="material-symbols-outlined">settings</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Decrypt Key Modal (hidden by default) -->
+  <div id="decrypt-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+    <div class="glass-panel border border-[#00FF41]/20 p-8 w-[500px] shadow-[0_12px_40px_rgba(0,255,65,0.08)]">
+      <h3 class="text-[#00FF41] font-mono text-xs uppercase tracking-widest font-bold mb-4">AGE_DECRYPTION_KEY</h3>
+      <p class="text-on-surface-variant text-xs font-mono mb-4">Paste your age secret key to decrypt .age recordings client-side. The key never leaves your browser.</p>
+      <textarea id="age-key-input" rows="3" class="w-full bg-surface-container-lowest border border-[#00FF41]/10 text-xs font-mono text-on-surface p-3 focus:ring-1 focus:ring-[#00FF41] rounded-sm placeholder-[#56E15B]/20 resize-none" placeholder="AGE-SECRET-KEY-1..."></textarea>
+      <div id="key-status" class="mt-2 text-[10px] font-mono text-[#56E15B]/40 h-4"></div>
+      <div class="flex gap-3 mt-4">
+        <button id="btn-save-key" class="flex-1 bg-primary-container text-on-primary font-mono text-xs py-3 rounded-sm font-bold tracking-widest hover:opacity-90 transition-opacity">SAVE_KEY</button>
+        <button id="btn-close-modal" class="px-6 border border-outline-variant text-on-surface font-mono text-xs py-3 rounded-sm hover:bg-surface-container-highest transition-colors">CLOSE</button>
+      </div>
+    </div>
   </div>
 
-  <div id="list"></div>
-  <div id="status" class="status"></div>
-  <div id="terminal"></div>
+  <!-- ============== DASHBOARD VIEW ============== -->
+  <div id="view-dashboard" class="view-section active">
+    <div class="p-8 max-w-7xl mx-auto w-full space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-headline font-bold text-[#00FF41] tracking-tight uppercase">Dashboard_Overview</h1>
+          <p id="dash-sync-time" class="text-[#56E15B]/60 font-mono text-sm mt-1"></p>
+        </div>
+        <div class="flex gap-2">
+          <div class="px-4 py-2 bg-surface-container-low border-l-2 border-[#56E15B] flex flex-col">
+            <span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">System_Status</span>
+            <span class="text-[#56E15B] font-mono text-sm">OPERATIONAL</span>
+          </div>
+          <div class="px-4 py-2 bg-surface-container-low border-l-2 border-primary-container flex flex-col">
+            <span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">Encryption</span>
+            <span class="text-primary-container font-mono text-sm">AGE_X25519</span>
+          </div>
+        </div>
+      </div>
 
-  <script type="module">
-    const API = window.location.origin;
-    let recordings = [];
+      <!-- Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-surface-container-lowest p-5 flex flex-col justify-between h-32 relative overflow-hidden group">
+          <div class="absolute top-0 right-0 w-16 h-16 bg-[#00FF41]/5 -rotate-45 translate-x-8 -translate-y-8 group-hover:bg-[#00FF41]/10 transition-colors"></div>
+          <span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest z-10">Total_Sessions</span>
+          <div class="flex items-baseline gap-2 z-10">
+            <span id="stat-total" class="text-4xl font-headline font-bold text-on-surface">--</span>
+          </div>
+        </div>
+        <div class="bg-surface-container-lowest p-5 flex flex-col justify-between h-32 relative overflow-hidden group">
+          <span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">Storage_Usage</span>
+          <div class="flex flex-col gap-2">
+            <span id="stat-storage" class="text-3xl font-headline font-bold text-on-surface">--</span>
+            <div class="h-1 bg-surface-container-highest w-full overflow-hidden">
+              <div id="stat-storage-bar" class="h-full bg-primary-container" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-surface-container-lowest p-5 flex flex-col justify-between h-32 relative overflow-hidden group">
+          <span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">Encrypted_Files</span>
+          <div class="flex items-baseline gap-2">
+            <span id="stat-encrypted" class="text-4xl font-headline font-bold text-on-surface">--</span>
+          </div>
+        </div>
+        <div class="bg-surface-container-lowest p-5 flex flex-col justify-between h-32 relative overflow-hidden group">
+          <span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">Unique_Users</span>
+          <div class="flex items-baseline gap-2">
+            <span id="stat-users" class="text-4xl font-headline font-bold text-on-surface">--</span>
+          </div>
+        </div>
+      </div>
 
-    document.getElementById('btn-refresh').addEventListener('click', loadRecordings);
+      <!-- Recent Sessions Table -->
+      <div class="space-y-4">
+        <div class="flex justify-between items-center">
+          <h3 class="text-[#00FF41] font-mono text-xs uppercase tracking-widest font-bold">Recent_Sessions</h3>
+          <a href="#" data-view="sessions" class="nav-trigger text-[10px] font-mono text-[#56E15B]/40 hover:text-[#00FF41] uppercase tracking-wider">View_All_</a>
+        </div>
+        <div class="bg-surface-container-lowest overflow-hidden">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-surface-container-low border-b border-[#00FF41]/10">
+              <tr>
+                <th class="px-6 py-3 font-mono text-[10px] text-[#56E15B]/40 uppercase tracking-widest">User</th>
+                <th class="px-6 py-3 font-mono text-[10px] text-[#56E15B]/40 uppercase tracking-widest">Filename</th>
+                <th class="px-6 py-3 font-mono text-[10px] text-[#56E15B]/40 uppercase tracking-widest">Size</th>
+                <th class="px-6 py-3 font-mono text-[10px] text-[#56E15B]/40 uppercase tracking-widest">Date</th>
+                <th class="px-6 py-3 font-mono text-[10px] text-[#56E15B]/40 uppercase tracking-widest text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="dash-recent-body" class="divide-y divide-[#00FF41]/5"></tbody>
+          </table>
+        </div>
+      </div>
 
-    async function loadRecordings() {
-      const res = await fetch(`${API}/api/recordings`);
-      const data = await res.json();
-      recordings = data.recordings;
-      renderList();
+      <footer class="flex flex-col md:flex-row justify-between items-center py-6 border-t border-[#00FF41]/5 text-[10px] font-mono text-[#56E15B]/20 uppercase tracking-widest">
+        <span>THEATRON // SESSION_ARCHIVE_VIEWER</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ============== SESSIONS VIEW ============== -->
+  <div id="view-sessions" class="view-section">
+    <div class="pt-6 pb-10 px-6 min-h-screen">
+      <!-- Search -->
+      <div class="max-w-6xl mx-auto mb-8">
+        <div class="flex flex-col md:flex-row gap-4 items-end justify-between">
+          <div class="w-full md:w-1/2">
+            <label class="block font-mono text-[10px] text-[#56E15B]/40 mb-2 tracking-widest">QUERY_SESSIONS</label>
+            <div class="glass-panel flex items-center px-4 py-3 rounded-sm border border-[#00FF41]/10 focus-within:border-[#00FF41]/40 transition-all">
+              <span class="material-symbols-outlined text-[#00FF41] mr-3 text-lg">search</span>
+              <input id="session-search" class="bg-transparent border-none focus:ring-0 text-sm font-mono text-on-surface placeholder-[#56E15B]/20 w-full" placeholder="Filter by user or filename..." type="text"/>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button id="btn-refresh" class="px-6 bg-surface-container-low border border-[#00FF41]/10 text-xs font-mono text-[#00FF41] rounded-sm py-3 hover:bg-[#00FF41]/5 transition-colors">
+              REFRESH_
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session Table -->
+      <div class="max-w-6xl mx-auto">
+        <div class="bg-surface-container-lowest rounded-sm overflow-hidden border border-[#00FF41]/5">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-surface-container-low border-b border-[#00FF41]/10">
+                  <th class="px-6 py-4 font-mono text-[10px] text-[#56E15B]/40 tracking-widest uppercase">User</th>
+                  <th class="px-6 py-4 font-mono text-[10px] text-[#56E15B]/40 tracking-widest uppercase">Filename</th>
+                  <th class="px-6 py-4 font-mono text-[10px] text-[#56E15B]/40 tracking-widest uppercase">Size</th>
+                  <th class="px-6 py-4 font-mono text-[10px] text-[#56E15B]/40 tracking-widest uppercase">Date</th>
+                  <th class="px-6 py-4 font-mono text-[10px] text-[#56E15B]/40 tracking-widest uppercase">Type</th>
+                  <th class="px-6 py-4 font-mono text-[10px] text-[#56E15B]/40 tracking-widest uppercase">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="session-table-body" class="divide-y divide-[#00FF41]/5"></tbody>
+            </table>
+          </div>
+          <div class="bg-surface-container-lowest px-6 py-4 border-t border-[#00FF41]/10 flex justify-between items-center">
+            <span id="session-count" class="font-mono text-[10px] text-[#56E15B]/40 tracking-widest"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Insight Cards -->
+      <div class="max-w-6xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface-container-low p-6 rounded-sm border border-[#00FF41]/5 relative overflow-hidden group">
+          <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+            <span class="material-symbols-outlined text-6xl">history</span>
+          </div>
+          <h3 class="font-mono text-[10px] text-[#56E15B]/40 tracking-widest mb-4">TOTAL_VOLUME</h3>
+          <p id="card-volume" class="text-4xl font-bold font-headline text-on-surface">--</p>
+        </div>
+        <div class="bg-surface-container-low p-6 rounded-sm border border-[#00FF41]/5 relative overflow-hidden group">
+          <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+            <span class="material-symbols-outlined text-6xl">person</span>
+          </div>
+          <h3 class="font-mono text-[10px] text-[#56E15B]/40 tracking-widest mb-4">UNIQUE_OPERATORS</h3>
+          <p id="card-operators" class="text-4xl font-bold font-headline text-on-surface">--</p>
+        </div>
+        <div class="bg-surface-container-low p-6 rounded-sm border border-[#00FF41]/5 relative overflow-hidden group">
+          <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+            <span class="material-symbols-outlined text-6xl">lock</span>
+          </div>
+          <h3 class="font-mono text-[10px] text-[#56E15B]/40 tracking-widest mb-4">ENCRYPTED_RATIO</h3>
+          <p id="card-encrypted-ratio" class="text-4xl font-bold font-headline text-on-surface">--</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== VIEWER VIEW ============== -->
+  <div id="view-viewer" class="view-section">
+    <div class="flex flex-col h-[calc(100vh-4rem)]">
+      <!-- Session Header Bar -->
+      <div class="px-8 py-4 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container-lowest shrink-0">
+        <div>
+          <div class="flex items-center gap-3 mb-1">
+            <span id="viewer-status-badge" class="bg-surface-container-highest text-[#56E15B]/40 text-[10px] px-2 py-0.5 font-mono tracking-tighter border border-outline-variant/20">NO_SESSION</span>
+            <h1 id="viewer-title" class="font-headline text-xl font-bold tracking-tight text-on-surface">Select a session to play</h1>
+          </div>
+          <div id="viewer-meta" class="flex gap-4 text-[10px] font-mono text-on-surface-variant"></div>
+        </div>
+      </div>
+
+      <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        <!-- Terminal Area -->
+        <div class="flex-1 p-6 flex flex-col min-w-0">
+          <div class="flex-1 bg-[#050505] rounded-lg border border-outline-variant/20 flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <!-- Window chrome -->
+            <div class="h-8 flex items-center justify-between px-4 border-b border-outline-variant/10 bg-surface-container-low shrink-0">
+              <div class="flex gap-2">
+                <div class="w-2.5 h-2.5 rounded-full bg-error/40"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-secondary-container/40"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-primary-container/40"></div>
+              </div>
+              <span id="viewer-tty-label" class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-[0.2em]">tty0</span>
+              <span class="material-symbols-outlined text-xs text-[#56E15B]/30">more_horiz</span>
+            </div>
+            <!-- Terminal output -->
+            <div id="terminal-output" class="flex-1 p-6 font-mono text-sm leading-relaxed overflow-y-auto text-primary/80 selection:bg-primary-container/30 whitespace-pre-wrap"></div>
+            <!-- Playback Controls -->
+            <div class="h-20 px-6 border-t border-outline-variant/10 bg-surface-container-lowest flex flex-col justify-center gap-1 shrink-0">
+              <div class="relative w-full h-1 bg-outline-variant/20 group cursor-pointer" id="progress-bar-track">
+                <div id="progress-bar-fill" class="absolute top-0 left-0 h-full w-0 bg-primary-container shadow-[0_0_10px_rgba(0,255,65,0.4)]"></div>
+                <div id="progress-bar-handle" class="absolute top-1/2 left-0 -translate-y-1/2 w-3 h-3 bg-primary-container border-4 border-[#050505] shadow-lg"></div>
+              </div>
+              <div class="flex items-center justify-between mt-1">
+                <div class="flex items-center gap-4">
+                  <button id="btn-play" class="material-symbols-outlined text-[#00FF41] text-2xl hover:scale-110 transition-transform">play_arrow</button>
+                  <button id="btn-rewind" class="material-symbols-outlined text-on-surface-variant hover:text-on-surface">fast_rewind</button>
+                  <button id="btn-forward" class="material-symbols-outlined text-on-surface-variant hover:text-on-surface">fast_forward</button>
+                  <span id="playback-time" class="text-[11px] font-mono text-on-surface-variant tracking-wider ml-2">00:00 / 00:00</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center gap-1">
+                    <span class="text-[10px] font-mono text-on-surface-variant uppercase">Speed:</span>
+                    <select id="playback-speed" class="bg-transparent border-none text-[11px] font-mono text-primary-container py-0 pr-8 focus:ring-0">
+                      <option value="0.5">0.5x</option>
+                      <option value="1" selected>1.0x</option>
+                      <option value="2">2.0x</option>
+                      <option value="4">4.0x</option>
+                      <option value="10">10x</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Playback info widgets -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 shrink-0">
+            <div class="bg-surface-container-low border border-outline-variant/10 p-4 flex items-center gap-4">
+              <div class="p-2 bg-primary-container/10"><span class="material-symbols-outlined text-primary-container">speed</span></div>
+              <div>
+                <p class="text-[10px] font-mono uppercase tracking-widest text-[#56E15B]/40">Events</p>
+                <p id="widget-events" class="text-sm font-mono text-on-surface">--</p>
+              </div>
+            </div>
+            <div class="bg-surface-container-low border border-outline-variant/10 p-4 flex items-center gap-4">
+              <div class="p-2 bg-secondary-container/10"><span class="material-symbols-outlined text-secondary-container">straighten</span></div>
+              <div>
+                <p class="text-[10px] font-mono uppercase tracking-widest text-[#56E15B]/40">Terminal_Size</p>
+                <p id="widget-size" class="text-sm font-mono text-on-surface">--</p>
+              </div>
+            </div>
+            <div class="bg-surface-container-low border border-outline-variant/10 p-4 flex items-center gap-4">
+              <div class="p-2 bg-error/10"><span class="material-symbols-outlined text-error">lock</span></div>
+              <div>
+                <p class="text-[10px] font-mono uppercase tracking-widest text-[#56E15B]/40">Encryption</p>
+                <p id="widget-encryption" class="text-sm font-mono text-on-surface">--</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="w-full lg:w-80 bg-surface-container-lowest border-l border-outline-variant/10 flex flex-col shrink-0 overflow-hidden">
+          <div class="p-6">
+            <h3 class="text-xs font-mono uppercase tracking-widest text-primary-container mb-4">SESSION_PROPERTIES</h3>
+            <div id="viewer-properties" class="space-y-4 text-sm font-mono">
+              <p class="text-[#56E15B]/40 text-xs">No session loaded</p>
+            </div>
+          </div>
+          <div class="flex-1 border-t border-outline-variant/10 flex flex-col overflow-hidden">
+            <div class="p-6 flex items-center justify-between shrink-0">
+              <h3 class="text-xs font-mono uppercase tracking-widest text-primary-container">RAW_EVENT_LOG</h3>
+            </div>
+            <div id="event-log" class="flex-1 overflow-y-auto px-6 font-mono text-[10px] space-y-2 pb-8"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== EXPORTS VIEW ============== -->
+  <div id="view-exports" class="view-section">
+    <div class="p-8 space-y-8">
+      <div class="flex justify-between items-end">
+        <div class="space-y-1">
+          <p class="font-mono text-[#00FF41] text-[10px] tracking-[0.2em]">EXPORT_CENTER</p>
+          <h2 class="text-3xl font-headline font-bold text-on-surface">Vault Management</h2>
+        </div>
+        <div class="flex gap-4 font-mono text-[10px]">
+          <div class="bg-surface-container-lowest px-4 py-2 border-l-2 border-primary-container">
+            <span class="text-[#56E15B]/40">TOTAL_FILES:</span>
+            <span id="export-total" class="text-on-surface ml-2">--</span>
+          </div>
+          <div class="bg-surface-container-lowest px-4 py-2 border-l-2 border-secondary">
+            <span class="text-[#56E15B]/40">ENCRYPTION:</span>
+            <span class="text-on-surface ml-2">AGE-v1_X25519</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- File Table -->
+      <div class="bg-surface-container-low border border-outline-variant/10">
+        <div class="p-6 border-b border-outline-variant/10 flex justify-between items-center">
+          <h3 class="font-mono text-sm text-[#00FF41]">RECORDING_FILES</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left font-mono text-[11px]">
+            <thead class="bg-surface-container-lowest text-[#56E15B]/40 uppercase tracking-widest border-b border-outline-variant/10">
+              <tr>
+                <th class="px-6 py-4 font-normal">FILE_IDENTIFIER</th>
+                <th class="px-6 py-4 font-normal">USER</th>
+                <th class="px-6 py-4 font-normal">TIMESTAMP</th>
+                <th class="px-6 py-4 font-normal">SIZE</th>
+                <th class="px-6 py-4 font-normal">ENCRYPTION</th>
+                <th class="px-6 py-4 font-normal text-right">ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="export-table-body" class="divide-y divide-outline-variant/5"></tbody>
+          </table>
+        </div>
+        <div class="p-4 bg-surface-container-lowest/50 flex justify-between items-center font-mono text-[10px] text-[#56E15B]/40">
+          <span id="export-count"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+// -- State --
+const API = window.location.origin;
+let allRecordings = [];
+let ageSecretKey = '';
+let currentView = 'dashboard';
+
+// Playback state
+let playbackEvents = [];
+let playbackHeader = null;
+let playbackIndex = 0;
+let playbackTimer = null;
+let isPlaying = false;
+let currentRecording = null;
+
+// -- DOM refs --
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+
+// -- Navigation --
+function navigateTo(view, opts) {
+  currentView = view;
+  $$('.view-section').forEach(s => s.classList.remove('active'));
+  const target = $(`#view-${view}`);
+  if (target) target.classList.add('active');
+
+  $$('.nav-link').forEach(link => {
+    if (link.dataset.view === view) {
+      link.classList.add('active-nav');
+    } else {
+      link.classList.remove('active-nav');
     }
+  });
 
-    function renderList() {
-      const list = document.getElementById('list');
-      list.textContent = '';
+  if (view === 'sessions') renderSessionsView();
+  if (view === 'exports') renderExportsView();
+  if (view === 'dashboard') renderDashboard();
+  if (view === 'viewer' && opts && opts.user && opts.filename) {
+    loadAndPlay(opts.user, opts.filename);
+  }
+}
 
-      if (!recordings.length) {
-        const p = document.createElement('p');
-        p.className = 'status';
-        p.textContent = 'No recordings found.';
-        list.appendChild(p);
+$$('.nav-link, .nav-trigger').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo(link.dataset.view);
+  });
+});
+
+// -- Data loading --
+async function fetchRecordings() {
+  try {
+    const res = await fetch(`${API}/api/recordings`);
+    const data = await res.json();
+    allRecordings = data.recordings || [];
+  } catch (e) {
+    allRecordings = [];
+  }
+  renderDashboard();
+}
+
+// -- Helpers --
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  return (bytes / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
+}
+
+function formatDate(unixSecs) {
+  if (!unixSecs) return '--';
+  return new Date(unixSecs * 1000).toISOString().slice(0, 19).replace('T', ' ');
+}
+
+function formatDuration(secs) {
+  const m = Math.floor(secs / 60);
+  const s = Math.floor(secs % 60);
+  return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+}
+
+function isEncrypted(filename) {
+  return filename.endsWith('.age');
+}
+
+function userInitials(user) {
+  return user.slice(0, 2).toUpperCase();
+}
+
+// Safely create text elements
+function el(tag, classes, text) {
+  const e = document.createElement(tag);
+  if (classes) e.className = classes;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+// -- Dashboard --
+function renderDashboard() {
+  const now = new Date().toISOString().slice(0, 19).replace('T', '_T') + 'Z';
+  $('#dash-sync-time').textContent = `LAST_SYNC: ${now}`;
+
+  const total = allRecordings.length;
+  const totalSize = allRecordings.reduce((s, r) => s + r.size, 0);
+  const encrypted = allRecordings.filter(r => isEncrypted(r.filename)).length;
+  const users = new Set(allRecordings.map(r => r.user)).size;
+
+  $('#stat-total').textContent = total.toLocaleString();
+  $('#stat-storage').textContent = formatSize(totalSize);
+  $('#stat-encrypted').textContent = encrypted.toLocaleString();
+  $('#stat-users').textContent = users.toLocaleString();
+
+  // Recent sessions table (top 5)
+  const tbody = $('#dash-recent-body');
+  tbody.textContent = '';
+  const recent = allRecordings.slice(0, 5);
+  for (const r of recent) {
+    const tr = document.createElement('tr');
+    tr.className = 'hover:bg-surface-container-low/40 transition-colors group cursor-pointer';
+    tr.addEventListener('click', () => {
+      navigateTo('viewer', { user: r.user, filename: r.filename });
+    });
+
+    const tdUser = el('td', 'px-6 py-4 font-mono text-sm text-[#00FF41]', r.user);
+    const tdFile = el('td', 'px-6 py-4 font-mono text-xs text-on-surface/60', r.filename);
+    const tdSize = el('td', 'px-6 py-4 font-mono text-xs text-on-surface/60', formatSize(r.size));
+    const tdDate = el('td', 'px-6 py-4 font-mono text-xs text-on-surface/60', formatDate(r.modified));
+
+    const tdAction = document.createElement('td');
+    tdAction.className = 'px-6 py-4 text-right';
+    const btn = el('button', 'text-[#56E15B]/40 hover:text-primary-container transition-colors font-mono text-[10px] tracking-widest', 'PLAYBACK_');
+    tdAction.appendChild(btn);
+
+    tr.append(tdUser, tdFile, tdSize, tdDate, tdAction);
+    tbody.appendChild(tr);
+  }
+
+  if (!recent.length) {
+    const tr = document.createElement('tr');
+    const td = el('td', 'px-6 py-8 text-center font-mono text-xs text-[#56E15B]/40', 'No recordings found. Check that the recordings directory is configured.');
+    td.colSpan = 5;
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+  }
+}
+
+// -- Sessions view --
+function renderSessionsView() {
+  const search = ($('#session-search').value || '').toLowerCase();
+  const filtered = allRecordings.filter(r =>
+    r.user.toLowerCase().includes(search) || r.filename.toLowerCase().includes(search)
+  );
+
+  const tbody = $('#session-table-body');
+  tbody.textContent = '';
+
+  for (const r of filtered) {
+    const tr = document.createElement('tr');
+    tr.className = 'hover:bg-[#00FF41]/5 transition-colors group relative cursor-pointer';
+    tr.addEventListener('click', () => {
+      navigateTo('viewer', { user: r.user, filename: r.filename });
+    });
+
+    // User cell with initials
+    const tdUser = document.createElement('td');
+    tdUser.className = 'px-6 py-5';
+    const userDiv = document.createElement('div');
+    userDiv.className = 'flex items-center gap-2';
+    const avatar = el('div', 'w-6 h-6 rounded-sm bg-primary-container/10 flex items-center justify-center text-[10px] text-[#00FF41] font-bold', userInitials(r.user));
+    const uname = el('span', 'text-sm font-medium', r.user);
+    userDiv.append(avatar, uname);
+    tdUser.appendChild(userDiv);
+
+    const tdFile = el('td', 'px-6 py-5 font-mono text-sm text-[#00FF41]', r.filename);
+    const tdSize = el('td', 'px-6 py-5 font-mono text-xs text-on-surface-variant', formatSize(r.size));
+    const tdDate = el('td', 'px-6 py-5 font-mono text-xs', formatDate(r.modified));
+
+    const tdType = document.createElement('td');
+    tdType.className = 'px-6 py-5';
+    const enc = isEncrypted(r.filename);
+    const badge = el('span',
+      `bg-surface-container-highest px-2 py-0.5 text-[9px] rounded-sm font-mono ${enc ? 'text-secondary' : 'text-on-surface-variant'}`,
+      enc ? 'X25519' : 'PLAIN'
+    );
+    tdType.appendChild(badge);
+
+    const tdAction = document.createElement('td');
+    tdAction.className = 'px-6 py-5';
+    const actionDiv = document.createElement('div');
+    actionDiv.className = 'flex items-center gap-3';
+    const playBtn = el('button', 'text-[#00FF41] hover:underline font-mono text-[10px] tracking-widest', 'PLAYBACK_');
+    actionDiv.appendChild(playBtn);
+    tdAction.appendChild(actionDiv);
+
+    tr.append(tdUser, tdFile, tdSize, tdDate, tdType, tdAction);
+    tbody.appendChild(tr);
+  }
+
+  $('#session-count').textContent = `SHOWING_${filtered.length}_OF_${allRecordings.length}_SESSIONS`;
+
+  // Insight cards
+  const totalSize = allRecordings.reduce((s, r) => s + r.size, 0);
+  const users = new Set(allRecordings.map(r => r.user)).size;
+  const encCount = allRecordings.filter(r => isEncrypted(r.filename)).length;
+  const ratio = allRecordings.length ? Math.round(encCount / allRecordings.length * 100) : 0;
+
+  $('#card-volume').textContent = formatSize(totalSize);
+  $('#card-operators').textContent = String(users);
+  $('#card-encrypted-ratio').textContent = ratio + '%';
+}
+
+$('#session-search').addEventListener('input', renderSessionsView);
+$('#btn-refresh').addEventListener('click', fetchRecordings);
+
+// -- Exports view --
+function renderExportsView() {
+  const tbody = $('#export-table-body');
+  tbody.textContent = '';
+  $('#export-total').textContent = String(allRecordings.length);
+
+  for (const r of allRecordings) {
+    const tr = document.createElement('tr');
+    const enc = isEncrypted(r.filename);
+    tr.className = 'hover:bg-surface-container-highest transition-colors group';
+
+    // filename
+    const tdFile = document.createElement('td');
+    tdFile.className = 'px-6 py-4';
+    const fileDiv = document.createElement('div');
+    fileDiv.className = 'flex items-center gap-3';
+    const icon = document.createElement('span');
+    icon.className = `material-symbols-outlined ${enc ? 'text-primary-container' : 'text-[#56E15B]/40'}`;
+    icon.textContent = enc ? 'lock' : 'description';
+    const fname = el('span', 'text-on-surface', r.filename);
+    fileDiv.append(icon, fname);
+    tdFile.appendChild(fileDiv);
+
+    const tdUser = el('td', 'px-6 py-4 text-on-surface', r.user);
+    const tdDate = el('td', 'px-6 py-4 text-[#56E15B]/60', formatDate(r.modified));
+    const tdSize = el('td', 'px-6 py-4 text-on-surface', formatSize(r.size));
+
+    const tdEnc = document.createElement('td');
+    tdEnc.className = 'px-6 py-4';
+    const encBadge = el('span',
+      `bg-surface-container-highest px-2 py-1 text-[9px] rounded-sm ${enc ? 'text-secondary' : 'text-on-surface-variant'}`,
+      enc ? 'X25519' : 'NONE'
+    );
+    tdEnc.appendChild(encBadge);
+
+    const tdAction = document.createElement('td');
+    tdAction.className = 'px-6 py-4 text-right';
+    const dlBtn = el('button', 'text-primary-container opacity-40 group-hover:opacity-100 hover:underline transition-all', 'DOWNLOAD_');
+    dlBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      downloadFile(r.user, r.filename);
+    });
+    tdAction.appendChild(dlBtn);
+
+    tr.addEventListener('click', () => {
+      navigateTo('viewer', { user: r.user, filename: r.filename });
+    });
+
+    tr.append(tdFile, tdUser, tdDate, tdSize, tdEnc, tdAction);
+    tbody.appendChild(tr);
+  }
+
+  $('#export-count').textContent = `PAGE_01 // ${allRecordings.length}_FILES`;
+}
+
+function downloadFile(user, filename) {
+  const url = `${API}/api/recordings/${encodeURIComponent(user)}/${encodeURIComponent(filename)}`;
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+// -- Viewer / Playback --
+async function loadAndPlay(user, filename) {
+  stopPlayback();
+  currentRecording = { user, filename };
+
+  const term = $('#terminal-output');
+  term.textContent = '';
+  $('#viewer-title').textContent = `${user}/${filename}`;
+  $('#viewer-status-badge').textContent = 'LOADING';
+  $('#viewer-status-badge').className = 'bg-primary-container/10 text-primary-container text-[10px] px-2 py-0.5 font-mono tracking-tighter border border-primary-container/20';
+  $('#viewer-meta').textContent = '';
+  $('#event-log').textContent = '';
+  $('#progress-bar-fill').style.width = '0%';
+  $('#progress-bar-handle').style.left = '0%';
+  $('#playback-time').textContent = '00:00 / 00:00';
+
+  try {
+    const res = await fetch(`${API}/api/recordings/${encodeURIComponent(user)}/${encodeURIComponent(filename)}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    let text;
+    const enc = isEncrypted(filename);
+
+    if (enc) {
+      if (!ageSecretKey) {
+        term.textContent = '-- Encrypted recording. Set your age secret key first (click the key icon in the header). --';
+        $('#viewer-status-badge').textContent = 'KEY_REQUIRED';
+        $('#widget-encryption').textContent = 'AGE_ENCRYPTED';
         return;
       }
-
-      const table = document.createElement('table');
-      const thead = document.createElement('tr');
-      for (const h of ['user', 'file', 'size', 'date']) {
-        const th = document.createElement('th');
-        th.textContent = h;
-        thead.appendChild(th);
-      }
-      table.appendChild(thead);
-
-      for (const r of recordings) {
-        const tr = document.createElement('tr');
-        const date = new Date(r.modified * 1000).toISOString().slice(0, 19).replace('T', ' ');
-        const size = (r.size / 1024).toFixed(1) + ' KB';
-
-        const cells = [r.user, r.filename + (r.filename.endsWith('.age') ? ' [encrypted]' : ''), size, date];
-        for (const val of cells) {
-          const td = document.createElement('td');
-          td.textContent = val;
-          tr.appendChild(td);
-        }
-        tr.addEventListener('click', () => playRecording(r.user, r.filename));
-        table.appendChild(tr);
-      }
-      list.appendChild(table);
+      $('#viewer-status-badge').textContent = 'DECRYPTING';
+      const encrypted = new Uint8Array(await res.arrayBuffer());
+      const { Decrypter } = await import('./age-decrypt.js');
+      text = await Decrypter.decrypt(encrypted, ageSecretKey);
+    } else {
+      text = await res.text();
     }
 
-    async function playRecording(user, filename) {
-      const status = document.getElementById('status');
-      const terminal = document.getElementById('terminal');
-      terminal.style.display = 'block';
-      terminal.textContent = '';
-      status.textContent = 'Loading...';
+    parseAndPrepare(text, enc);
+  } catch (e) {
+    term.textContent = `Error: ${e.message}`;
+    $('#viewer-status-badge').textContent = 'ERROR';
+    $('#viewer-status-badge').className = 'bg-error/10 text-error text-[10px] px-2 py-0.5 font-mono tracking-tighter border border-error/20';
+  }
+}
 
-      const res = await fetch(`${API}/api/recordings/${encodeURIComponent(user)}/${encodeURIComponent(filename)}`);
-      if (!res.ok) {
-        status.textContent = `Error: ${res.status}`;
-        return;
+function parseAndPrepare(text, encrypted) {
+  const lines = text.split('\n').filter(l => l.trim());
+  if (!lines.length) {
+    $('#terminal-output').textContent = '(empty recording)';
+    return;
+  }
+
+  // Parse header
+  try {
+    playbackHeader = JSON.parse(lines[0]);
+  } catch {
+    playbackHeader = {};
+  }
+
+  // Parse events
+  playbackEvents = [];
+  for (let i = 1; i < lines.length; i++) {
+    try {
+      const ev = JSON.parse(lines[i]);
+      if (Array.isArray(ev) && ev.length >= 3) {
+        playbackEvents.push(ev);
       }
+    } catch { /* skip malformed */ }
+  }
 
-      let text;
-      if (filename.endsWith('.age')) {
-        const key = document.getElementById('key-input').value.trim();
-        if (!key) {
-          status.textContent = 'Enter your age secret key to decrypt.';
-          return;
-        }
-        status.textContent = 'Decrypting...';
-        try {
-          const encrypted = new Uint8Array(await res.arrayBuffer());
-          const { Decrypter } = await import('./age-decrypt.js');
-          text = await Decrypter.decrypt(encrypted, key);
-        } catch (e) {
-          status.textContent = `Decryption failed: ${e.message}`;
-          return;
-        }
-      } else {
-        text = await res.text();
-      }
+  // Update metadata displays
+  const w = playbackHeader.width || '?';
+  const h = playbackHeader.height || '?';
+  const totalTime = playbackEvents.length ? playbackEvents[playbackEvents.length - 1][0] : 0;
 
-      const lines = text.split('\n').filter(l => l.trim());
-      if (!lines.length) {
-        status.textContent = 'Empty recording.';
-        return;
-      }
+  $('#viewer-tty-label').textContent = `tty — ${w}x${h}`;
+  $('#widget-events').textContent = `${playbackEvents.length} events`;
+  $('#widget-size').textContent = `${w}x${h}`;
+  $('#widget-encryption').textContent = encrypted ? 'AGE_X25519' : 'PLAINTEXT';
+  $('#playback-time').textContent = `00:00 / ${formatDuration(totalTime)}`;
 
-      try {
-        const header = JSON.parse(lines[0]);
-        let info = `Terminal: ${header.width}x${header.height}`;
-        if (header.epitropos) {
-          info += ` | Host: ${header.epitropos.host} | Rec: ${header.epitropos.rec}`;
-        }
-        status.textContent = info;
-      } catch {
-        status.textContent = 'Playing...';
-      }
+  // Viewer status
+  $('#viewer-status-badge').textContent = 'READY';
+  $('#viewer-status-badge').className = 'bg-primary-container/10 text-primary-container text-[10px] px-2 py-0.5 font-mono tracking-tighter border border-primary-container/20';
 
-      const speed = parseFloat(document.getElementById('speed').value) || 1;
-      let prevTime = 0;
-      for (let i = 1; i < lines.length; i++) {
-        let event;
-        try { event = JSON.parse(lines[i]); } catch { continue; }
-        if (!Array.isArray(event) || event.length < 3) continue;
+  // Meta line
+  const meta = $('#viewer-meta');
+  meta.textContent = '';
+  if (currentRecording) {
+    const sp1 = el('span', '', `USER: ${currentRecording.user}`);
+    sp1.className = 'text-secondary';
+    const sp2 = el('span', 'text-secondary', `DURATION: ${formatDuration(totalTime)}`);
+    const sp3 = el('span', 'text-secondary', `EVENTS: ${playbackEvents.length}`);
+    meta.append(sp1, sp2, sp3);
+  }
 
-        const [elapsed, type, data] = event;
-        const delay = (elapsed - prevTime) / speed;
-        if (delay > 0 && delay < 30) {
-          await new Promise(r => setTimeout(r, delay * 1000));
-        }
-        prevTime = elapsed;
+  // Properties sidebar
+  const props = $('#viewer-properties');
+  props.textContent = '';
+  const fields = [
+    ['USER', currentRecording ? currentRecording.user : '--'],
+    ['FILENAME', currentRecording ? currentRecording.filename : '--'],
+    ['TERMINAL', `${w}x${h}`],
+    ['DURATION', formatDuration(totalTime)],
+    ['EVENTS', String(playbackEvents.length)],
+    ['ENCRYPTION', encrypted ? 'AGE_X25519' : 'NONE'],
+  ];
+  if (playbackHeader.env && playbackHeader.env.SHELL) {
+    fields.push(['SHELL', playbackHeader.env.SHELL]);
+  }
+  if (playbackHeader.env && playbackHeader.env.TERM) {
+    fields.push(['TERM', playbackHeader.env.TERM]);
+  }
+  // katagrapho-specific metadata
+  if (playbackHeader.epitropos) {
+    const ep = playbackHeader.epitropos;
+    if (ep.host) fields.push(['HOST', ep.host]);
+    if (ep.rec) fields.push(['REC_ID', ep.rec]);
+    if (ep.tty) fields.push(['TTY', ep.tty]);
+  }
 
-        if (type === 'o') {
-          terminal.textContent += data;
-          terminal.scrollTop = terminal.scrollHeight;
-        }
-      }
-      status.textContent += ' (finished)';
+  for (const [label, value] of fields) {
+    const div = document.createElement('div');
+    const lbl = el('label', 'block text-[10px] font-mono text-[#56E15B]/40 mb-1', label);
+    const val = el('p', 'text-sm font-mono text-on-surface', value);
+    div.append(lbl, val);
+    props.appendChild(div);
+  }
+
+  playbackIndex = 0;
+  $('#terminal-output').textContent = '';
+}
+
+function startPlayback() {
+  if (!playbackEvents.length) return;
+  isPlaying = true;
+  $('#btn-play').textContent = 'pause';
+  scheduleNext();
+}
+
+function stopPlayback() {
+  isPlaying = false;
+  if (playbackTimer) {
+    clearTimeout(playbackTimer);
+    playbackTimer = null;
+  }
+  $('#btn-play').textContent = 'play_arrow';
+}
+
+function scheduleNext() {
+  if (!isPlaying || playbackIndex >= playbackEvents.length) {
+    stopPlayback();
+    if (playbackIndex >= playbackEvents.length) {
+      $('#viewer-status-badge').textContent = 'FINISHED';
     }
+    return;
+  }
 
-    loadRecordings();
-  </script>
+  const speed = parseFloat($('#playback-speed').value) || 1;
+  const ev = playbackEvents[playbackIndex];
+  const prevTime = playbackIndex > 0 ? playbackEvents[playbackIndex - 1][0] : 0;
+  let delay = (ev[0] - prevTime) / speed;
+  // Cap delays to prevent long waits
+  if (delay > 5) delay = 5;
+  if (delay < 0) delay = 0;
+
+  playbackTimer = setTimeout(() => {
+    renderEvent(ev);
+    playbackIndex++;
+    updateProgress();
+    scheduleNext();
+  }, delay * 1000);
+}
+
+function renderEvent(ev) {
+  const [elapsed, type, data] = ev;
+  const term = $('#terminal-output');
+
+  if (type === 'o') {
+    // Append output text safely
+    const span = document.createElement('span');
+    span.textContent = data;
+    term.appendChild(span);
+    term.scrollTop = term.scrollHeight;
+  }
+
+  // Event log sidebar
+  const log = $('#event-log');
+  const entry = document.createElement('div');
+  entry.className = 'flex gap-3 text-[#56E15B]/40';
+  const timeSpan = el('span', 'shrink-0', formatDuration(elapsed));
+  const descSpan = el('span', '', `${type === 'o' ? 'OUTPUT' : type.toUpperCase()}: ${data.length > 60 ? data.slice(0, 60) + '...' : data}`);
+  // Sanitize: just use textContent which is already safe
+  entry.append(timeSpan, descSpan);
+  log.appendChild(entry);
+
+  // Keep event log from growing too large in DOM
+  while (log.children.length > 200) {
+    log.removeChild(log.firstChild);
+  }
+  log.scrollTop = log.scrollHeight;
+}
+
+function updateProgress() {
+  if (!playbackEvents.length) return;
+  const totalTime = playbackEvents[playbackEvents.length - 1][0];
+  const currentTime = playbackIndex > 0 ? playbackEvents[playbackIndex - 1][0] : 0;
+  const pct = totalTime > 0 ? (currentTime / totalTime * 100) : 0;
+  $('#progress-bar-fill').style.width = pct + '%';
+  $('#progress-bar-handle').style.left = pct + '%';
+  $('#playback-time').textContent = `${formatDuration(currentTime)} / ${formatDuration(totalTime)}`;
+}
+
+// Playback controls
+$('#btn-play').addEventListener('click', () => {
+  if (isPlaying) {
+    stopPlayback();
+  } else {
+    if (playbackIndex >= playbackEvents.length) {
+      // Restart from beginning
+      playbackIndex = 0;
+      $('#terminal-output').textContent = '';
+      $('#event-log').textContent = '';
+    }
+    startPlayback();
+  }
+});
+
+$('#btn-rewind').addEventListener('click', () => {
+  // Jump back 10 events
+  stopPlayback();
+  playbackIndex = Math.max(0, playbackIndex - 10);
+  // Re-render from start to current index
+  rebuildTerminalTo(playbackIndex);
+});
+
+$('#btn-forward').addEventListener('click', () => {
+  // Jump forward 10 events
+  stopPlayback();
+  const target = Math.min(playbackEvents.length, playbackIndex + 10);
+  // Render skipped events
+  while (playbackIndex < target) {
+    renderEvent(playbackEvents[playbackIndex]);
+    playbackIndex++;
+  }
+  updateProgress();
+});
+
+// Click on progress bar to seek
+$('#progress-bar-track').addEventListener('click', (e) => {
+  if (!playbackEvents.length) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  const totalTime = playbackEvents[playbackEvents.length - 1][0];
+  const targetTime = pct * totalTime;
+
+  stopPlayback();
+
+  // Find event index closest to target time
+  let idx = 0;
+  for (let i = 0; i < playbackEvents.length; i++) {
+    if (playbackEvents[i][0] <= targetTime) idx = i;
+    else break;
+  }
+  playbackIndex = idx;
+  rebuildTerminalTo(playbackIndex);
+});
+
+function rebuildTerminalTo(targetIndex) {
+  const term = $('#terminal-output');
+  term.textContent = '';
+  $('#event-log').textContent = '';
+
+  for (let i = 0; i < targetIndex; i++) {
+    const [, type, data] = playbackEvents[i];
+    if (type === 'o') {
+      const span = document.createElement('span');
+      span.textContent = data;
+      term.appendChild(span);
+    }
+  }
+  term.scrollTop = term.scrollHeight;
+  updateProgress();
+}
+
+// -- Decrypt Key Modal --
+$('#btn-decrypt-toggle').addEventListener('click', () => {
+  $('#decrypt-modal').classList.toggle('hidden');
+  if (ageSecretKey) {
+    $('#key-status').textContent = 'KEY_LOADED (key is set)';
+    $('#key-status').className = 'mt-2 text-[10px] font-mono text-secondary';
+  }
+});
+
+$('#btn-close-modal').addEventListener('click', () => {
+  $('#decrypt-modal').classList.add('hidden');
+});
+
+$('#btn-save-key').addEventListener('click', () => {
+  const key = $('#age-key-input').value.trim();
+  if (!key) {
+    $('#key-status').textContent = 'ERROR: No key provided';
+    $('#key-status').className = 'mt-2 text-[10px] font-mono text-error';
+    return;
+  }
+  if (!key.startsWith('AGE-SECRET-KEY-')) {
+    $('#key-status').textContent = 'ERROR: Must start with AGE-SECRET-KEY-';
+    $('#key-status').className = 'mt-2 text-[10px] font-mono text-error';
+    return;
+  }
+  ageSecretKey = key;
+  $('#key-status').textContent = 'KEY_SAVED -- stored in memory only';
+  $('#key-status').className = 'mt-2 text-[10px] font-mono text-secondary';
+  // Update header icon to indicate key is loaded
+  $('#btn-decrypt-toggle').classList.remove('text-[#56E15B]/60');
+  $('#btn-decrypt-toggle').classList.add('text-[#00FF41]');
+});
+
+// Close modal on backdrop click
+$('#decrypt-modal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) {
+    $('#decrypt-modal').classList.add('hidden');
+  }
+});
+
+// -- Global search triggers session filter --
+$('#global-search').addEventListener('input', (e) => {
+  if (currentView === 'sessions') {
+    $('#session-search').value = e.target.value;
+    renderSessionsView();
+  }
+});
+
+// -- Init --
+fetchRecordings();
+</script>
 </body>
 </html>
