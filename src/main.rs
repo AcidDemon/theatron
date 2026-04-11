@@ -1,3 +1,5 @@
+mod manifest;
+
 use axum::Router;
 use axum::extract::{Path, State};
 use axum::response::Json;
