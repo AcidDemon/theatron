@@ -1,3 +1,4 @@
+mod index;
 mod manifest;
 
 use axum::Router;
