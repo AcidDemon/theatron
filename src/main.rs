@@ -1,5 +1,6 @@
 mod index;
 mod manifest;
+mod stream;
 
 use axum::Router;
 use axum::extract::{Path, State};
