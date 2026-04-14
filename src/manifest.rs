@@ -1,5 +1,7 @@
 //! Serde types for katagrapho-manifest-v1 sidecars.
 
+#![allow(dead_code)]
+
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize, Clone)]

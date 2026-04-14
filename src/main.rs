@@ -168,18 +168,17 @@ async fn run_inotify(
                     // Find the file in watched dirs.
                     for dir in &dirs {
                         let candidate = dir.join(name_str.as_ref());
-                        if candidate.exists() {
-                            if let Ok(m) = manifest::load_manifest(&candidate) {
-                                let sender =
-                                    extract_sender(storage_dir, &candidate);
-                                let idx = state.index.lock().unwrap();
-                                let _ = idx.upsert(
-                                    &sender,
-                                    &m,
-                                    &candidate.to_string_lossy(),
-                                );
-                                eprintln!("theatron: indexed {}", name_str);
-                            }
+                        if candidate.exists()
+                            && let Ok(m) = manifest::load_manifest(&candidate)
+                        {
+                            let sender = extract_sender(storage_dir, &candidate);
+                            let idx = state.index.lock().unwrap();
+                            let _ = idx.upsert(
+                                &sender,
+                                &m,
+                                &candidate.to_string_lossy(),
+                            );
+                            eprintln!("theatron: indexed {}", name_str);
                         }
                     }
                 }

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>THE GATEKEEPER | INVIZIBLENET.WORK</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#ecffe4",
+                    "secondary-fixed-dim": "#56e15b",
+                    "surface-variant": "#353534",
+                    "surface-bright": "#3a3939",
+                    "on-primary-fixed": "#002203",
+                    "on-background": "#e5e2e1",
+                    "on-primary-fixed-variant": "#00530e",
+                    "on-error": "#690005",
+                    "surface-container-low": "#1c1b1b",
+                    "primary-fixed": "#72ff70",
+                    "on-secondary-container": "#003506",
+                    "on-primary-container": "#007117",
+                    "surface": "#131313",
+                    "on-secondary": "#003908",
+                    "on-secondary-fixed-variant": "#00530f",
+                    "error-container": "#93000a",
+                    "on-surface": "#e5e2e1",
+                    "on-primary": "#003907",
+                    "secondary-container": "#03ab2b",
+                    "surface-tint": "#00e639",
+                    "on-tertiary-fixed-variant": "#005311",
+                    "tertiary-container": "#9cf195",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-container": "#1c7024",
+                    "on-secondary-fixed": "#002203",
+                    "background": "#131313",
+                    "secondary-fixed": "#74ff74",
+                    "secondary": "#56e15b",
+                    "on-surface-variant": "#b9ccb2",
+                    "inverse-on-surface": "#313030",
+                    "tertiary-fixed-dim": "#86da80",
+                    "surface-container": "#201f1f",
+                    "primary-container": "#00ff41",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed-dim": "#00e639",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#131313",
+                    "on-tertiary-fixed": "#002203",
+                    "surface-container-highest": "#353534",
+                    "inverse-primary": "#006e16",
+                    "tertiary-fixed": "#a1f79a",
+                    "on-tertiary": "#003909",
+                    "primary": "#ebffe2",
+                    "inverse-surface": "#e5e2e1",
+                    "outline": "#84967e",
+                    "outline-variant": "#3b4b37",
+                    "error": "#ffb4ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"],
+                    "mono": ["Share Tech Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .glow-button {
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.6);
+        }
+        .scanline {
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 65, 0.02) 50%
+            );
+            background-size: 100% 4px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body overflow-hidden selection:bg-primary-container selection:text-on-primary">
+<!-- Global Layout Shell -->
+<div class="relative min-h-screen w-full flex flex-col items-center justify-center grid-bg">
+<!-- Scanline Overlay -->
+<div class="absolute inset-0 scanline pointer-events-none z-10"></div>
+<!-- TopNavBar (Shared Component Identity) -->
+<header class="fixed top-0 left-0 w-full h-16 px-6 flex justify-between items-center bg-[#131313]/80 backdrop-blur-xl border-b border-[#00FF41]/10 z-50">
+<div class="flex items-center gap-4">
+<span class="text-xl font-black text-[#00FF41] italic font-headline">INVIZIBLENET.WORK</span>
+<span class="hidden md:block h-4 w-px bg-outline-variant/30"></span>
+<span class="hidden md:block text-[10px] font-mono tracking-widest text-[#56E15B]/60 uppercase">AUTH_SERVICE_v.4.0.2</span>
+</div>
+<nav class="flex gap-8 items-center">
+<a class="font-headline uppercase text-xs tracking-widest text-[#56E15B]/40 hover:text-[#00FF41] hover:brightness-125 transition-all duration-300 ease-in-out" href="#">BACK_TO_HUB</a>
+<a class="font-headline uppercase text-xs tracking-widest text-[#56E15B]/40 hover:text-[#00FF41] hover:brightness-125 transition-all duration-300 ease-in-out" href="#">REQUEST_ACCESS</a>
+<span class="material-symbols-outlined text-[#00FF41] text-lg">security</span>
+</nav>
+</header>
+<!-- Main Login Canvas -->
+<main class="relative z-20 w-full max-w-md px-6">
+<!-- Branding/Status Header -->
+<div class="mb-8 text-center">
+<h1 class="font-headline text-2xl font-bold tracking-tighter text-[#00FF41] uppercase mb-1">THE_GATEKEEPER</h1>
+<p class="font-mono text-xs text-[#56E15B]/60 tracking-wider">SECURE_AUTHENTICATION_PROTOCOL_INITIATED</p>
+</div>
+<!-- Login Card (Glassmorphism & High-Contrast) -->
+<div class="bg-surface-container-low/60 backdrop-blur-2xl border border-outline-variant/20 p-8 rounded shadow-[0_12px_40px_rgba(0,255,65,0.05)] relative overflow-hidden">
+<!-- Terminal Decorative Element -->
+<div class="absolute top-0 right-0 p-2 opacity-20">
+<span class="font-mono text-[8px] leading-tight text-[#00FF41] block">SYS_STATUS: READY</span>
+<span class="font-mono text-[8px] leading-tight text-[#00FF41] block">ENCRYPT: AES-256</span>
+</div>
+<form class="space-y-6">
+<!-- ACCESS_ID Field -->
+<div class="space-y-2">
+<label class="block font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-[#56E15B]/80" for="access_id">ACCESS_ID</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-xs text-[#56E15B]/40 group-focus-within:text-[#00FF41]">terminal</span>
+</div>
+<input class="w-full bg-surface-container-lowest border-none focus:ring-1 focus:ring-[#00FF41]/50 text-on-surface font-mono text-sm py-3 pl-10 placeholder-[#56E15B]/20 rounded-sm" id="access_id" name="access_id" placeholder="ENTER_IDENTITY_TOKEN" type="text"/>
+</div>
+</div>
+<!-- PASS_PHRASE Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-[#56E15B]/80" for="pass_phrase">PASS_PHRASE</label>
+<a class="font-mono text-[8px] uppercase tracking-wider text-[#56E15B]/40 hover:text-[#00FF41]" href="#">RECOVER_CREDENTIALS</a>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-xs text-[#56E15B]/40 group-focus-within:text-[#00FF41]">key</span>
+</div>
+<input class="w-full bg-surface-container-lowest border-none focus:ring-1 focus:ring-[#00FF41]/50 text-on-surface font-mono text-sm py-3 pl-10 placeholder-[#56E15B]/20 rounded-sm" id="pass_phrase" name="pass_phrase" placeholder="••••••••••••" type="password"/>
+</div>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full bg-primary-container text-on-primary py-4 font-headline font-bold text-xs tracking-[0.2em] uppercase glow-button transition-all duration-300 rounded-sm flex items-center justify-center gap-2" type="submit">
+                        SECURE_LOGIN
+                        <span class="material-symbols-outlined text-sm">bolt</span>
+</button>
+</form>
+<!-- Footnote Info -->
+<div class="mt-8 pt-6 border-t border-outline-variant/10 flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<div class="h-1.5 w-1.5 rounded-full bg-secondary-container animate-pulse"></div>
+<span class="font-mono text-[9px] text-[#56E15B]/40">LOCAL_UPLINK: ACTIVE</span>
+</div>
+<p class="font-mono text-[8px] text-on-surface-variant/40 leading-relaxed uppercase">
+                        By accessing this terminal, you agree to comply with all Level_04 security protocols and non-disclosure agreements.
+                    </p>
+</div>
+</div>
+<!-- Secondary Links/Metadata -->
+<div class="mt-6 flex justify-between items-center px-2">
+<div class="flex gap-4">
+<span class="font-mono text-[10px] text-[#56E15B]/30 tracking-tighter italic">ID: 94.201.0.12</span>
+<span class="font-mono text-[10px] text-[#56E15B]/30 tracking-tighter italic">ZONE: EU-NORTH-1</span>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-xs text-[#56E15B]/20">shield_with_heart</span>
+<span class="material-symbols-outlined text-xs text-[#56E15B]/20">verified_user</span>
+</div>
+</div>
+</main>
+<!-- Decorative UI elements (Floating Data) -->
+<div class="hidden lg:block absolute left-12 top-1/2 -translate-y-1/2 space-y-12 opacity-30 select-none">
+<div class="border-l-2 border-[#00FF41]/20 pl-4">
+<span class="block font-mono text-[10px] text-[#00FF41] mb-2 uppercase tracking-widest">NETWORK_TRAFFIC</span>
+<div class="space-y-1">
+<div class="h-1 bg-[#00FF41]/40 w-24"></div>
+<div class="h-1 bg-[#00FF41]/20 w-40"></div>
+<div class="h-1 bg-[#00FF41]/60 w-32"></div>
+</div>
+</div>
+<div class="border-l-2 border-[#00FF41]/20 pl-4">
+<span class="block font-mono text-[10px] text-[#00FF41] mb-2 uppercase tracking-widest">ENCRYPTION_LAYER</span>
+<span class="block font-mono text-[8px] text-[#56E15B]/40">MD5_HASH: F8E9A2...</span>
+<span class="block font-mono text-[8px] text-[#56E15B]/40">SALT: RANDOM_01</span>
+</div>
+</div>
+<div class="hidden lg:block absolute right-12 top-1/2 -translate-y-1/2 text-right opacity-30 select-none">
+<div class="border-r-2 border-[#00FF41]/20 pr-4">
+<span class="block font-mono text-[10px] text-[#00FF41] mb-2 uppercase tracking-widest">SESSION_LOGS</span>
+<div class="space-y-1 font-mono text-[8px] text-[#56E15B]/40 uppercase">
+<div>12:00:04 | PING_REPLY</div>
+<div>12:00:05 | AUTH_READY</div>
+<div>12:00:05 | GATE_OPEN</div>
+</div>
+</div>
+</div>
+<!-- Background Image (Mood setter) -->
+<div class="fixed inset-0 z-0 opacity-[0.03] mix-blend-overlay pointer-events-none">
+<img alt="Security Background" class="w-full h-full object-cover" data-alt="high-tech abstract circuit board patterns with glowing green lights and digital matrix textures in a dark cybernetic environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwOrO5VP7MXyx2KSHgickx6nFCD1PLpTpJHbDtlYpnZcfoJV83t2ltqAZJF-DcTvT-CIgJQwRM1s3LlYhN_n_jW2lpWZuTGCa17bQeq7Ta84lxP8c9-Y2ty33fz6Hu88JR0TlafHe6YGSxw4rQSt63EJdIkOjph3bYaO1whxyPT1mBv43iLwgVestIxVWuxw7Dan9Pv7jYhbOz_u_AVXBQAwqW24Z_9fHG9EpK0U12v0VeVMmtsl-HefofZApzF29Y856zIxuPESA"/>
+</div>
+</div>
+<!-- Footer Meta (Optional for Gatekeeper) -->
+<footer class="fixed bottom-6 left-0 w-full px-8 flex justify-between items-center text-[#56E15B]/20 font-mono text-[9px] uppercase tracking-widest z-30">
+<div>DESIGNED_BY_ARCHITECT_LVL04</div>
+<div class="flex gap-4">
+<span>© 2024 INVIZIBLENET</span>
+<span>SYSTEM_STABLE</span>
+</div>
+</footer>
+</body></html>

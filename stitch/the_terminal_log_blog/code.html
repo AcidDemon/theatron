@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>THE_TERMINAL_LOG // INVIZIBLENET.WORK</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Share+Tech+Mono&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0E0E0E;
+            color: #E5E2E1;
+            font-family: 'Inter', sans-serif;
+        }
+        .mono-text {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .headline-text {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131313;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00FF41;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#ecffe4",
+                      "secondary-fixed-dim": "#56e15b",
+                      "surface-variant": "#353534",
+                      "surface-bright": "#3a3939",
+                      "on-primary-fixed": "#002203",
+                      "on-background": "#e5e2e1",
+                      "on-primary-fixed-variant": "#00530e",
+                      "on-error": "#690005",
+                      "surface-container-low": "#1c1b1b",
+                      "primary-fixed": "#72ff70",
+                      "on-secondary-container": "#003506",
+                      "on-primary-container": "#007117",
+                      "surface": "#131313",
+                      "on-secondary": "#003908",
+                      "on-secondary-fixed-variant": "#00530f",
+                      "error-container": "#93000a",
+                      "on-surface": "#e5e2e1",
+                      "on-primary": "#003907",
+                      "secondary-container": "#03ab2b",
+                      "surface-tint": "#00e639",
+                      "on-tertiary-fixed-variant": "#005311",
+                      "tertiary-container": "#9cf195",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-tertiary-container": "#1c7024",
+                      "on-secondary-fixed": "#002203",
+                      "background": "#131313",
+                      "secondary-fixed": "#74ff74",
+                      "secondary": "#56e15b",
+                      "on-surface-variant": "#b9ccb2",
+                      "inverse-on-surface": "#313030",
+                      "tertiary-fixed-dim": "#86da80",
+                      "surface-container": "#201f1f",
+                      "primary-container": "#00ff41",
+                      "surface-container-high": "#2a2a2a",
+                      "primary-fixed-dim": "#00e639",
+                      "on-error-container": "#ffdad6",
+                      "surface-dim": "#131313",
+                      "on-tertiary-fixed": "#002203",
+                      "surface-container-highest": "#353534",
+                      "inverse-primary": "#006e16",
+                      "tertiary-fixed": "#a1f79a",
+                      "on-tertiary": "#003909",
+                      "primary": "#ebffe2",
+                      "inverse-surface": "#e5e2e1",
+                      "outline": "#84967e",
+                      "outline-variant": "#3b4b37",
+                      "error": "#ffb4ab"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Space Grotesk"]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="flex min-h-screen bg-surface-container-lowest text-on-surface">
+<!-- Predicted SideNavBar -->
+<aside class="fixed left-0 h-screen w-64 bg-[#0E0E0E] flex flex-col py-6 border-r border-[#00FF41]/10 z-50">
+<div class="px-6 mb-10">
+<h1 class="text-2xl font-bold tracking-tighter text-[#00FF41] uppercase italic headline-text">INVIZIBLENET</h1>
+</div>
+<div class="px-4 mb-8">
+<div class="flex items-center gap-3 px-2 py-3 bg-[#1A1A1A] border-l-2 border-[#00FF41]">
+<div class="w-10 h-10 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img alt="User Terminal Profile" class="w-full h-full object-cover" data-alt="a pixel art style avatar of a futuristic cybersecurity architect with glowing green visor and digital artifacts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIipL2rMKgIE1CRLGPZhouCCub3_vPNQ1duwFcrthN5X8Hl6ad77MSL1Y2X_BFoyuLAnVi7c42KATLHl66sqqq_cHB80JIAMkXn1F1URhXtAd2O2DHAuMQAFZ9inlewC35H-EwUX_sI10BmsQbdc3yuj1iawhdLe7yc3SRzTi-zDt9TC3QGYvpHP_VQBGEy_ODwgz3q1WxYEEfOm_IO9-p49PtsSiVEUNLEO4xlhPNj6xsTFqQLaOt-fxgjiUOOzKKSgssVrWLoAg"/>
+</div>
+<div>
+<p class="text-[10px] mono-text text-[#56E15B]/60 tracking-wider">USER_ID</p>
+<p class="text-sm font-bold text-[#00FF41] mono-text">INVIZIBLE_USER</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-4 py-3 text-[#56E15B]/60 pl-4 hover:text-[#00FF41] transition-colors hover:bg-[#1A1A1A] group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span class="mono-text text-sm tracking-tight">THE_HUB</span>
+</a>
+<a class="flex items-center gap-4 py-3 text-[#00FF41] border-l-2 border-[#00FF41] pl-4 font-bold bg-[#1A1A1A]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="terminal">terminal</span>
+<span class="mono-text text-sm tracking-tight">TERMINAL_LOG</span>
+</a>
+<a class="flex items-center gap-4 py-3 text-[#56E15B]/60 pl-4 hover:text-[#00FF41] transition-colors hover:bg-[#1A1A1A] group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="mono-text text-sm tracking-tight">ADMIN_DECK</span>
+</a>
+<a class="flex items-center gap-4 py-3 text-[#56E15B]/60 pl-4 hover:text-[#00FF41] transition-colors hover:bg-[#1A1A1A] group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="hub">hub</span>
+<span class="mono-text text-sm tracking-tight">NETWORK_STATUS</span>
+</a>
+<a class="flex items-center gap-4 py-3 text-[#56E15B]/60 pl-4 hover:text-[#00FF41] transition-colors hover:bg-[#1A1A1A] group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+<span class="mono-text text-sm tracking-tight">SETTINGS</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-3 bg-[#00FF41] text-[#003907] font-bold text-xs mono-text mb-4 hover:brightness-110 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="publish">publish</span>
+                DEPLOY_SYSTEM
+            </button>
+<a class="flex items-center gap-4 py-3 text-[#56E15B]/40 pl-4 hover:text-[#00FF41] transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="logout">logout</span>
+<span class="mono-text text-sm tracking-tight">GATEKEEPER_EXIT</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen">
+<!-- Predicted TopNavBar -->
+<header class="flex justify-between items-center w-full px-8 h-16 bg-[#131313]/80 backdrop-blur-xl sticky top-0 z-40 border-b border-[#00FF41]/10">
+<div class="flex items-center gap-8">
+<div class="headline-text text-sm font-bold tracking-widest text-[#56E15B]/40">
+<span class="text-[#00FF41]">PATH:</span> ROOT/LOGS/CENTRAL
+                </div>
+<nav class="hidden md:flex gap-6">
+<a class="mono-text text-[10px] tracking-[0.2em] text-[#00FF41] border-b-2 border-[#00FF41] pb-1" href="#">LOGS</a>
+<a class="mono-text text-[10px] tracking-[0.2em] text-[#56E15B]/40 hover:text-[#00FF41] transition-all" href="#">DECK</a>
+<a class="mono-text text-[10px] tracking-[0.2em] text-[#56E15B]/40 hover:text-[#00FF41] transition-all" href="#">GATE</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-[#56E15B]/40 text-sm" data-icon="search">search</span>
+<input class="bg-[#1A1A1A] border-none text-[10px] mono-text text-[#00FF41] pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-[#00FF41]/30 placeholder:text-[#56E15B]/20" placeholder="SEARCH_DATABASE..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-[#56E15B]/60">
+<span class="material-symbols-outlined cursor-pointer hover:text-[#00FF41]" data-icon="notifications_active">notifications_active</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-[#00FF41]" data-icon="security">security</span>
+</div>
+<button class="bg-transparent border border-[#00FF41]/40 px-4 py-1 text-[10px] font-bold text-[#00FF41] mono-text hover:bg-[#00FF41]/10 transition-all">
+                    ROOT_ACCESS
+                </button>
+</div>
+</header>
+<!-- Page Content -->
+<section class="p-8">
+<!-- Hero Featured Article -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0 mb-12 border border-[#00FF41]/10 bg-[#131313] overflow-hidden group">
+<div class="lg:col-span-7 p-10 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-6">
+<span class="bg-[#00FF41]/10 text-[#00FF41] text-[10px] mono-text px-2 py-1">FEATURED_STUB</span>
+<span class="text-[#56E15B]/40 text-[10px] mono-text">04_OCT_2023</span>
+</div>
+<h2 class="headline-text text-5xl font-black text-on-surface mb-6 leading-none tracking-tighter">
+                        REBUILDING THE CORE: <br/><span class="text-[#00FF41]">HYPER-MINIMAL</span> NIXOS CONFIGS
+                    </h2>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-xl mb-8">
+                        Deconstructing the pursuit of single-binary operating systems. How we stripped 4GB of bloat into a 400MB functional deployment environment for edge security nodes.
+                    </p>
+<div class="flex items-center gap-4">
+<button class="bg-[#00FF41] text-[#003907] font-bold px-8 py-3 text-sm mono-text hover:brightness-110 transition-all">READ_LOG_ENTRY</button>
+<div class="flex gap-2">
+<span class="text-[10px] mono-text text-[#56E15B]/40 border border-[#56E15B]/20 px-2 py-1">#NIXOS</span>
+<span class="text-[10px] mono-text text-[#56E15B]/40 border border-[#56E15B]/20 px-2 py-1">#SECURITY</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 bg-[#0E0E0E] p-6 relative overflow-hidden border-l border-[#00FF41]/10">
+<div class="absolute top-0 right-0 p-4 mono-text text-[10px] text-[#00FF41]/20">PREVIEW_MODE_v2.0</div>
+<pre class="mono-text text-[13px] text-[#00FF41]/80 leading-relaxed overflow-hidden"><span class="text-[#56E15B]/40"># configuration.nix</span>
+{ config, pkgs, ... }: {
+  imports = [ ./hardware.nix ];
+
+  <span class="text-[#56E15B]/40"># Disable unnecessary services</span>
+  services.xserver.enable = false;
+  services.printing.enable = false;
+
+  <span class="text-[#56E15B]/40"># Hardened kernel parameters</span>
+  boot.kernelParams = [ 
+    "slub_debug=P" 
+    "page_poison=1" 
+  ];
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 22 80 443 ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+    networkmanager
+  ];
+}</pre>
+<div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0E0E0E] to-transparent"></div>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Main Feed -->
+<div class="flex-1 space-y-6">
+<div class="flex items-center justify-between mb-8 pb-4 border-b border-[#00FF41]/10">
+<h3 class="mono-text text-sm font-bold text-[#00FF41] flex items-center gap-2">
+<span class="w-2 h-2 bg-[#00FF41] animate-pulse"></span>
+                            LATEST_ENTRIES
+                        </h3>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#56E15B]/40 cursor-pointer" data-icon="grid_view">grid_view</span>
+<span class="material-symbols-outlined text-[#00FF41]" data-icon="view_headline">view_headline</span>
+</div>
+</div>
+<!-- Article Cards -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Post 1 -->
+<article class="bg-[#131313] border border-transparent hover:border-[#00FF41]/30 transition-all p-6 flex flex-col md:flex-row gap-6 group relative overflow-hidden">
+<div class="w-full md:w-48 h-32 bg-[#0E0E0E] flex-shrink-0 relative overflow-hidden border border-[#00FF41]/10">
+<img alt="OpenBSD abstraction" class="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="close-up of complex server wiring with neon green lights reflecting off dark metallic surfaces in a dim server room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClTHiMxDjtTtLso1_6TWULG_qhAVK9c1kuZmhnt-FFb2sdChEajB8MuGl1L6PiBUyTg7KJmg21gZXFRShwiUJLbBvINjWM6sI-QOE8crCkVtKB6-4_vhqGM_VbaAWBpLTC9skX637Sce6G2hcFn1zyAlnwRWg2-Rs3AKahiB28ZLoCqfiz6rsYXc6wahchMWISo0Duv2JZYGlX5dKX1BZLKMvYrDUGKlQbkJVeSN5D42nbnkJtrbCSc4xHPGM10PbQ71qnWhUS_S8"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-[#00FF41]/10 to-transparent"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-4 mb-3">
+<span class="text-[10px] mono-text text-[#00FF41]">OPENBSD</span>
+<span class="text-[10px] mono-text text-[#56E15B]/40">12_MIN_READ</span>
+<span class="text-[10px] mono-text text-[#56E15B]/40">24_SEP_2023</span>
+</div>
+<h4 class="headline-text text-2xl font-bold mb-2 group-hover:text-[#00FF41] transition-colors">THE ART OF CARP: HIGH AVAILABILITY ON OPENBSD</h4>
+<p class="text-on-surface-variant text-sm line-clamp-2 mono-text opacity-70">Implementation of Common Address Redundancy Protocol for failover gateway clusters using minimal hardware footprints.</p>
+</div>
+<div class="flex flex-col justify-between items-end">
+<span class="material-symbols-outlined text-[#56E15B]/20 group-hover:text-[#00FF41] transition-all" data-icon="north_east">north_east</span>
+<div class="flex gap-2">
+<span class="w-1 h-1 bg-[#56E15B]/20"></span>
+<span class="w-1 h-1 bg-[#56E15B]/20"></span>
+<span class="w-1 h-1 bg-[#56E15B]/20"></span>
+</div>
+</div>
+</article>
+<!-- Post 2 -->
+<article class="bg-[#131313] border border-transparent hover:border-[#00FF41]/30 transition-all p-6 flex flex-col md:flex-row gap-6 group relative overflow-hidden">
+<div class="w-full md:w-48 h-32 bg-[#0E0E0E] flex-shrink-0 relative overflow-hidden border border-[#00FF41]/10">
+<img alt="QubesOS isolation" class="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="a dark digital workspace with multiple floating virtual windows displaying green terminal code on a black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-uqkk-jKzxB8tAAN4inIJQgg8UzDsjYR6uvh1wwkMzb8s5Bw898RzIR09U086iJbCrNVVxJ4ZtrJrg0oy-xeLZz2WxznJ4Q5aqPZOMX_ukusDAzFJI2iN1hPBjinVIRIEwMgHD_xjPmQiPx00IjDkxbRcmKkm5SrMks9BiDV9o4cRPWvZ3y4Qnt27LkinY19dKBvE6lB1LihOr5JYiNMwC2sZSp0aV-ay4QiOH01snLN9n_bmKCpc1xpbCRPiARUVeYCjLtVpu90"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-[#00FF41]/10 to-transparent"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-4 mb-3">
+<span class="text-[10px] mono-text text-[#00FF41]">QUBESOS</span>
+<span class="text-[10px] mono-text text-[#56E15B]/40">18_MIN_READ</span>
+<span class="text-[10px] mono-text text-[#56E15B]/40">18_SEP_2023</span>
+</div>
+<h4 class="headline-text text-2xl font-bold mb-2 group-hover:text-[#00FF41] transition-colors">COMPARTMENTALIZATION STRATEGIES FOR THE PARANOID</h4>
+<p class="text-on-surface-variant text-sm line-clamp-2 mono-text opacity-70">A deep dive into Xen-based VM isolation for daily workflows. Managing Vaults, Disposables, and Networking AppVMs.</p>
+</div>
+<div class="flex flex-col justify-between items-end">
+<span class="material-symbols-outlined text-[#56E15B]/20 group-hover:text-[#00FF41] transition-all" data-icon="north_east">north_east</span>
+<div class="flex gap-2">
+<span class="w-1 h-1 bg-[#56E15B]/20"></span>
+<span class="w-1 h-1 bg-[#56E15B]/20"></span>
+<span class="w-1 h-1 bg-[#56E15B]/20"></span>
+</div>
+</div>
+</article>
+<!-- Post 3 -->
+<article class="bg-[#131313] border border-transparent hover:border-[#00FF41]/30 transition-all p-6 flex flex-col md:flex-row gap-6 group relative overflow-hidden">
+<div class="w-full md:w-48 h-32 bg-[#0E0E0E] flex-shrink-0 relative overflow-hidden border border-[#00FF41]/10">
+<img alt="Terminal font styling" class="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="macro photograph of glowing phosphorescent green pixels on a retro CRT monitor showing lines of code" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPQX41kPOcrNkWx8xLcGmZkj9YOJ2e298wP6Dkk4oLdxgtkTdGfC9MSFknaGrNoAvlPq4WZEc5UZlgy4Ez0Px1yvla1-HhIEoJNwdOfG1BZsLzLoMTbwBkoLrm3_8qdv4S3wgGRjVAkoA9OrGT935NOnyCFqsDYSkIX2WUk9DzKuAeppUyBo-hpEoNELOEZNFSY1sblryiz729gIqA5nvwRGGcHqebxLxhvfV-F8vrBPjZErOHUAck71fNWnaF2cuy7Tm3yE8oSOY"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-[#00FF41]/10 to-transparent"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-4 mb-3">
+<span class="text-[10px] mono-text text-[#00FF41]">CONFIGURATION</span>
+<span class="text-[10px] mono-text text-[#56E15B]/40">08_MIN_READ</span>
+<span class="text-[10px] mono-text text-[#56E15B]/40">10_SEP_2023</span>
+</div>
+<h4 class="headline-text text-2xl font-bold mb-2 group-hover:text-[#00FF41] transition-colors">THE PERFECT TTY: FONT RENDERING ON THE CONSOLE</h4>
+<p class="text-on-surface-variant text-sm line-clamp-2 mono-text opacity-70">Optimizing bitmap fonts and terminus support for pure-CLI environments without X11 or Wayland dependencies.</p>
+</div>
+<div class="flex flex-col justify-between items-end">
+<span class="material-symbols-outlined text-[#56E15B]/20 group-hover:text-[#00FF41] transition-all" data-icon="north_east">north_east</span>
+<div class="flex gap-2">
+<span class="w-1 h-1 bg-[#56E15B]/20"></span>
+<span class="w-1 h-1 bg-[#56E15B]/20"></span>
+<span class="w-1 h-1 bg-[#56E15B]/20"></span>
+</div>
+</div>
+</article>
+</div>
+<button class="w-full py-4 border border-[#00FF41]/20 mono-text text-xs text-[#56E15B]/40 hover:text-[#00FF41] hover:border-[#00FF41]/40 transition-all mt-8">LOAD_MORE_LOGS_...</button>
+</div>
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-80 space-y-8">
+<!-- Categories -->
+<div class="bg-[#131313] p-6 border border-[#00FF41]/10">
+<h5 class="mono-text text-[10px] tracking-[0.2em] text-[#00FF41] mb-6 uppercase">SYSTEM_INDEX</h5>
+<ul class="space-y-2">
+<li>
+<a class="flex justify-between items-center group py-2" href="#">
+<span class="mono-text text-sm text-[#56E15B]/60 group-hover:text-[#00FF41]">NixOS</span>
+<span class="text-[10px] mono-text text-[#56E15B]/20 bg-[#1A1A1A] px-2 py-0.5">14</span>
+</a>
+</li>
+<li>
+<a class="flex justify-between items-center group py-2" href="#">
+<span class="mono-text text-sm text-[#56E15B]/60 group-hover:text-[#00FF41]">OpenBSD</span>
+<span class="text-[10px] mono-text text-[#56E15B]/20 bg-[#1A1A1A] px-2 py-0.5">08</span>
+</a>
+</li>
+<li>
+<a class="flex justify-between items-center group py-2" href="#">
+<span class="mono-text text-sm text-[#56E15B]/60 group-hover:text-[#00FF41]">QubesOS</span>
+<span class="text-[10px] mono-text text-[#56E15B]/20 bg-[#1A1A1A] px-2 py-0.5">12</span>
+</a>
+</li>
+<li>
+<a class="flex justify-between items-center group py-2" href="#">
+<span class="mono-text text-sm text-[#56E15B]/60 group-hover:text-[#00FF41]">Configuration</span>
+<span class="text-[10px] mono-text text-[#56E15B]/20 bg-[#1A1A1A] px-2 py-0.5">31</span>
+</a>
+</li>
+<li>
+<a class="flex justify-between items-center group py-2" href="#">
+<span class="mono-text text-sm text-[#56E15B]/60 group-hover:text-[#00FF41]">Hardware_Hacking</span>
+<span class="text-[10px] mono-text text-[#56E15B]/20 bg-[#1A1A1A] px-2 py-0.5">05</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Terminal Status Widget -->
+<div class="bg-[#0E0E0E] p-6 border border-[#00FF41]/10">
+<h5 class="mono-text text-[10px] tracking-[0.2em] text-[#00FF41] mb-6 uppercase">SESSION_METRICS</h5>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-[10px] mono-text text-[#56E15B]/40 mb-1">
+<span>SYSTEM_UPTIME</span>
+<span>99.98%</span>
+</div>
+<div class="h-1 bg-[#1A1A1A] overflow-hidden">
+<div class="h-full bg-[#00FF41] w-[99.98%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] mono-text text-[#56E15B]/40 mb-1">
+<span>NETWORK_STABILITY</span>
+<span>12.4ms</span>
+</div>
+<div class="h-1 bg-[#1A1A1A] overflow-hidden">
+<div class="h-full bg-[#00FF41] w-[85%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-[#00FF41]/10 text-[10px] mono-text text-[#56E15B]/20 leading-relaxed">
+                            LAST_REFRESH: SYNC_COMPLETE<br/>
+                            ENCRYPTION: AES_256_GCM<br/>
+                            LOCATION: <span class="text-[#00FF41]/40">UNDISCLOSED_NODE</span>
+</div>
+</div>
+<!-- Newsletter Sub -->
+<div class="bg-[#00FF41]/5 p-6 border border-[#00FF41]/20">
+<h5 class="mono-text text-[10px] tracking-[0.2em] text-[#00FF41] mb-4 uppercase">SUBSCRIBE_TO_SIGNAL</h5>
+<p class="text-xs text-[#56E15B]/60 mono-text mb-6">Receive encrypted log updates directly to your terminal weekly.</p>
+<div class="space-y-3">
+<input class="w-full bg-[#131313] border-none text-[10px] mono-text text-[#00FF41] px-4 py-3 focus:ring-1 focus:ring-[#00FF41]/30 placeholder:text-[#56E15B]/20" placeholder="ADDR@NETWORK.HOST" type="email"/>
+<button class="w-full bg-[#00FF41] text-[#003907] font-bold py-3 text-[10px] mono-text">ESTABLISH_LINK</button>
+</div>
+</div>
+</aside>
+</div>
+</section>
+<!-- Footer -->
+<footer class="mt-auto p-12 bg-[#0E0E0E] border-t border-[#00FF41]/10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div>
+<h1 class="text-xl font-bold tracking-tighter text-[#00FF41] uppercase italic headline-text mb-2">INVIZIBLENET.WORK</h1>
+<p class="mono-text text-[10px] text-[#56E15B]/20">© 2023 // ALL_BITS_RESERVED // NO_TRACKING_ENABLED</p>
+</div>
+<div class="flex gap-12">
+<div class="space-y-4">
+<h6 class="mono-text text-[10px] text-[#00FF41] tracking-[0.2em]">PROTOCOL</h6>
+<ul class="space-y-2">
+<li><a class="mono-text text-[10px] text-[#56E15B]/40 hover:text-[#00FF41]" href="#">PRIVACY_SHIELD</a></li>
+<li><a class="mono-text text-[10px] text-[#56E15B]/40 hover:text-[#00FF41]" href="#">LICENSE_EULA</a></li>
+<li><a class="mono-text text-[10px] text-[#56E15B]/40 hover:text-[#00FF41]" href="#">GITHUB_MIRROR</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h6 class="mono-text text-[10px] text-[#00FF41] tracking-[0.2em]">NODES</h6>
+<ul class="space-y-2">
+<li><a class="mono-text text-[10px] text-[#56E15B]/40 hover:text-[#00FF41]" href="#">TOR_GATEWAY</a></li>
+<li><a class="mono-text text-[10px] text-[#56E15B]/40 hover:text-[#00FF41]" href="#">IPFS_CLUSTER</a></li>
+<li><a class="mono-text text-[10px] text-[#56E15B]/40 hover:text-[#00FF41]" href="#">MATRIX_CHAT</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

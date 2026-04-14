@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NETWORK_CONFIG_CORE | INVIZIBLE_NET</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#00530e",
+                    "on-surface": "#e5e2e1",
+                    "inverse-primary": "#006e16",
+                    "on-tertiary-container": "#1c7024",
+                    "on-secondary-fixed": "#002203",
+                    "on-primary-fixed": "#002203",
+                    "secondary-container": "#03ab2b",
+                    "on-tertiary-fixed-variant": "#005311",
+                    "on-tertiary-fixed": "#002203",
+                    "tertiary-fixed": "#a1f79a",
+                    "tertiary-container": "#9cf195",
+                    "secondary-fixed": "#74ff74",
+                    "primary-fixed-dim": "#00e639",
+                    "outline": "#84967e",
+                    "primary-container": "#00ff41",
+                    "surface-variant": "#353534",
+                    "on-tertiary": "#003909",
+                    "surface": "#131313",
+                    "on-error": "#690005",
+                    "on-secondary-fixed-variant": "#00530f",
+                    "on-secondary-container": "#003506",
+                    "primary": "#ebffe2",
+                    "surface-bright": "#3a3939",
+                    "error-container": "#93000a",
+                    "background": "#131313",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-dim": "#131313",
+                    "surface-container-low": "#1c1b1b",
+                    "secondary-fixed-dim": "#56e15b",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "inverse-surface": "#e5e2e1",
+                    "tertiary-fixed-dim": "#86da80",
+                    "on-primary-container": "#007117",
+                    "surface-tint": "#00e639",
+                    "surface-container": "#201f1f",
+                    "inverse-on-surface": "#313030",
+                    "surface-container-high": "#2a2a2a",
+                    "tertiary": "#ecffe4",
+                    "primary-fixed": "#72ff70",
+                    "on-surface-variant": "#b9ccb2",
+                    "on-primary": "#003907",
+                    "surface-container-highest": "#353534",
+                    "secondary": "#56e15b",
+                    "on-secondary": "#003908",
+                    "outline-variant": "#3b4b37",
+                    "on-background": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"],
+                    "mono": ["Share Tech Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 99;
+            background: linear-gradient(0deg, rgba(0, 255, 65, 0) 0%, rgba(0, 255, 65, 0.05) 50%, rgba(0, 255, 65, 0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 bg-[#131313] bg-opacity-90 backdrop-blur-xl h-16 shadow-[0_4px_20px_rgba(0,255,65,0.05)]">
+<div class="flex items-center gap-8">
+<span class="font-headline font-bold text-[#00FF41] tracking-[0.2em] text-lg">INVIZIBLE_NET</span>
+<div class="hidden md:flex items-center gap-6 font-headline tracking-tighter uppercase text-xs">
+<a class="text-neutral-500 hover:text-[#56E15B] transition-all duration-200" href="#">The Hub</a>
+<a class="text-[#00FF41] border-b-2 border-[#00FF41] pb-1" href="#">Network Status</a>
+<a class="text-neutral-500 hover:text-[#56E15B] transition-all duration-200" href="#">Terminal Log</a>
+</div>
+</div>
+<div class="flex items-center gap-4 text-[#00FF41]">
+<span class="material-symbols-outlined cursor-pointer hover:text-[#56E15B]">notifications_active</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-[#56E15B]">dns</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-[#56E15B]">terminal</span>
+<div class="w-8 h-8 bg-surface-container-highest border border-outline-variant rounded-sm overflow-hidden ml-2">
+<img alt="Operator Profile" class="w-full h-full object-cover" data-alt="close up of technical data display reflecting in the eye of a cybersecurity professional in a dark room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF10cSSpfkNXuhoRSJJUPPUkeOGI98tfPhVNjsbLvcxjuOZSOLHZwKvvT0ZemhlFYQA0oZLLGvCeM4b7i_ZQ7PH2sdmJ6wHKRtvj_wCzqQd-_fFh0FFtyMqeb_1M8J9HEO-T6fODhgh9vtbiRRwCObVrqFhXR7XyXyZUD3EPZid_eoMwctVoutfDTjgxOR6fRPmvxculkj3SllWZiafu_XFa44WcDa3Wx0bMjdJeJvhoLXc7R7FXYYiIoXB4xx29PsgGd8cQmm5Gg"/>
+</div>
+</div>
+</nav>
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-screen w-64 pt-20 hidden md:flex flex-col z-40 bg-[#0E0E0E] border-r border-neutral-900/50">
+<div class="px-6 mb-8">
+<h2 class="font-mono text-[#00FF41] text-xs tracking-widest uppercase">SYSTEM_CORE</h2>
+<p class="font-mono text-neutral-600 text-[10px] tracking-widest">v4.0.2-STABLE</p>
+</div>
+<nav class="flex flex-col font-mono text-[11px] uppercase tracking-widest">
+<a class="flex items-center gap-3 text-neutral-600 px-6 py-4 hover:bg-[#131313] hover:text-[#56E15B] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">grid_view</span> The Hub
+            </a>
+<a class="flex items-center gap-3 text-neutral-600 px-6 py-4 hover:bg-[#131313] hover:text-[#56E15B] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">segment</span> Terminal Log
+            </a>
+<a class="flex items-center gap-3 text-neutral-600 px-6 py-4 hover:bg-[#131313] hover:text-[#56E15B] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">security</span> Admin Deck
+            </a>
+<a class="flex items-center gap-3 text-[#00FF41] bg-[#131313] border-l-4 border-[#00FF41] px-6 py-4 font-bold" href="#">
+<span class="material-symbols-outlined text-sm">hub</span> Network Status
+            </a>
+<a class="flex items-center gap-3 text-neutral-600 px-6 py-4 hover:bg-[#131313] hover:text-[#56E15B] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">settings</span> Settings
+            </a>
+</nav>
+<div class="mt-auto p-6">
+<button class="w-full bg-[#131313] border border-[#00FF41]/30 text-[#00FF41] font-mono text-[11px] py-3 tracking-widest hover:bg-[#00FF41] hover:text-[#003907] transition-all">
+                INITIATE_SCAN
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-64 pt-24 px-6 pb-12 min-h-screen">
+<header class="mb-12 max-w-5xl mx-auto">
+<div class="flex items-baseline gap-4 mb-2">
+<h1 class="font-headline font-extrabold text-3xl md:text-5xl tracking-tighter text-on-surface">NETWORK_CONFIG_CORE</h1>
+<span class="font-mono text-secondary text-xs bg-secondary-container/10 px-2 py-1">LIVE_FEED</span>
+</div>
+<p class="font-mono text-neutral-500 text-sm max-w-2xl uppercase tracking-wider">Authentication endpoints and cryptographic protocols for the Invizible infrastructure.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-5xl mx-auto">
+<!-- Email Config Section -->
+<div class="lg:col-span-8 bg-surface-container-low border-l-2 border-primary-container p-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 font-mono text-[10px] text-neutral-700 select-none">MODULE_MAIL_01</div>
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">alternate_email</span>
+<h3 class="font-headline font-bold text-xl tracking-tight">Email Configuration</h3>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-mono text-secondary text-[11px] tracking-widest">OPERATIONAL</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- IMAP -->
+<div class="space-y-4">
+<label class="font-mono text-[11px] text-neutral-500 tracking-widest uppercase">IMAP Incoming</label>
+<div class="space-y-2">
+<div class="flex justify-between items-center bg-surface p-3 rounded-sm border border-outline-variant/10 group-hover:border-primary-container/20 transition-colors">
+<span class="font-mono text-primary-container text-sm">imap.inviziblenet.work</span>
+<span class="material-symbols-outlined text-neutral-600 text-xs cursor-pointer hover:text-white">content_copy</span>
+</div>
+<div class="flex gap-2">
+<div class="flex-1 flex justify-between items-center bg-surface p-3 rounded-sm border border-outline-variant/10">
+<span class="font-mono text-neutral-400 text-[11px]">Port: <span class="text-on-surface">993</span></span>
+</div>
+<div class="flex-1 flex justify-between items-center bg-surface p-3 rounded-sm border border-outline-variant/10">
+<span class="font-mono text-neutral-400 text-[11px]">SSL/TLS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SMTP -->
+<div class="space-y-4">
+<label class="font-mono text-[11px] text-neutral-500 tracking-widest uppercase">SMTP Outgoing</label>
+<div class="space-y-2">
+<div class="flex justify-between items-center bg-surface p-3 rounded-sm border border-outline-variant/10 group-hover:border-primary-container/20 transition-colors">
+<span class="font-mono text-primary-container text-sm">smtp.inviziblenet.work</span>
+<span class="material-symbols-outlined text-neutral-600 text-xs cursor-pointer hover:text-white">content_copy</span>
+</div>
+<div class="flex gap-2">
+<div class="flex-1 flex justify-between items-center bg-surface p-3 rounded-sm border border-outline-variant/10">
+<span class="font-mono text-neutral-400 text-[11px]">Port: <span class="text-on-surface">465</span></span>
+</div>
+<div class="flex-1 flex justify-between items-center bg-surface p-3 rounded-sm border border-outline-variant/10">
+<span class="font-mono text-neutral-400 text-[11px]">SSL/TLS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Matrix Section -->
+<div class="lg:col-span-4 bg-surface-container-low p-8 border-t-2 border-primary-container relative group overflow-hidden">
+<div class="absolute bottom-0 right-0 p-4 font-mono text-[10px] text-neutral-700 select-none">NODE_MTX_X</div>
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">hub</span>
+<h3 class="font-headline font-bold text-xl tracking-tight">Matrix Server</h3>
+</div>
+</div>
+<div class="flex items-center gap-2 mb-6">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-mono text-secondary text-[11px] tracking-widest">OPERATIONAL</span>
+</div>
+<div class="space-y-6">
+<div>
+<label class="font-mono text-[11px] text-neutral-500 tracking-widest uppercase block mb-2">Home Server</label>
+<div class="bg-surface p-3 border border-outline-variant/10 font-mono text-primary-container text-sm">matrix.inviziblenet.work</div>
+</div>
+<div>
+<label class="font-mono text-[11px] text-neutral-500 tracking-widest uppercase block mb-2">Identity Pattern</label>
+<div class="bg-surface p-3 border border-outline-variant/10 font-mono text-on-surface text-sm">@user:inviziblenet.work</div>
+</div>
+</div>
+</div>
+<!-- XMPP Section -->
+<div class="lg:col-span-6 bg-surface-container-low p-8 border-b-2 border-primary-container relative group">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">chat</span>
+<h3 class="font-headline font-bold text-xl tracking-tight">XMPP Protocol</h3>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-mono text-secondary text-[11px] tracking-widest">OPERATIONAL</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface p-4 border border-outline-variant/10">
+<label class="font-mono text-[10px] text-neutral-500 block mb-1">DOMAIN</label>
+<p class="font-mono text-on-surface text-sm">inviziblenet.work</p>
+</div>
+<div class="bg-surface p-4 border border-outline-variant/10">
+<label class="font-mono text-[10px] text-neutral-500 block mb-1">PORT</label>
+<p class="font-mono text-on-surface text-sm">5222</p>
+</div>
+<div class="bg-surface p-4 border border-outline-variant/10 md:col-span-2">
+<label class="font-mono text-[10px] text-neutral-500 block mb-1">ENCRYPTION</label>
+<p class="font-mono text-primary-container text-sm">STARTTLS REQUIRED</p>
+</div>
+</div>
+</div>
+<!-- Network Visualization Card (Aesthetic Gap Filler) -->
+<div class="lg:col-span-6 bg-[#0E0E0E] p-8 flex flex-col justify-between border-l border-outline-variant/20 relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_#00FF41_1px,_transparent_1px)] [background-size:20px_20px]"></div>
+</div>
+<div class="relative z-10">
+<h4 class="font-headline font-bold text-lg mb-2">Network Health Overview</h4>
+<p class="text-neutral-500 text-xs mb-6 uppercase tracking-widest">Global Node Distribution &amp; Latency</p>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-[10px] font-mono">
+<span class="text-neutral-400">US-EAST-01</span>
+<span class="text-secondary">12ms <span class="ml-2">●</span></span>
+</div>
+<div class="flex justify-between items-center text-[10px] font-mono">
+<span class="text-neutral-400">EU-WEST-04</span>
+<span class="text-secondary">48ms <span class="ml-2">●</span></span>
+</div>
+<div class="flex justify-between items-center text-[10px] font-mono">
+<span class="text-neutral-400">ASIA-SOUTH-02</span>
+<span class="text-secondary">112ms <span class="ml-2">●</span></span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/10 relative z-10">
+<div class="flex items-center gap-4">
+<div class="flex-1 h-1 bg-surface-container-highest">
+<div class="h-full bg-primary-container w-[92%]"></div>
+</div>
+<span class="font-mono text-[10px] text-primary-container">Uptime: 99.98%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Terminal Output Section -->
+<section class="mt-12 max-w-5xl mx-auto bg-[#0E0E0E] rounded-sm border border-outline-variant/10 overflow-hidden shadow-2xl">
+<div class="bg-surface-container px-4 py-2 border-b border-outline-variant/10 flex items-center justify-between">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-error/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container/20"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container/40"></div>
+</div>
+<span class="font-mono text-[10px] text-neutral-500 uppercase tracking-widest">live_session_log.sh</span>
+<div></div>
+</div>
+<div class="p-6 font-mono text-[12px] text-neutral-400 space-y-1.5 leading-relaxed overflow-x-auto">
+<p><span class="text-neutral-600">[14:22:01]</span> <span class="text-primary-container">INFO</span>: Initializing handshake with imap.inviziblenet.work...</p>
+<p><span class="text-neutral-600">[14:22:02]</span> <span class="text-primary-container">SUCCESS</span>: TLS Connection established (AES-256-GCM)</p>
+<p><span class="text-neutral-600">[14:22:05]</span> <span class="text-primary-container">INFO</span>: Matrix federation probe sent to matrix.inviziblenet.work</p>
+<p><span class="text-neutral-600">[14:22:07]</span> <span class="text-primary-container">INFO</span>: XMPP service discovered on port 5222</p>
+<p><span class="text-neutral-600">[14:22:08]</span> <span class="text-secondary-fixed-dim">STATUS</span>: Global network integrity verified. All systems nominal.</p>
+<p class="pt-2"><span class="text-primary-container">invizible@admin:~$</span> <span class="animate-pulse">_</span></p>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full h-16 bg-surface border-t border-outline-variant/20 flex justify-around items-center z-50">
+<button class="flex flex-col items-center gap-1 text-neutral-500">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-headline text-[10px] uppercase">Hub</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#00FF41]">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-headline text-[10px] uppercase">Network</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-neutral-500">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-headline text-[10px] uppercase">Settings</span>
+</button>
+</nav>
+<div class="fixed bottom-8 right-8 md:right-12 z-40">
+<!-- Suppression: FAB only on Home/Dashboard, not strictly needed on Config, but if required: -->
+</div>
+</body></html>

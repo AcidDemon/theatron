@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INVIZIBLENET.WORK // THE_HUB</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+        .glass-panel {
+            background: rgba(53, 53, 52, 0.4);
+            backdrop-filter: blur(24px);
+        }
+        .mono {
+            font-family: 'Share+Tech+Mono', monospace;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#ecffe4",
+                        "secondary-fixed-dim": "#56e15b",
+                        "surface-variant": "#353534",
+                        "surface-bright": "#3a3939",
+                        "on-primary-fixed": "#002203",
+                        "on-background": "#e5e2e1",
+                        "on-primary-fixed-variant": "#00530e",
+                        "on-error": "#690005",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-fixed": "#72ff70",
+                        "on-secondary-container": "#003506",
+                        "on-primary-container": "#007117",
+                        "surface": "#131313",
+                        "on-secondary": "#003908",
+                        "on-secondary-fixed-variant": "#00530f",
+                        "error-container": "#93000a",
+                        "on-surface": "#e5e2e1",
+                        "on-primary": "#003907",
+                        "secondary-container": "#03ab2b",
+                        "surface-tint": "#00e639",
+                        "on-tertiary-fixed-variant": "#005311",
+                        "tertiary-container": "#9cf195",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-container": "#1c7024",
+                        "on-secondary-fixed": "#002203",
+                        "background": "#131313",
+                        "secondary-fixed": "#74ff74",
+                        "secondary": "#56e15b",
+                        "on-surface-variant": "#b9ccb2",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed-dim": "#86da80",
+                        "surface-container": "#201f1f",
+                        "primary-container": "#00ff41",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-fixed-dim": "#00e639",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed": "#002203",
+                        "surface-container-highest": "#353534",
+                        "inverse-primary": "#006e16",
+                        "tertiary-fixed": "#a1f79a",
+                        "on-tertiary": "#003909",
+                        "primary": "#ebffe2",
+                        "inverse-surface": "#e5e2e1",
+                        "outline": "#84967e",
+                        "outline-variant": "#3b4b37",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary">
+<!-- Sidebar (SideNavBar) -->
+<aside class="hidden md:flex fixed left-0 top-0 h-screen w-64 bg-[#0E0E0E] flex-col py-6 z-[60]">
+<div class="px-6 mb-8">
+<h1 class="text-2xl font-bold tracking-tighter text-[#00FF41] uppercase font-headline">INVIZIBLE_NET</h1>
+<div class="mt-4 p-4 bg-[#1A1A1A] rounded-sm">
+<div class="flex items-center gap-3">
+<img alt="User Terminal Profile" class="w-10 h-10 rounded-sm border border-[#00FF41]/20" data-alt="Cyberpunk style character portrait with glowing neon green highlights on visor and dark matte armor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpJNhmMcpxIN4lyuZUWQZ2TgME6fbSBFLtRNV7M4hvNyGm91_GA3cZWwm_Qyp9Rz-5XD82zXkufHBdM2nm1OABPAxl2mUHR5tNVtbMH5ogNzuLg40y-IErHwjEepQ93iA_TLMn3whDXc2zWQTkEIHsTAioF3aaHm-kaGPphry5jrzbZ6BI9nWnz8HlDZG-ZQlOOCiYregZ_0tMmIhOY84wgrYBp3ycZO08LmjdXUWLhFpCRuSCdI6gDRGtlQowzLH4qLTcK3sfFRk"/>
+<div>
+<p class="text-xs font-bold text-[#00FF41] font-headline">INVIZIBLE_USER</p>
+<p class="text-[10px] text-[#56E15B]/60 font-mono">LEVEL_04_ARCHITECT</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-6 py-3 text-[#00FF41] border-l-2 border-[#00FF41] pl-4 font-bold bg-[#1A1A1A] font-label text-sm tracking-tight transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard">dashboard</span>
+                THE_HUB
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#56E15B]/60 pl-4 hover:text-[#00FF41] hover:bg-[#1A1A1A] transition-colors font-label text-sm tracking-tight" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="terminal">terminal</span>
+                TERMINAL_LOG
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#56E15B]/60 pl-4 hover:text-[#00FF41] hover:bg-[#1A1A1A] transition-colors font-label text-sm tracking-tight" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="admin_panel_settings">admin_panel_settings</span>
+                ADMIN_DECK
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#56E15B]/60 pl-4 hover:text-[#00FF41] hover:bg-[#1A1A1A] transition-colors font-label text-sm tracking-tight" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="hub">hub</span>
+                NETWORK_STATUS
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#56E15B]/60 pl-4 hover:text-[#00FF41] hover:bg-[#1A1A1A] transition-colors font-label text-sm tracking-tight" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+                SETTINGS
+            </a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full py-3 bg-[#00FF41] text-[#003907] font-bold text-xs font-label uppercase tracking-widest rounded-sm hover:brightness-110 transition-all cursor-crosshair">
+                DEPLOY_SYSTEM
+            </button>
+<a class="flex items-center gap-3 mt-6 py-3 text-[#56E15B]/40 hover:text-[#00FF41] transition-colors font-label text-sm tracking-tight" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+                GATEKEEPER_EXIT
+            </a>
+</div>
+</aside>
+<!-- Top Navigation (TopNavBar) -->
+<header class="md:ml-64 bg-[#131313]/80 backdrop-blur-xl sticky top-0 z-50 border-b border-[#00FF41]/10 px-6 h-16 flex justify-between items-center w-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black text-[#00FF41] italic font-headline tracking-tighter">INVIZIBLENET.WORK</span>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-xs font-bold font-label uppercase tracking-widest text-[#00FF41] border-b-2 border-[#00FF41] pb-1" href="#">LOGS</a>
+<a class="text-xs font-bold font-label uppercase tracking-widest text-[#56E15B]/40 hover:text-[#00FF41] transition-all" href="#">DECK</a>
+<a class="text-xs font-bold font-label uppercase tracking-widest text-[#56E15B]/40 hover:text-[#00FF41] transition-all" href="#">GATE</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#56E15B]/40 text-sm" data-icon="search">search</span>
+<input class="bg-[#0E0E0E] border-none text-[10px] font-mono text-[#00FF41] placeholder-[#56E15B]/20 pl-10 pr-4 py-2 w-64 rounded-sm focus:ring-1 focus:ring-[#00FF41]/30" placeholder="COMMAND_QUERY..." type="text"/>
+</div>
+<div class="flex items-center gap-3 px-4 border-l border-[#00FF41]/10">
+<button class="text-[#56E15B]/60 hover:text-[#00FF41] transition-all">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</button>
+<button class="text-[#56E15B]/60 hover:text-[#00FF41] transition-all">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</button>
+<button class="bg-[#00FF41] text-[#003907] px-4 py-1.5 rounded-sm font-bold text-[10px] font-label uppercase tracking-widest ml-2">
+                    ROOT_ACCESS
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="md:ml-64 min-h-screen p-6 lg:p-10 space-y-10">
+<!-- System Status Header -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-[#00FF41] animate-pulse"></span>
+<span class="text-[10px] font-mono text-[#56E15B]/60 uppercase tracking-widest">SYSTEM_LIVE // NODE_01</span>
+</div>
+<h2 class="text-4xl lg:text-6xl font-black font-headline text-on-surface tracking-tighter uppercase leading-none">
+                    SYSTEM_<span class="text-[#00FF41]">STATUS</span>
+</h2>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-low p-4 rounded-sm border-l-2 border-[#00FF41] min-w-[140px]">
+<p class="text-[10px] font-mono text-[#56E15B]/40 uppercase">CPU_LOAD</p>
+<p class="text-xl font-mono text-[#00FF41]">12.42%</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-sm border-l-2 border-[#00FF41] min-w-[140px]">
+<p class="text-[10px] font-mono text-[#56E15B]/40 uppercase">UPTIME</p>
+<p class="text-xl font-mono text-[#00FF41]">42D 12H</p>
+</div>
+<div class="hidden lg:block bg-surface-container-low p-4 rounded-sm border-l-2 border-error min-w-[140px]">
+<p class="text-[10px] font-mono text-[#FFB4AB]/40 uppercase">THREAT_LVL</p>
+<p class="text-xl font-mono text-error">NULL</p>
+</div>
+</div>
+</section>
+<!-- Main Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Terminal Log (Blog Highlights) -->
+<section class="lg:col-span-8 space-y-6">
+<div class="flex items-center justify-between border-b border-[#00FF41]/10 pb-4">
+<h3 class="font-headline text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00FF41]" data-icon="terminal">terminal</span>
+                        TERMINAL_LOG
+                    </h3>
+<a class="text-[10px] font-mono text-[#56E15B]/40 hover:text-[#00FF41] uppercase tracking-widest" href="#">VIEW_ALL_LOGS_</a>
+</div>
+<div class="grid md:grid-cols-2 gap-6">
+<!-- Blog Card 1 -->
+<div class="group relative bg-surface-container-low overflow-hidden rounded-sm hover:ring-1 hover:ring-[#00FF41]/30 transition-all">
+<div class="h-48 overflow-hidden">
+<img alt="NixOS Server Hardware" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60" data-alt="Server rack with green indicator lights in a dark data center, high contrast cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhqB0eTYSCGjPSpCRgIksprdBgh_AoitXKJizjig_PJFKDFdFlMWiTHLFWK9MAiJ9OFEJjRH6ysAJ_lMl_4Al8KgdiZI7mXG-qCYmA_AdtR7_KbZ8u0qRGycLKN8ypGP2CCmowwcJgss3WK7EfxrNAllUlvWQRlSSc-mqYgj5sXyDzNUkkgj3YCou8UlFj8ffKQzqST7AUI5harDG_VZb4Uk8sFBOBkppFThGx6qC5d3ggQwb9S_ewK0d5cdfkPIxDEaupYYGLQ5U"/>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-4 mb-3">
+<span class="text-[10px] font-mono text-[#00FF41] bg-[#00FF41]/10 px-2 py-1 rounded-sm uppercase">NIXOS</span>
+<span class="text-[10px] font-mono text-[#56E15B]/40">2024.05.12</span>
+</div>
+<h4 class="text-xl font-headline font-bold text-on-surface mb-2 group-hover:text-[#00FF41] transition-colors">Optimizing NixOS Kernels for Low-Latency Tasks</h4>
+<p class="text-sm text-[#b9ccb2] leading-relaxed mb-4">A deep dive into custom kernel compilation flags and derivation overrides for high-performance networking...</p>
+<a class="text-xs font-mono text-[#00FF41] flex items-center gap-2 group-hover:translate-x-1 transition-transform" href="#">
+                                READ_ENTRY <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Blog Card 2 -->
+<div class="group relative bg-surface-container-low overflow-hidden rounded-sm hover:ring-1 hover:ring-[#00FF41]/30 transition-all">
+<div class="h-48 overflow-hidden">
+<img alt="Security Rules Concept" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60" data-alt="Abstract visualization of network firewall rules as glowing green geometric patterns on black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAufR55y1WILnSsCcF0c4xUp-NKxecF9oe0LGuhmB8BsvlLO9nrjXI9RVHOKd5rWQPWKitHM_GE_KkzzKdoyYcfhL-H4ES0v6z2mP_L2lo9wXOoRcpPfIeANlmrgRX7-QkHzCBNWuKEf4wgb0vgG4Ulzl_OOkLKimEuseSDhVPah0C46k8Oegwtu2VCvrW2Q-3WfTzkLigw_v12UeK34WPGAZn6ovZI8h7AkaixJPiEW_xor7ntgVDVMdeVBHMz7Cod8D3Lllq56b8"/>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-4 mb-3">
+<span class="text-[10px] font-mono text-[#00FF41] bg-[#00FF41]/10 px-2 py-1 rounded-sm uppercase">OPENBSD</span>
+<span class="text-[10px] font-mono text-[#56E15B]/40">2024.05.10</span>
+</div>
+<h4 class="text-xl font-headline font-bold text-on-surface mb-2 group-hover:text-[#00FF41] transition-colors">OpenBSD PF Ruleset for Home Labs</h4>
+<p class="text-sm text-[#b9ccb2] leading-relaxed mb-4">Hardening your perimeter with Packet Filter. Comprehensive guide for stateful inspection and NAT configuration...</p>
+<a class="text-xs font-mono text-[#00FF41] flex items-center gap-2 group-hover:translate-x-1 transition-transform" href="#">
+                                READ_ENTRY <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Network Nodes -->
+<section class="lg:col-span-4 space-y-6">
+<div class="flex items-center justify-between border-b border-[#00FF41]/10 pb-4">
+<h3 class="font-headline text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00FF41]" data-icon="hub">hub</span>
+                        NETWORK_NODES
+                    </h3>
+</div>
+<div class="space-y-3">
+<!-- Node 1 -->
+<div class="bg-surface-container p-4 rounded-sm flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-sm bg-[#0E0E0E] flex items-center justify-center text-[#00FF41]">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</div>
+<div>
+<p class="text-xs font-bold font-headline uppercase">MATRIX</p>
+<p class="text-[10px] font-mono text-[#56E15B]/40">matrix.inviziblenet.work</p>
+</div>
+</div>
+<span class="text-[10px] font-mono text-[#00FF41]">ONLINE</span>
+</div>
+<!-- Node 2 -->
+<div class="bg-surface-container p-4 rounded-sm flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-sm bg-[#0E0E0E] flex items-center justify-center text-[#00FF41]">
+<span class="material-symbols-outlined" data-icon="message">message</span>
+</div>
+<div>
+<p class="text-xs font-bold font-headline uppercase">XMPP</p>
+<p class="text-[10px] font-mono text-[#56E15B]/40">xmpp.inviziblenet.work</p>
+</div>
+</div>
+<span class="text-[10px] font-mono text-[#00FF41]">ONLINE</span>
+</div>
+<!-- Node 3 -->
+<div class="bg-surface-container p-4 rounded-sm flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-sm bg-[#0E0E0E] flex items-center justify-center text-[#00FF41]">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</div>
+<div>
+<p class="text-xs font-bold font-headline uppercase">EMAIL</p>
+<p class="text-[10px] font-mono text-[#56E15B]/40">mx.inviziblenet.work</p>
+</div>
+</div>
+<span class="text-[10px] font-mono text-[#00FF41]">ONLINE</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-sm border border-[#00FF41]/5">
+<p class="text-[10px] font-mono text-[#56E15B]/60 uppercase mb-4 tracking-widest">ENCRYPTION_KEY</p>
+<div class="font-mono text-[9px] text-[#00FF41]/40 break-all leading-relaxed p-3 bg-surface rounded-sm">
+                        0x4B3A8F2C9D1E0F5A7B3C4D5E6F7G8H9I0J1K2L3M4N5O6P7Q8R9S0T1U2V3W4X5Y6Z7
+                    </div>
+<button class="mt-4 w-full py-2 border border-[#00FF41]/20 text-[10px] font-mono text-[#00FF41] hover:bg-[#00FF41]/10 transition-colors uppercase">
+                        COPY_PUBLIC_KEYS
+                    </button>
+</div>
+</section>
+</div>
+<!-- Quick Access Services -->
+<section class="space-y-6">
+<div class="flex items-center justify-between border-b border-[#00FF41]/10 pb-4">
+<h3 class="font-headline text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00FF41]" data-icon="apps">apps</span>
+                    QUICK_ACCESS_SERVICES
+                </h3>
+<div class="flex items-center gap-4">
+<span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">SYSTEM_HEALTH: 100%</span>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+<!-- Nextcloud -->
+<a class="bg-surface-container-low p-6 rounded-sm flex flex-col items-center justify-center text-center hover:bg-[#1A1A1A] hover:shadow-[0_0_20px_rgba(0,255,65,0.05)] transition-all group" href="#">
+<span class="material-symbols-outlined text-3xl mb-3 text-[#56E15B]/40 group-hover:text-[#00FF41]" data-icon="cloud">cloud</span>
+<p class="text-xs font-bold font-headline uppercase mb-1">Nextcloud</p>
+<p class="text-[9px] font-mono text-[#00FF41] bg-[#00FF41]/5 px-2 rounded-full">OPERATIONAL</p>
+</a>
+<!-- PaperlessNGX -->
+<a class="bg-surface-container-low p-6 rounded-sm flex flex-col items-center justify-center text-center hover:bg-[#1A1A1A] hover:shadow-[0_0_20px_rgba(0,255,65,0.05)] transition-all group" href="#">
+<span class="material-symbols-outlined text-3xl mb-3 text-[#56E15B]/40 group-hover:text-[#00FF41]" data-icon="description">description</span>
+<p class="text-xs font-bold font-headline uppercase mb-1">PaperlessNGX</p>
+<p class="text-[9px] font-mono text-[#00FF41] bg-[#00FF41]/5 px-2 rounded-full">OPERATIONAL</p>
+</a>
+<!-- BentoPDF -->
+<a class="bg-surface-container-low p-6 rounded-sm flex flex-col items-center justify-center text-center hover:bg-[#1A1A1A] hover:shadow-[0_0_20px_rgba(0,255,65,0.05)] transition-all group" href="#">
+<span class="material-symbols-outlined text-3xl mb-3 text-[#56E15B]/40 group-hover:text-[#00FF41]" data-icon="picture_as_pdf">picture_as_pdf</span>
+<p class="text-xs font-bold font-headline uppercase mb-1">BentoPDF</p>
+<p class="text-[9px] font-mono text-[#00FF41] bg-[#00FF41]/5 px-2 rounded-full">OPERATIONAL</p>
+</a>
+<!-- IT-Tools -->
+<a class="bg-surface-container-low p-6 rounded-sm flex flex-col items-center justify-center text-center hover:bg-[#1A1A1A] hover:shadow-[0_0_20px_rgba(0,255,65,0.05)] transition-all group" href="#">
+<span class="material-symbols-outlined text-3xl mb-3 text-[#56E15B]/40 group-hover:text-[#00FF41]" data-icon="build">build</span>
+<p class="text-xs font-bold font-headline uppercase mb-1">IT-Tools</p>
+<p class="text-[9px] font-mono text-[#00FF41] bg-[#00FF41]/5 px-2 rounded-full">OPERATIONAL</p>
+</a>
+<!-- Cyberchef -->
+<a class="bg-surface-container-low p-6 rounded-sm flex flex-col items-center justify-center text-center hover:bg-[#1A1A1A] hover:shadow-[0_0_20px_rgba(0,255,65,0.05)] transition-all group" href="#">
+<span class="material-symbols-outlined text-3xl mb-3 text-[#56E15B]/40 group-hover:text-[#00FF41]" data-icon="cooking">cooking</span>
+<p class="text-xs font-bold font-headline uppercase mb-1">Cyberchef</p>
+<p class="text-[9px] font-mono text-[#00FF41] bg-[#00FF41]/5 px-2 rounded-full">OPERATIONAL</p>
+</a>
+<!-- Stalwart -->
+<a class="bg-surface-container-low p-6 rounded-sm flex flex-col items-center justify-center text-center hover:bg-[#1A1A1A] hover:shadow-[0_0_20px_rgba(0,255,65,0.05)] transition-all group" href="#">
+<span class="material-symbols-outlined text-3xl mb-3 text-[#56E15B]/40 group-hover:text-[#00FF41]" data-icon="alternate_email">alternate_email</span>
+<p class="text-xs font-bold font-headline uppercase mb-1">Stalwart Webmail</p>
+<p class="text-[9px] font-mono text-[#00FF41] bg-[#00FF41]/5 px-2 rounded-full">OPERATIONAL</p>
+</a>
+<!-- SearXNG -->
+<a class="bg-surface-container-low p-6 rounded-sm flex flex-col items-center justify-center text-center hover:bg-[#1A1A1A] hover:shadow-[0_0_20px_rgba(0,255,65,0.05)] transition-all group" href="#">
+<span class="material-symbols-outlined text-3xl mb-3 text-[#56E15B]/40 group-hover:text-[#00FF41]" data-icon="search_insights">search_insights</span>
+<p class="text-xs font-bold font-headline uppercase mb-1">SearXNG</p>
+<p class="text-[9px] font-mono text-[#00FF41] bg-[#00FF41]/5 px-2 rounded-full">OPERATIONAL</p>
+</a>
+<!-- Calibre-Web -->
+<a class="bg-surface-container-low p-6 rounded-sm flex flex-col items-center justify-center text-center hover:bg-[#1A1A1A] hover:shadow-[0_0_20px_rgba(0,255,65,0.05)] transition-all group" href="#">
+<span class="material-symbols-outlined text-3xl mb-3 text-[#56E15B]/40 group-hover:text-[#00FF41]" data-icon="menu_book">menu_book</span>
+<p class="text-xs font-bold font-headline uppercase mb-1">Calibre-Web</p>
+<p class="text-[9px] font-mono text-[#00FF41] bg-[#00FF41]/5 px-2 rounded-full">OPERATIONAL</p>
+</a>
+<!-- Gitlab -->
+<a class="bg-surface-container-low p-6 rounded-sm flex flex-col items-center justify-center text-center hover:bg-[#1A1A1A] hover:shadow-[0_0_20px_rgba(0,255,65,0.05)] transition-all group" href="#">
+<span class="material-symbols-outlined text-3xl mb-3 text-[#56E15B]/40 group-hover:text-[#00FF41]" data-icon="code_blocks">code_blocks</span>
+<p class="text-xs font-bold font-headline uppercase mb-1">Gitlab</p>
+<p class="text-[9px] font-mono text-[#00FF41] bg-[#00FF41]/5 px-2 rounded-full">OPERATIONAL</p>
+</a>
+<!-- More -->
+<a class="bg-surface-container p-6 rounded-sm flex flex-col items-center justify-center text-center hover:bg-[#1A1A1A] border border-[#00FF41]/10 transition-all group border-dashed" href="#">
+<span class="material-symbols-outlined text-3xl mb-3 text-[#56E15B]/20 group-hover:text-[#00FF41]" data-icon="add_box">add_box</span>
+<p class="text-xs font-bold font-headline uppercase text-[#56E15B]/40 group-hover:text-[#00FF41]">ADD_TOOL</p>
+</a>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#0E0E0E] flex justify-around items-center h-16 z-[60] border-t border-[#00FF41]/10 px-4">
+<a class="flex flex-col items-center text-[#00FF41]" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[8px] font-mono">HUB</span>
+</a>
+<a class="flex flex-col items-center text-[#56E15B]/40" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="text-[8px] font-mono">LOGS</span>
+</a>
+<a class="flex flex-col items-center text-[#56E15B]/40" href="#">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+<span class="text-[8px] font-mono">NET</span>
+</a>
+<a class="flex flex-col items-center text-[#56E15B]/40" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[8px] font-mono">CONF</span>
+</a>
+</nav>
+<!-- Floating Security Pulse -->
+<div class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[70]">
+<div class="relative">
+<div class="absolute -inset-1 bg-[#00FF41]/20 rounded-full blur-md animate-pulse"></div>
+<button class="relative bg-[#00FF41] text-[#003907] w-12 h-12 rounded-sm flex items-center justify-center shadow-[0_0_30px_rgba(0,255,65,0.4)]">
+<span class="material-symbols-outlined font-bold" data-icon="shield">shield</span>
+</button>
+</div>
+</div>
+</body></html>

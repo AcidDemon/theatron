@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EPISTROPOS | SYSTEM_NODE_01</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#56e15b",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-bright": "#3a3939",
+                        "error": "#ffb4ab",
+                        "outline": "#84967e",
+                        "primary": "#ebffe2",
+                        "surface-container-highest": "#353534",
+                        "on-primary-container": "#007117",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-container": "#00ff41",
+                        "on-secondary-fixed": "#002203",
+                        "on-surface-variant": "#b9ccb2",
+                        "on-secondary": "#003908",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#313030",
+                        "surface-dim": "#131313",
+                        "on-secondary-container": "#003506",
+                        "error-container": "#93000a",
+                        "surface": "#131313",
+                        "on-primary": "#003907",
+                        "on-tertiary-fixed-variant": "#005311",
+                        "outline-variant": "#3b4b37",
+                        "secondary-fixed": "#74ff74",
+                        "surface-variant": "#353534",
+                        "on-tertiary-fixed": "#002203",
+                        "on-background": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#86da80",
+                        "tertiary": "#ecffe4",
+                        "secondary-container": "#03ab2b",
+                        "surface-container": "#201f1f",
+                        "on-tertiary": "#003909",
+                        "tertiary-fixed": "#a1f79a",
+                        "on-primary-fixed": "#002203",
+                        "tertiary-container": "#9cf195",
+                        "on-tertiary-container": "#1c7024",
+                        "inverse-primary": "#006e16",
+                        "primary-fixed-dim": "#00e639",
+                        "surface-tint": "#00e639",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary": "#56e15b",
+                        "primary-fixed": "#72ff70",
+                        "on-primary-fixed-variant": "#00530e",
+                        "on-secondary-fixed-variant": "#00530f",
+                        "background": "#131313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"],
+                        "mono": ["Share Tech Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .custom-glass {
+            background: rgba(53, 53, 52, 0.4);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-8 bg-[#0E0E0E] w-64 border-r border-[#00FF41]/10 z-50">
+<div class="px-6 mb-10">
+<h2 class="text-[#00FF41] font-bold font-mono tracking-wider">TERMINAL ARCHITECT</h2>
+<p class="text-[#56E15B]/40 text-[10px] font-mono mt-1">SYSTEM_NODE_01</p>
+</div>
+<nav class="flex-1">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 text-[#00FF41] bg-[#131313] border-l-2 border-[#00FF41] px-4 py-3 font-mono uppercase tracking-wider text-xs transition-all Active: scale-[0.98] duration-150" href="#">
+<span class="material-symbols-outlined text-sm">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-mono uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">list_alt</span>
+                        Sessions
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-mono uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">terminal</span>
+                        Viewer
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-mono uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Exports
+                    </a>
+</li>
+</ul>
+</nav>
+<div class="px-6 mb-8">
+<button class="w-full bg-primary-container text-on-primary font-mono text-xs py-3 rounded-sm font-bold tracking-widest hover:opacity-90 transition-opacity">
+                RECORD_NEW
+            </button>
+</div>
+<div class="border-t border-[#00FF41]/5 pt-4">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-mono uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">menu_book</span>
+                        Docs
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-mono uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+                        Logout
+                    </a>
+</li>
+</ul>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="ml-64 flex-1 flex flex-col bg-[#131313]">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-8 h-16 bg-[#131313] border-b border-[#00FF41]/10 sticky top-0 z-40">
+<div class="flex items-center gap-6">
+<span class="text-xl font-bold text-[#00FF41] tracking-widest font-['Space_Grotesk']">EPISTROPOS</span>
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-[#56E15B]/40">
+<span class="material-symbols-outlined text-sm">search</span>
+</span>
+<input class="bg-surface-container-lowest border-none text-xs font-mono py-2 pl-10 pr-4 w-64 focus:ring-1 focus:ring-[#00FF41] rounded-sm placeholder-[#56E15B]/20" placeholder="CMD_LINE_SEARCH..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#56E15B]/60 hover:bg-[#00FF41]/5 hover:text-[#00FF41] transition-colors rounded-sm">
+<span class="material-symbols-outlined">security</span>
+</button>
+<button class="p-2 text-[#56E15B]/60 hover:bg-[#00FF41]/5 hover:text-[#00FF41] transition-colors rounded-sm">
+<span class="material-symbols-outlined">terminal</span>
+</button>
+<button class="p-2 text-[#56E15B]/60 hover:bg-[#00FF41]/5 hover:text-[#00FF41] transition-colors rounded-sm">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="ml-2 w-8 h-8 bg-surface-container-highest flex items-center justify-center rounded-sm border border-[#00FF41]/20">
+<img alt="User avatar" class="w-6 h-6" data-alt="minimalist pixel art avatar representing a system administrator with neon green accents on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuKr3QuTQONP5ohrm1Xf4GNPYvlFTLTWaM-46c_osHRc7Bl0NEU_LJiwx9gQxgr2WSkHSRHgjOB0ilJzOROBsTNdnGFCz8qpkxermFF6v_P7H44K1pk96tfwZNCimaKPhR3Nq0ahxJOlZUVZuKgmo0etSmcPBIFdgXvAEyyTclZkHgmnFIgBlLtJoQfYDRLDOyrrWfBBsIBLFIKqLocrpx4Ze9CUkLrA_ScKJEclBUF-obTWrl5FiyQKgn3TMsGvnUu4e7E8he1zA"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="p-8 max-w-7xl mx-auto w-full space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-headline font-bold text-[#00FF41] tracking-tight uppercase">Dashboard_Overview</h1>
+<p class="text-[#56E15B]/60 font-mono text-sm mt-1">LAST_SYNC: 2023-10-27_T14:42:01Z // NODE: US_WEST_02</p>
+</div>
+<div class="flex gap-2">
+<div class="px-4 py-2 bg-surface-container-low border-l-2 border-[#56E15B] flex flex-col">
+<span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">System_Status</span>
+<span class="text-[#56E15B] font-mono text-sm">OPERATIONAL</span>
+</div>
+<div class="px-4 py-2 bg-surface-container-low border-l-2 border-primary-container flex flex-col">
+<span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">Encryption</span>
+<span class="text-primary-container font-mono text-sm">AES_256_ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest p-5 flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#00FF41]/5 -rotate-45 translate-x-8 -translate-y-8 group-hover:bg-[#00FF41]/10 transition-colors"></div>
+<span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest z-10">Total_Sessions</span>
+<div class="flex items-baseline gap-2 z-10">
+<span class="text-4xl font-headline font-bold text-on-surface">1,248</span>
+<span class="text-[#56E15B] text-xs font-mono">+12%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 flex flex-col justify-between h-32 relative overflow-hidden group">
+<span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">Storage_Usage</span>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="text-3xl font-headline font-bold text-on-surface">64.2<span class="text-lg opacity-50 ml-1">GB</span></span>
+<span class="text-[#56E15B]/60 text-xs font-mono italic">85%_USED</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full overflow-hidden">
+<div class="h-full bg-primary-container" style="width: 85%"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 flex flex-col justify-between h-32 relative overflow-hidden group">
+<span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">Active_Streams</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-bold text-on-surface">14</span>
+<div class="flex gap-1 ml-2">
+<div class="w-1 h-3 bg-primary-container animate-pulse"></div>
+<div class="w-1 h-5 bg-primary-container/60"></div>
+<div class="w-1 h-4 bg-primary-container"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 flex flex-col justify-between h-32 relative overflow-hidden group">
+<span class="text-[10px] font-mono text-[#56E15B]/40 uppercase tracking-widest">Global_Latency</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-bold text-on-surface">24<span class="text-lg opacity-50 ml-1">ms</span></span>
+<span class="material-symbols-outlined text-primary-container text-sm">trending_down</span>
+</div>
+</div>
+</div>
+<!-- Activity Chart & Real-time Logs -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Activity Chart -->
+<div class="lg:col-span-2 bg-surface-container-low p-6 flex flex-col h-[400px]">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-[#00FF41] font-mono text-xs uppercase tracking-widest font-bold">Network_Activity_Metric</h3>
+<p class="text-on-surface/40 text-[10px] font-mono mt-1">REAL_TIME_NODE_TRAFFIC_LOGGING</p>
+</div>
+<div class="flex gap-4 font-mono text-[10px] text-[#56E15B]/40">
+<span class="flex items-center gap-1"><div class="w-2 h-2 bg-primary-container"></div> UPLINK</span>
+<span class="flex items-center gap-1"><div class="w-2 h-2 bg-secondary/40"></div> DOWNLINK</span>
+</div>
+</div>
+<div class="flex-1 relative border-l border-b border-[#56E15B]/10 flex items-end justify-between px-4 pb-2">
+<!-- Simulated Chart Elements -->
+<div class="w-[8%] h-[40%] bg-primary-container/20 border-t border-primary-container"></div>
+<div class="w-[8%] h-[60%] bg-primary-container/20 border-t border-primary-container"></div>
+<div class="w-[8%] h-[45%] bg-primary-container/20 border-t border-primary-container"></div>
+<div class="w-[8%] h-[80%] bg-primary-container/20 border-t border-primary-container"></div>
+<div class="w-[8%] h-[75%] bg-primary-container/20 border-t border-primary-container"></div>
+<div class="w-[8%] h-[30%] bg-primary-container/20 border-t border-primary-container"></div>
+<div class="w-[8%] h-[55%] bg-primary-container/20 border-t border-primary-container"></div>
+<div class="w-[8%] h-[90%] bg-primary-container/20 border-t border-primary-container"></div>
+<div class="w-[8%] h-[65%] bg-primary-container/20 border-t border-primary-container"></div>
+<div class="w-[8%] h-[50%] bg-primary-container/20 border-t border-primary-container"></div>
+<!-- Backdrop Grid -->
+<div class="absolute inset-0 grid grid-rows-4 pointer-events-none opacity-[0.03]">
+<div class="border-t border-[#00FF41]"></div>
+<div class="border-t border-[#00FF41]"></div>
+<div class="border-t border-[#00FF41]"></div>
+<div class="border-t border-[#00FF41]"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 px-4 font-mono text-[9px] text-[#56E15B]/30">
+<span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span>
+</div>
+</div>
+<!-- Session Logs / Right Panel -->
+<div class="bg-surface-container-lowest p-6 flex flex-col h-[400px]">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[#00FF41] text-lg">history</span>
+<h3 class="text-[#00FF41] font-mono text-xs uppercase tracking-widest font-bold">Event_Stream</h3>
+</div>
+<div class="flex-1 space-y-4 overflow-y-auto pr-2 custom-scrollbar">
+<div class="flex gap-4 items-start group">
+<span class="text-[#56E15B]/30 font-mono text-[10px] pt-1">14:42:01</span>
+<div class="flex-1">
+<p class="text-on-surface text-xs font-mono leading-tight group-hover:text-primary-container transition-colors">Session_ID <span class="text-[#00FF41]">#9921</span> completed successfully.</p>
+<p class="text-[10px] text-[#56E15B]/40 font-mono mt-1">SRC: 192.168.1.1 // SIZE: 1.2GB</p>
+</div>
+</div>
+<div class="flex gap-4 items-start group">
+<span class="text-[#56E15B]/30 font-mono text-[10px] pt-1">14:38:55</span>
+<div class="flex-1">
+<p class="text-on-surface text-xs font-mono leading-tight group-hover:text-primary-container transition-colors">Encryption handshake initiated.</p>
+<p class="text-[10px] text-[#56E15B]/40 font-mono mt-1">PROTOCOL: TLS_1.3 // NODE: EDGE_04</p>
+</div>
+</div>
+<div class="flex gap-4 items-start group">
+<span class="text-[#56E15B]/30 font-mono text-[10px] pt-1">14:35:12</span>
+<div class="flex-1">
+<p class="text-error text-xs font-mono leading-tight">Authentication retry limit exceeded.</p>
+<p class="text-[10px] text-error/40 font-mono mt-1">SRC_IP: 45.12.8.2 // STATUS: BLOCKED</p>
+</div>
+</div>
+<div class="flex gap-4 items-start group">
+<span class="text-[#56E15B]/30 font-mono text-[10px] pt-1">14:30:00</span>
+<div class="flex-1">
+<p class="text-on-surface text-xs font-mono leading-tight group-hover:text-primary-container transition-colors">Scheduled export: SESSIONS_WK_43</p>
+<p class="text-[10px] text-[#56E15B]/40 font-mono mt-1">DEST: CLOUD_ARCHIVE_01</p>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-surface-container-high border border-[#00FF41]/10 text-[#00FF41] font-mono text-[10px] uppercase hover:bg-[#00FF41]/5 transition-colors">
+                        View_Full_Console
+                    </button>
+</div>
+</div>
+<!-- Recent Sessions Table -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="text-[#00FF41] font-mono text-xs uppercase tracking-widest font-bold">Recent_Active_Sessions</h3>
+<a class="text-[10px] font-mono text-[#56E15B]/40 hover:text-[#00FF41] uppercase tracking-wider" href="#">Expand_Index_</a>
+</div>
+<div class="bg-surface-container-lowest overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-[#00FF41]/10">
+<tr>
+<th class="px-6 py-3 font-mono text-[10px] text-[#56E15B]/40 uppercase tracking-widest">Session_UID</th>
+<th class="px-6 py-3 font-mono text-[10px] text-[#56E15B]/40 uppercase tracking-widest">Status</th>
+<th class="px-6 py-3 font-mono text-[10px] text-[#56E15B]/40 uppercase tracking-widest">Duration</th>
+<th class="px-6 py-3 font-mono text-[10px] text-[#56E15B]/40 uppercase tracking-widest">Data_Vol</th>
+<th class="px-6 py-3 font-mono text-[10px] text-[#56E15B]/40 uppercase tracking-widest text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#00FF41]/5">
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="px-6 py-4 font-mono text-sm text-[#00FF41]">8821-XRT-019</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2 text-xs font-mono text-[#56E15B]">
+<div class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></div>
+                                        ACTIVE
+                                    </span>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface/60">01:14:42</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface/60">4.2 GB</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#56E15B]/40 hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="px-6 py-4 font-mono text-sm text-[#00FF41]">8815-ZQA-112</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2 text-xs font-mono text-on-surface/40">
+<div class="w-1.5 h-1.5 rounded-full bg-on-surface/20"></div>
+                                        CLOSED
+                                    </span>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface/60">00:45:10</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface/60">1.8 GB</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#56E15B]/40 hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="px-6 py-4 font-mono text-sm text-[#00FF41]">8792-WPL-450</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2 text-xs font-mono text-[#56E15B]">
+<div class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></div>
+                                        ACTIVE
+                                    </span>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface/60">00:08:21</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface/60">256 MB</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#56E15B]/40 hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="flex flex-col md:flex-row justify-between items-center py-6 border-t border-[#00FF41]/5 text-[10px] font-mono text-[#56E15B]/20 uppercase tracking-widest">
+<div class="flex gap-6">
+<span>Build: v2.4.0-stable</span>
+<span>Kernel: 5.15.0-generic</span>
+<span>Region: EU-Central-1</span>
+</div>
+<div class="mt-4 md:mt-0">
+                    © 2023 EPISTROPOS // SECURITY_CORE_INITIALIZED
+                </div>
+</footer>
+</div>
+</main>
+<!-- Contextual FAB (Suppressed on most screens, but useful here for quick record) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary-container text-on-primary rounded-sm shadow-[0_12px_40px_rgba(0,255,65,0.15)] flex items-center justify-center group hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl font-bold" style="font-variation-settings: 'FILL' 1;">add</span>
+<span class="absolute right-16 bg-surface-container-highest px-3 py-1 text-[10px] font-mono whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-[#00FF41]/20">NEW_INST_REC</span>
+</button>
+</body></html>

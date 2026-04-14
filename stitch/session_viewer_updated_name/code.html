@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EPITROPOS // SESSION_VIEWER</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#56e15b",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-bright": "#3a3939",
+                        "error": "#ffb4ab",
+                        "outline": "#84967e",
+                        "primary": "#ebffe2",
+                        "surface-container-highest": "#353534",
+                        "on-primary-container": "#007117",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-container": "#00ff41",
+                        "on-secondary-fixed": "#002203",
+                        "on-surface-variant": "#b9ccb2",
+                        "on-secondary": "#003908",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#313030",
+                        "surface-dim": "#131313",
+                        "on-secondary-container": "#003506",
+                        "error-container": "#93000a",
+                        "surface": "#131313",
+                        "on-primary": "#003907",
+                        "on-tertiary-fixed-variant": "#005311",
+                        "outline-variant": "#3b4b37",
+                        "secondary-fixed": "#74ff74",
+                        "surface-variant": "#353534",
+                        "on-tertiary-fixed": "#002203",
+                        "on-background": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#86da80",
+                        "tertiary": "#ecffe4",
+                        "secondary-container": "#03ab2b",
+                        "surface-container": "#201f1f",
+                        "on-tertiary": "#003909",
+                        "tertiary-fixed": "#a1f79a",
+                        "on-primary-fixed": "#002203",
+                        "tertiary-container": "#9cf195",
+                        "on-tertiary-container": "#1c7024",
+                        "inverse-primary": "#006e16",
+                        "primary-fixed-dim": "#00e639",
+                        "surface-tint": "#00e639",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary": "#56e15b",
+                        "primary-fixed": "#72ff70",
+                        "on-primary-fixed-variant": "#00530e",
+                        "on-secondary-fixed-variant": "#00530f",
+                        "background": "#131313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #00FF41; border-radius: 2px; }
+        .glass-panel {
+            background: rgba(53, 53, 52, 0.4);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary">
+<!-- TopNavBar -->
+<header class="fixed top-0 z-50 flex justify-between items-center w-full px-6 h-16 bg-[#131313] border-b border-[#00FF41]/10">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-[#00FF41] tracking-widest font-['Space_Grotesk']">EPITROPOS</span>
+<nav class="hidden md:flex items-center gap-6 text-xs font-['Space_Grotesk'] uppercase tracking-widest">
+<a class="text-[#56E15B]/60 hover:bg-[#00FF41]/5 hover:text-[#00FF41] transition-colors px-2 py-1" href="#">Dashboard</a>
+<a class="text-[#56E15B]/60 hover:bg-[#00FF41]/5 hover:text-[#00FF41] transition-colors px-2 py-1" href="#">Network</a>
+<a class="text-[#00FF41] border-b-2 border-[#00FF41] pb-1" href="#">Sessions</a>
+<a class="text-[#56E15B]/60 hover:bg-[#00FF41]/5 hover:text-[#00FF41] transition-colors px-2 py-1" href="#">Archives</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#56E15B]/60 hover:text-[#00FF41] transition-colors">security</button>
+<button class="material-symbols-outlined text-[#56E15B]/60 hover:text-[#00FF41] transition-colors">terminal</button>
+<button class="material-symbols-outlined text-[#56E15B]/60 hover:text-[#00FF41] transition-colors">settings</button>
+<div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center overflow-hidden border border-[#00FF41]/20">
+<img alt="User avatar" data-alt="Cyberpunk style user avatar silhouette in green neon colors with glitch effect on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWajM5pmHsjQ10514qE55i20OfIqFjLfzpgskRcOn6vzW9Ljv7hyr7BiY5Ch9zUsdsKqb2wsLd9ojjUpcTbkaN3vNrLjsoC-ZFwG13AKT21MdaPOuwc044_DJqMpGn1fqT8qzll0G3ab-MuHd6nmKR6iJXeaV4FPtC8gc7D-1F97Q1H2v5j6CkjywM47jptfRveK_nDSuXjYlPpKjr-rhw8csG6k44nCIztOOyxczlfqm0KcWSDtlZ_9xkv2XJSjm_or6FM0iVu1s"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-8 bg-[#0E0E0E] w-64 z-40 hidden md:flex pt-24">
+<div class="px-6 mb-8">
+<h2 class="text-[#00FF41] font-bold font-['Share_Tech_Mono'] uppercase tracking-wider text-xs">TERMINAL ARCHITECT</h2>
+<p class="text-[#56E15B]/40 text-[10px] font-['Share_Tech_Mono']">SYSTEM_NODE_01</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-['Share_Tech_Mono'] uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-['Share_Tech_Mono'] uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span>Sessions</span>
+</a>
+<a class="flex items-center gap-3 text-[#00FF41] bg-[#131313] border-l-2 border-[#00FF41] px-4 py-3 font-['Share_Tech_Mono'] uppercase tracking-wider text-xs scale-[0.98] duration-150" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span>Viewer</span>
+</a>
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-['Share_Tech_Mono'] uppercase tracking-wider text-xs hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined">download</span>
+<span>Exports</span>
+</a>
+</nav>
+<div class="px-4 mb-8">
+<button class="w-full py-3 bg-primary-container text-on-primary font-['Share_Tech_Mono'] text-xs font-bold tracking-widest hover:opacity-80 transition-opacity">
+                RECORD_NEW
+            </button>
+</div>
+<div class="mt-auto border-t border-[#00FF41]/5 pt-4">
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-['Share_Tech_Mono'] uppercase tracking-wider text-xs hover:text-[#00FF41]" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span>Docs</span>
+</a>
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 font-['Share_Tech_Mono'] uppercase tracking-wider text-xs hover:text-[#00FF41]" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="md:ml-64 pt-16 min-h-screen bg-surface flex flex-col">
+<!-- Session Header -->
+<div class="px-8 py-6 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container-lowest">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="bg-primary-container/10 text-primary-container text-[10px] px-2 py-0.5 font-['Share_Tech_Mono'] tracking-tighter border border-primary-container/20">LIVE_FEED</span>
+<h1 class="font-headline text-xl font-bold tracking-tight text-on-surface">SESSION::ALPHA_V82_SEC</h1>
+</div>
+<div class="flex gap-4 text-[10px] font-['Share_Tech_Mono'] text-on-surface-variant">
+<span>ID: <span class="text-secondary">#0091-XFC</span></span>
+<span>TIMESTAMP: <span class="text-secondary">2024-05-24 14:02:11 UTC</span></span>
+<span>NODE: <span class="text-secondary">US-EAST-PROXY-04</span></span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 border border-outline-variant/30 text-xs font-['Share_Tech_Mono'] uppercase tracking-widest text-[#00FF41] hover:bg-primary-container/5 transition-colors">
+                    EXPORT_LOGS
+                </button>
+<button class="px-4 py-1.5 bg-error/10 text-error border border-error/20 text-xs font-['Share_Tech_Mono'] uppercase tracking-widest hover:bg-error/20 transition-colors">
+                    TERMINATE_NODE
+                </button>
+</div>
+</div>
+<div class="flex-1 flex flex-col lg:flex-row">
+<!-- Left Column: Terminal Playback -->
+<div class="flex-1 p-6 flex flex-col min-w-0">
+<!-- Terminal Window -->
+<div class="flex-1 bg-[#050505] rounded-lg border border-outline-variant/20 flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+<!-- Window Controls -->
+<div class="h-8 flex items-center justify-between px-4 border-b border-outline-variant/10 bg-surface-container-low">
+<div class="flex gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-error/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-secondary-container/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container/40"></div>
+</div>
+<span class="text-[10px] font-['Share_Tech_Mono'] text-[#56E15B]/40 uppercase tracking-[0.2em]">tty1 — root@epitropos:~</span>
+<span class="material-symbols-outlined text-xs text-[#56E15B]/30">more_horiz</span>
+</div>
+<!-- Playback Canvas -->
+<div class="flex-1 p-6 font-['Share_Tech_Mono'] text-sm leading-relaxed overflow-y-auto text-primary/80 selection:bg-primary-container/30">
+<div class="space-y-1">
+<p class="text-secondary-fixed-dim">epitropos login: root</p>
+<p class="text-secondary-fixed-dim">Password: ************</p>
+<p class="text-primary-container mt-2">Welcome to EPITROPOS Secure Environment v4.2.1-stable</p>
+<p class="text-[#56E15B]/40">Last login: Fri May 24 13:58:12 on tty1</p>
+<p class="mt-4"><span class="text-primary-container">root@epitropos:</span><span class="text-secondary-fixed-dim">~#</span> apt-get analyze --all-nodes</p>
+<p class="text-on-surface-variant italic">[...] Analyzing system structure...</p>
+<div class="grid grid-cols-4 gap-4 my-2 text-[11px] opacity-80">
+<span class="text-error">CRITICAL_FAIL: node_09</span>
+<span class="text-primary-container">SECURE: node_01</span>
+<span class="text-primary-container">SECURE: node_02</span>
+<span class="text-primary-container">SECURE: node_03</span>
+</div>
+<p><span class="text-primary-container">root@epistropos:</span><span class="text-secondary-fixed-dim">~#</span> tail -f /var/log/syslog</p>
+<p class="text-primary-container/60">May 24 14:00:01 node-04 CRON[2839]: pam_unix(cron:session): session opened for user root</p>
+<p class="text-primary-container/60">May 24 14:00:15 node-04 kernel: [19203.411] SECURITY_ALERT: Multiple failed auth attempts from 192.168.1.102</p>
+<p class="text-primary-container/60">May 24 14:00:18 node-04 sshd[2841]: Invalid user admin from 192.168.1.102 port 44212</p>
+<p class="text-primary-container/60">May 24 14:01:05 node-04 sshd[2845]: Connection closed by authenticating user admin 192.168.1.102 [preauth]</p>
+<p><span class="text-primary-container">root@epistropos:</span><span class="text-secondary-fixed-dim">~#</span> <span class="inline-block w-2 h-4 bg-[#00FF41] animate-pulse align-middle"></span></p>
+</div>
+</div>
+<!-- Playback Controls -->
+<div class="h-16 px-6 border-t border-outline-variant/10 bg-surface-container-lowest flex flex-col justify-center gap-1">
+<!-- Progress Bar -->
+<div class="relative w-full h-1 bg-outline-variant/20 group cursor-pointer">
+<div class="absolute top-0 left-0 h-full w-[64%] bg-primary-container shadow-[0_0_10px_rgba(0,255,65,0.4)]"></div>
+<div class="absolute top-1/2 left-[64%] -translate-y-1/2 w-3 h-3 bg-primary-container border-4 border-[#050505] shadow-lg"></div>
+</div>
+<!-- Buttons and Meta -->
+<div class="flex items-center justify-between mt-1">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#00FF41] text-2xl hover:scale-110 transition-transform">play_arrow</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface">fast_rewind</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface">fast_forward</button>
+<span class="text-[11px] font-['Share_Tech_Mono'] text-on-surface-variant tracking-wider ml-2">14:02 / 21:55</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<span class="text-[10px] font-['Share_Tech_Mono'] text-on-surface-variant uppercase">Speed:</span>
+<select class="bg-transparent border-none text-[11px] font-['Share_Tech_Mono'] text-primary-container py-0 pr-8 focus:ring-0">
+<option>1.0x</option>
+<option>1.5x</option>
+<option>2.0x</option>
+<option>4.0x</option>
+</select>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface text-xl">settings_ethernet</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface text-xl">fullscreen</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Widgets Below Terminal -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+<div class="bg-surface-container-low border border-outline-variant/10 p-4 flex items-center gap-4">
+<div class="p-2 bg-primary-container/10">
+<span class="material-symbols-outlined text-primary-container">speed</span>
+</div>
+<div>
+<p class="text-[10px] font-['Share_Tech_Mono'] uppercase tracking-widest text-[#56E15B]/40">Input Rate</p>
+<p class="text-sm font-['Share_Tech_Mono'] text-on-surface">12.4 KB/s <span class="text-[10px] text-primary-container">+0.2</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/10 p-4 flex items-center gap-4">
+<div class="p-2 bg-secondary-container/10">
+<span class="material-symbols-outlined text-secondary-container">fingerprint</span>
+</div>
+<div>
+<p class="text-[10px] font-['Share_Tech_Mono'] uppercase tracking-widest text-[#56E15B]/40">Auth Level</p>
+<p class="text-sm font-['Share_Tech_Mono'] text-on-surface">ADMIN_ELEVATED</p>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/10 p-4 flex items-center gap-4">
+<div class="p-2 bg-error/10">
+<span class="material-symbols-outlined text-error">warning</span>
+</div>
+<div>
+<p class="text-[10px] font-['Share_Tech_Mono'] uppercase tracking-widest text-[#56E15B]/40">Threat Delta</p>
+<p class="text-sm font-['Share_Tech_Mono'] text-on-surface">MINIMAL (0.02)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Metadata & Raw Logs -->
+<div class="w-full lg:w-80 bg-surface-container-lowest border-l border-outline-variant/10 flex flex-col">
+<div class="p-6">
+<h3 class="text-xs font-['Share_Tech_Mono'] uppercase tracking-widest text-primary-container mb-4">SESSION_PROPERTIES</h3>
+<div class="space-y-6">
+<div>
+<label class="block text-[10px] font-['Share_Tech_Mono'] text-[#56E15B]/40 mb-1">ORIGIN_IP</label>
+<p class="text-sm font-['Share_Tech_Mono'] text-on-surface">192.168.1.104</p>
+<div class="mt-2 h-24 w-full bg-surface-container overflow-hidden grayscale contrast-125 opacity-50 border border-outline-variant/10">
+<img alt="Map" data-alt="Dark monochrome stylized digital map of Washington DC area with glowing data points and grid overlay" data-location="Washington DC" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIWdiI8L0GGn27nNFdwTyQb08V-9VUdiaUfScFFv24rve_G6jRRuiNRbgz9PbrwXMHeK0JCaSpEumsHy9IBxkYcElYNOx0EkbkleHLv_41-ov2wpNO1yhFIcc1qbyI1BJ8dYfkEWsD7YqZyHKmvh4eAy4wFisZkLS-s4TwuuqziDlzEpoIjqJQU0BZ_FaAlYWOqjMPWbpII8WZgukS79q-rAyRD9nmpDIkkRDB9QplGnoO5HaUrPEIKt3nGvJ58mFmdNQf1ONLfxo"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[10px] font-['Share_Tech_Mono'] text-[#56E15B]/40 mb-1">PROTOCOL</label>
+<p class="text-sm font-['Share_Tech_Mono']">SSH/v2</p>
+</div>
+<div>
+<label class="block text-[10px] font-['Share_Tech_Mono'] text-[#56E15B]/40 mb-1">ENCRYPTION</label>
+<p class="text-sm font-['Share_Tech_Mono']">AES-256</p>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-['Share_Tech_Mono'] text-[#56E15B]/40 mb-1">USER_TAGS</label>
+<div class="flex flex-wrap gap-2 mt-1">
+<span class="bg-surface-container-high px-2 py-0.5 text-[10px] font-['Share_Tech_Mono'] text-primary-container/80 border border-primary-container/10">PROD</span>
+<span class="bg-surface-container-high px-2 py-0.5 text-[10px] font-['Share_Tech_Mono'] text-primary-container/80 border border-primary-container/10">SEC_OP</span>
+<span class="bg-surface-container-high px-2 py-0.5 text-[10px] font-['Share_Tech_Mono'] text-primary-container/80 border border-primary-container/10">ROOT</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 border-t border-outline-variant/10 flex flex-col">
+<div class="p-6 flex items-center justify-between">
+<h3 class="text-xs font-['Share_Tech_Mono'] uppercase tracking-widest text-primary-container">RAW_EVENT_LOG</h3>
+<button class="material-symbols-outlined text-[#56E15B]/40 text-sm hover:text-primary-container transition-colors">filter_list</button>
+</div>
+<div class="flex-1 overflow-y-auto px-6 font-['Share_Tech_Mono'] text-[10px] space-y-3 pb-8">
+<div class="flex gap-3 text-[#56E15B]/40">
+<span class="shrink-0">14:02:01</span>
+<span class="text-primary-container">TERM_RESIZE: 120x40</span>
+</div>
+<div class="flex gap-3 text-[#56E15B]/40">
+<span class="shrink-0">14:02:05</span>
+<span>KEY_PRESS: ENTER</span>
+</div>
+<div class="flex gap-3 text-[#56E15B]/40">
+<span class="shrink-0">14:02:08</span>
+<span>CMD_EXEC: "sudo -l"</span>
+</div>
+<div class="flex gap-3 text-error">
+<span class="shrink-0">14:02:09</span>
+<span>AUTH_FAIL: PAM_MODULE</span>
+</div>
+<div class="flex gap-3 text-[#56E15B]/40">
+<span class="shrink-0">14:02:11</span>
+<span>KEY_PRESS: "a"</span>
+</div>
+<div class="flex gap-3 text-[#56E15B]/40">
+<span class="shrink-0">14:02:12</span>
+<span>KEY_PRESS: "p"</span>
+</div>
+<div class="flex gap-3 text-[#56E15B]/40">
+<span class="shrink-0">14:02:12</span>
+<span>KEY_PRESS: "t"</span>
+</div>
+<div class="flex gap-3 text-[#56E15B]/40">
+<span class="shrink-0">14:02:14</span>
+<span class="text-secondary-fixed-dim">OUT_STREAM_CH: 01</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Command Bar -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 glass-panel border border-outline-variant/20 px-6 py-3 flex items-center gap-6 shadow-[0_12px_40px_rgba(0,255,65,0.08)]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00FF41]">search</span>
+<input class="bg-transparent border-none text-[11px] font-['Share_Tech_Mono'] text-on-surface placeholder:text-[#56E15B]/30 focus:ring-0 w-48 tracking-widest uppercase" placeholder="JUMP TO COMMAND..." type="text"/>
+</div>
+<div class="h-4 w-px bg-outline-variant/20"></div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#56E15B]/60 hover:text-[#00FF41] transition-colors" title="Bookmarks">bookmark</button>
+<button class="material-symbols-outlined text-[#56E15B]/60 hover:text-[#00FF41] transition-colors" title="Animate">auto_videocam</button>
+<button class="material-symbols-outlined text-[#56E15B]/60 hover:text-[#00FF41] transition-colors" title="Share Session">share</button>
+</div>
+</div>
+</body></html>

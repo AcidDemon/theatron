@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EPISTROPOS | Export &amp; Download</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#56e15b",
+            "inverse-surface": "#e5e2e1",
+            "surface-bright": "#3a3939",
+            "error": "#ffb4ab",
+            "outline": "#84967e",
+            "primary": "#ebffe2",
+            "surface-container-highest": "#353534",
+            "on-primary-container": "#007117",
+            "surface-container-high": "#2a2a2a",
+            "surface-container-lowest": "#0e0e0e",
+            "primary-container": "#00ff41",
+            "on-secondary-fixed": "#002203",
+            "on-surface-variant": "#b9ccb2",
+            "on-secondary": "#003908",
+            "on-error": "#690005",
+            "inverse-on-surface": "#313030",
+            "surface-dim": "#131313",
+            "on-secondary-container": "#003506",
+            "error-container": "#93000a",
+            "surface": "#131313",
+            "on-primary": "#003907",
+            "on-tertiary-fixed-variant": "#005311",
+            "outline-variant": "#3b4b37",
+            "secondary-fixed": "#74ff74",
+            "surface-variant": "#353534",
+            "on-tertiary-fixed": "#002203",
+            "on-background": "#e5e2e1",
+            "on-error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#86da80",
+            "tertiary": "#ecffe4",
+            "secondary-container": "#03ab2b",
+            "surface-container": "#201f1f",
+            "on-tertiary": "#003909",
+            "tertiary-fixed": "#a1f79a",
+            "on-primary-fixed": "#002203",
+            "tertiary-container": "#9cf195",
+            "on-tertiary-container": "#1c7024",
+            "inverse-primary": "#006e16",
+            "primary-fixed-dim": "#00e639",
+            "surface-tint": "#00e639",
+            "on-surface": "#e5e2e1",
+            "surface-container-low": "#1c1b1b",
+            "secondary": "#56e15b",
+            "primary-fixed": "#72ff70",
+            "on-primary-fixed-variant": "#00530e",
+            "on-secondary-fixed-variant": "#00530f",
+            "background": "#131313"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Space Grotesk"],
+            "body": ["Inter"],
+            "label": ["Space Grotesk"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background-color: #131313;
+      color: #e5e2e1;
+      font-family: 'Inter', sans-serif;
+    }
+    .mono {
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .glass {
+      background: rgba(53, 53, 52, 0.4);
+      backdrop-filter: blur(24px);
+    }
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0e0e0e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3b4b37;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ff41;
+    }
+  </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-8 bg-[#0E0E0E] text-[#00FF41] font-['Share_Tech_Mono'] uppercase tracking-wider text-xs w-64 z-50">
+<div class="px-6 mb-10">
+<div class="text-[#00FF41] font-bold text-lg">TERMINAL ARCHITECT</div>
+<div class="text-[#56E15B]/40 text-[10px]">SYSTEM_NODE_01</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span>Sessions</span>
+</a>
+<a class="flex items-center gap-3 text-[#56E15B]/40 px-4 py-3 hover:bg-[#131313] hover:text-[#00FF41] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span>Viewer</span>
+</a>
+<a class="flex items-center gap-3 text-[#00FF41] bg-[#131313] border-l-2 border-[#00FF41] px-4 py-3 scale-[0.98] duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+<span>Exports</span>
+</a>
+</nav>
+<div class="mt-auto px-6 space-y-4">
+<button class="w-full py-2 bg-primary-container text-on-primary font-bold text-[10px] tracking-widest rounded-sm hover:opacity-90 active:scale-95 transition-all">
+        RECORD_NEW
+      </button>
+<div class="flex flex-col gap-1 border-t border-[#3b4b37] pt-4">
+<a class="flex items-center gap-3 text-[#56E15B]/40 py-2 hover:text-[#00FF41]" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="menu_book">menu_book</span>
+<span>Docs</span>
+</a>
+<a class="flex items-center gap-3 text-[#56E15B]/40 py-2 hover:text-[#00FF41]" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="ml-64 flex-1 flex flex-col bg-[#131313]">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-6 h-16 bg-[#131313] border-b border-[#00FF41]/10 sticky top-0 z-40">
+<div class="flex items-center gap-6">
+<h1 class="text-xl font-bold text-[#00FF41] tracking-widest font-['Space_Grotesk']">EPISTROPOS</h1>
+<div class="relative hidden lg:block">
+<input class="bg-surface-container-lowest border-none text-[#00FF41] mono text-xs w-64 focus:ring-1 focus:ring-primary-container placeholder:text-[#56E15B]/20" placeholder="SEARCH_EXPORTS..." type="text"/>
+<span class="material-symbols-outlined absolute right-2 top-1.5 text-sm text-[#56E15B]/40" data-icon="search">search</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#56E15B]/60 hover:text-[#00FF41] transition-colors">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</button>
+<button class="text-[#56E15B]/60 hover:text-[#00FF41] transition-colors">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+<button class="text-[#56E15B]/60 hover:text-[#00FF41] transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-sm bg-surface-container-high border border-outline-variant flex items-center justify-center overflow-hidden">
+<img alt="User avatar" data-alt="Cyberpunk style minimalist avatar of a computer engineer wearing a visor with green glowing digital elements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRmpvgv0MxCASgh58Mc-XwS-55-UYkVypXdVcIAvurEJqsxq3iLH7CCgtfpXZHd5Qu07VFEnuWfbeo9g0CEDVez_YkEJQHt0J0aOeeRyzo5G-4RX8CbH5uWIODkVx1NdXAlb4gkVaxziepSHaVxhGQjEIGzPkEVBdx-PExD2IeQ-zdPxjU8wSHOmfLwt-OvPNNh9nn650UEMs93pLk6CvIJmJcci5itKXuRyTKnS0rhdOo5wvDnESzn8Y09mrR-5fa77nA1h70-L4"/>
+</div>
+</div>
+</header>
+<!-- Canvas Section -->
+<div class="p-8 space-y-8">
+<!-- Header / Stats Row -->
+<div class="flex justify-between items-end">
+<div class="space-y-1">
+<p class="mono text-[#00FF41] text-[10px] tracking-[0.2em]">EXPORT_CENTER</p>
+<h2 class="text-3xl font-headline font-bold text-on-surface">Vault Management</h2>
+</div>
+<div class="flex gap-4 mono text-[10px]">
+<div class="bg-surface-container-lowest px-4 py-2 border-l-2 border-primary-container">
+<span class="text-[#56E15B]/40">TOTAL_FILES:</span>
+<span class="text-on-surface ml-2">1,248</span>
+</div>
+<div class="bg-surface-container-lowest px-4 py-2 border-l-2 border-secondary">
+<span class="text-[#56E15B]/40">ENCRYPTION:</span>
+<span class="text-on-surface ml-2">AGE-v1_X25519</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid for Export Controls -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Batch Export Panel -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-low p-6 flex flex-col gap-6 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<h3 class="mono text-sm text-[#00FF41] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="package_2">package_2</span>
+              BATCH_EXPORT_PROTOCOL
+            </h3>
+<span class="text-[10px] text-[#56E15B]/40 mono">READY_FOR_SEQUENCING</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="mono text-[10px] text-[#56E15B]/60 block">SELECTION_RANGE</label>
+<div class="bg-surface-container-lowest p-4 space-y-3">
+<div class="flex items-center justify-between text-xs">
+<span class="text-on-surface">Last 24 Hours</span>
+<input checked="" class="rounded-none bg-surface-container-highest border-outline-variant text-primary-container focus:ring-0" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-on-surface">All Security Events</span>
+<input class="rounded-none bg-surface-container-highest border-outline-variant text-primary-container focus:ring-0" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-on-surface">Network Log Fragments</span>
+<input checked="" class="rounded-none bg-surface-container-highest border-outline-variant text-primary-container focus:ring-0" type="checkbox"/>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="mono text-[10px] text-[#56E15B]/60 block">ENCRYPTION_LAYER</label>
+<div class="bg-surface-container-lowest p-4 space-y-3">
+<select class="w-full bg-transparent border-none text-xs text-primary-container mono focus:ring-0 cursor-pointer">
+<option>AGE_ENCRYPTION_X25519</option>
+<option>RSA_4096_PKCS1</option>
+<option>AES_256_GCM_RAW</option>
+</select>
+<input class="w-full bg-surface-container-high border-none text-[10px] mono text-on-surface py-2 focus:ring-1 focus:ring-primary-container" placeholder="PASSPHRASE_OVERRIDE" type="password"/>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-6 flex gap-4">
+<button class="flex-1 bg-primary-container text-on-primary py-3 mono font-bold text-xs flex items-center justify-center gap-2 rounded-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="rocket_launch">rocket_launch</span>
+              EXECUTE_BATCH_EXPORT
+            </button>
+<button class="px-6 border border-outline-variant text-on-surface py-3 mono text-xs hover:bg-surface-container-highest transition-all">
+              RESET_PARAMS
+            </button>
+</div>
+</div>
+<!-- System Health / Status Panel -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest p-6 border-l-2 border-primary-container/20">
+<h3 class="mono text-sm text-[#00FF41] mb-6">STORAGE_INTEGRITY</h3>
+<div class="space-y-6">
+<div class="relative h-40 w-full overflow-hidden">
+<img class="w-full h-full object-cover opacity-40" data-alt="Abstract digital visualization of encrypted data blocks and flowing green binary streams on a dark background with grid lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGVRRrVhoUmXHjbib8pbOyKfqXiTsB7NiY_P9w0Ezpz-llldCXTZsvvPRM7rlfmeLcxnf8DMwioHzhErHxoEimd6UhaotM5YtKteLsvz8OiUbB3XnzXhCQK1Vx1lUNa0FeSyanhgoUkTDeooCjN1hoitlcA73t9KAH1RNTo98We_xcm_FOJ2raS5NcnYmSxiTWNgbTN9YoNA-ZnRMVl-8NluTeovbtMKKs467toAalCfkXD-89yDy4CTb3H6fGvRRcaf9V86fgNHc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between text-[10px] mono">
+<span class="text-[#56E15B]/40">PRIMARY_VAULT:</span>
+<span class="text-on-surface">84.2% FULL</span>
+</div>
+<div class="h-1 bg-surface-container-high overflow-hidden">
+<div class="h-full bg-primary-container w-[84.2%]"></div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 text-[10px] mono text-[#56E15B]/60">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+                  NODE_DELTA: ACTIVE
+                </div>
+<div class="flex items-center gap-3 text-[10px] mono text-[#56E15B]/60">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+                  ENCRYPTION_ENGINE: NOMINAL
+                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- File Inventory Table -->
+<div class="bg-surface-container-low border border-outline-variant/10">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center">
+<h3 class="mono text-sm text-[#00FF41]">GENERATED_AGE_FILES</h3>
+<div class="flex gap-4">
+<button class="text-xs mono text-[#56E15B]/40 hover:text-[#00FF41] transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+              FILTER
+            </button>
+<button class="text-xs mono text-[#56E15B]/40 hover:text-[#00FF41] transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="sort">sort</span>
+              SORT_BY: DATE
+            </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left mono text-[11px]">
+<thead class="bg-surface-container-lowest text-[#56E15B]/40 uppercase tracking-widest border-b border-outline-variant/10">
+<tr>
+<th class="px-6 py-4 font-normal">FILE_IDENTIFIER</th>
+<th class="px-6 py-4 font-normal">TIMESTAMP</th>
+<th class="px-6 py-4 font-normal">SIZE</th>
+<th class="px-6 py-4 font-normal">ENCRYPTION</th>
+<th class="px-6 py-4 font-normal">STATUS</th>
+<th class="px-6 py-4 font-normal text-right">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-surface-container-highest transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="lock">lock</span>
+<span class="text-on-surface">session_82x_20231124.age</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#56E15B]/60">2023-11-24 14:22:10</td>
+<td class="px-6 py-4 text-on-surface">2.4 MB</td>
+<td class="px-6 py-4">
+<span class="bg-surface-container-highest px-2 py-1 text-[9px] rounded-sm text-secondary">X25519</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
+<span class="text-on-surface">READY</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary-container opacity-40 group-hover:opacity-100 hover:underline transition-all">DOWNLOAD_</button>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest/30 hover:bg-surface-container-highest transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="lock">lock</span>
+<span class="text-on-surface">network_audit_fragment_v4.age</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#56E15B]/60">2023-11-23 09:15:45</td>
+<td class="px-6 py-4 text-on-surface">14.8 MB</td>
+<td class="px-6 py-4">
+<span class="bg-surface-container-highest px-2 py-1 text-[9px] rounded-sm text-secondary">SSH_KEY</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
+<span class="text-on-surface">READY</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary-container opacity-40 group-hover:opacity-100 hover:underline transition-all">DOWNLOAD_</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#56E15B]/40" data-icon="sync">sync</span>
+<span class="text-[#56E15B]/40">archived_logs_temp_88.tmp</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#56E15B]/60">2023-11-23 18:00:00</td>
+<td class="px-6 py-4 text-[#56E15B]/40">--</td>
+<td class="px-6 py-4">
+<span class="bg-surface-container-highest px-2 py-1 text-[9px] rounded-sm text-[#56E15B]/40">PENDING</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary-container/20 rounded-full animate-pulse"></span>
+<span class="text-[#56E15B]/40">PROCESSING</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-[#56E15B]/20 cursor-not-allowed">LOCKED_</span>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest/30 hover:bg-surface-container-highest transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<span class="text-on-surface">security_handshake_fail.age</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#56E15B]/60">2023-11-22 22:11:04</td>
+<td class="px-6 py-4 text-on-surface">0 KB</td>
+<td class="px-6 py-4">
+<span class="bg-error-container/20 px-2 py-1 text-[9px] rounded-sm text-error">NONE</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-error">
+<span class="w-1.5 h-1.5 bg-error rounded-full"></span>
+<span>CORRUPT</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-error opacity-40 group-hover:opacity-100 hover:underline transition-all">RETRY_</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-surface-container-lowest/50 flex justify-between items-center mono text-[10px] text-[#56E15B]/40">
+<span>PAGE_01_OF_42</span>
+<div class="flex gap-4">
+<button class="hover:text-primary-container">PREV_NODE</button>
+<button class="hover:text-primary-container">NEXT_NODE</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="fixed bottom-0 right-0 p-12 pointer-events-none opacity-5">
+<span class="mono text-[120px] font-bold select-none">KATAGRAPHO</span>
+</div>
+</main>
+</body></html>

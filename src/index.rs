@@ -229,13 +229,13 @@ impl Index {
     pub fn query(&self, p: &QueryParams) -> Result<QueryResult, String> {
         let mut where_parts: Vec<String> = Vec::new();
 
-        if let Some(ref q) = p.q {
-            if !q.is_empty() {
-                where_parts.push(format!(
-                    "id IN (SELECT rowid FROM sessions_fts WHERE sessions_fts MATCH '{}')",
-                    q.replace('\'', "''")
-                ));
-            }
+        if let Some(ref q) = p.q
+            && !q.is_empty()
+        {
+            where_parts.push(format!(
+                "id IN (SELECT rowid FROM sessions_fts WHERE sessions_fts MATCH '{}')",
+                q.replace('\'', "''")
+            ));
         }
         if let Some(ref user) = p.user {
             where_parts.push(format!("user = '{}'", user.replace('\'', "''")));
