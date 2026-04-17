@@ -164,37 +164,110 @@ function renderActivityChart(buckets) {
   }
 
   const maxCount = Math.max(...buckets.map(b => b.count), 1);
+  const chartHeight = 140;
 
-  // Chart wrapper: flex row of bars
-  const chart = document.createElement('div');
-  chart.style.cssText = 'display:flex;align-items:flex-end;gap:3px;height:140px;padding-top:10px';
+  // Compute nice Y-axis tick values that adapt to the data range.
+  const ticks = computeYTicks(maxCount);
+
+  // Outer layout: Y-axis labels on the left, chart bars on the right.
+  const outer = document.createElement('div');
+  outer.style.cssText = 'display:flex;gap:0';
+
+  // Y-axis column
+  const yAxis = document.createElement('div');
+  yAxis.style.cssText = `display:flex;flex-direction:column;justify-content:space-between;height:${chartHeight}px;padding-right:8px;min-width:30px;align-items:flex-end`;
+
+  // Render ticks top (max) to bottom (0).
+  for (let i = ticks.length - 1; i >= 0; i--) {
+    const tick = document.createElement('div');
+    tick.className = 'mono';
+    tick.style.cssText = 'font-size:0.6rem;color:var(--on-surface-variant);line-height:1';
+    tick.textContent = ticks[i];
+    yAxis.appendChild(tick);
+  }
+
+  // Chart area with gridlines + bars
+  const chartArea = document.createElement('div');
+  chartArea.style.cssText = `flex:1;position:relative;height:${chartHeight}px`;
+
+  // Horizontal gridlines at each tick position
+  for (let i = 0; i < ticks.length; i++) {
+    const line = document.createElement('div');
+    const yPct = (ticks[i] / (ticks[ticks.length - 1] || 1)) * 100;
+    line.style.cssText = `position:absolute;left:0;right:0;bottom:${yPct}%;height:1px;background:var(--outline-variant);opacity:0.4`;
+    chartArea.appendChild(line);
+  }
+
+  // Bar container (flex row inside the chart area)
+  const barRow = document.createElement('div');
+  barRow.style.cssText = `display:flex;align-items:flex-end;gap:3px;height:100%;position:relative;z-index:1`;
+
+  const yMax = ticks[ticks.length - 1] || 1;
 
   for (const bucket of buckets) {
     const col = document.createElement('div');
     col.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;height:100%';
 
-    // Bar
     const barWrap = document.createElement('div');
     barWrap.style.cssText = 'flex:1;display:flex;align-items:flex-end;width:100%';
     const bar = document.createElement('div');
-    const heightPct = maxCount > 0 ? (bucket.count / maxCount) * 100 : 0;
-    bar.style.cssText = `width:100%;background:var(--primary);border-radius:2px 2px 0 0;min-height:2px;height:${heightPct}%;opacity:${bucket.count > 0 ? 0.8 : 0.15}`;
-    bar.title = `${bucket.count} session(s)`;
+    const heightPct = yMax > 0 ? (bucket.count / yMax) * 100 : 0;
+    bar.style.cssText = `width:100%;background:var(--primary);border-radius:2px 2px 0 0;min-height:${bucket.count > 0 ? 2 : 1}px;height:${heightPct}%;opacity:${bucket.count > 0 ? 0.8 : 0.15}`;
+    bar.title = bucket.count + ' session(s)';
     barWrap.appendChild(bar);
 
-    // Hour label
+    col.appendChild(barWrap);
+    barRow.appendChild(col);
+  }
+
+  chartArea.appendChild(barRow);
+
+  outer.appendChild(yAxis);
+  outer.appendChild(chartArea);
+  container.appendChild(outer);
+
+  // X-axis labels row below the chart
+  const xRow = document.createElement('div');
+  xRow.style.cssText = 'display:flex;gap:3px;margin-left:38px'; // offset to match bars
+
+  for (const bucket of buckets) {
     const label = document.createElement('div');
     const d = new Date(bucket.hour * 1000);
     label.className = 'mono';
-    label.style.cssText = 'font-size:0.55rem;color:var(--on-surface-variant);margin-top:4px';
+    label.style.cssText = 'flex:1;text-align:center;font-size:0.55rem;color:var(--on-surface-variant);margin-top:4px';
     label.textContent = String(d.getHours()).padStart(2, '0') + ':00';
-
-    col.appendChild(barWrap);
-    col.appendChild(label);
-    chart.appendChild(col);
+    xRow.appendChild(label);
   }
+  container.appendChild(xRow);
+}
 
-  container.appendChild(chart);
+/// Compute nice Y-axis tick values (always includes 0 and a rounded max).
+function computeYTicks(maxVal) {
+  if (maxVal <= 0) return [0];
+  if (maxVal <= 5) {
+    // Small range: tick every 1
+    const t = [];
+    for (let i = 0; i <= maxVal; i++) t.push(i);
+    return t;
+  }
+  // Find a nice step: 1, 2, 5, 10, 20, 50, ...
+  const raw = maxVal / 4; // aim for ~4-5 ticks
+  const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  let step;
+  if (raw / mag < 1.5) step = mag;
+  else if (raw / mag < 3.5) step = 2 * mag;
+  else if (raw / mag < 7.5) step = 5 * mag;
+  else step = 10 * mag;
+
+  const ticks = [];
+  for (let v = 0; v <= maxVal + step * 0.1; v += step) {
+    ticks.push(Math.round(v));
+  }
+  // Ensure the last tick covers maxVal
+  if (ticks[ticks.length - 1] < maxVal) {
+    ticks.push(ticks[ticks.length - 1] + Math.round(step));
+  }
+  return ticks;
 }
 
 function makeStatCard(label, valueId, initial) {
