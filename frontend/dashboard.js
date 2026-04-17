@@ -40,27 +40,35 @@ async function initDashboard() {
     for (const s of data.sessions) {
       const tr = document.createElement('tr');
 
-      const tdId = document.createElement('td');
-      tdId.className = 'mono';
-      const link = document.createElement('a');
-      link.href = '#/viewer/' + s.session_id;
-      link.textContent = s.session_id.slice(0, 16) + '...';
-      link.className = 'text-primary hover:underline';
-      tdId.appendChild(link);
+      const tdUser = document.createElement('td');
+      tdUser.className = 'mono';
+      const userLink = document.createElement('a');
+      userLink.href = '#/viewer/' + s.session_id;
+      userLink.textContent = s.user;
+      userLink.className = 'text-primary hover:underline';
+      tdUser.appendChild(userLink);
 
-      const tdStatus = document.createElement('td');
-      const dot = document.createElement('span');
-      dot.textContent = (s.end_reason === 'eof' || s.end_reason === 'rotated') ? '● CLOSED' : '● ACTIVE';
-      dot.className = (s.end_reason === 'eof' || s.end_reason === 'rotated') ? 'dot-closed' : 'dot-active';
-      tdStatus.appendChild(dot);
+      const tdHost = document.createElement('td');
+      tdHost.className = 'mono text-on-surface-variant';
+      tdHost.textContent = s.host;
+
+      const tdTime = document.createElement('td');
+      tdTime.className = 'mono text-on-surface-variant';
+      tdTime.textContent = formatTime(s.started);
 
       const tdDur = document.createElement('td');
       tdDur.className = 'mono';
       tdDur.textContent = formatDuration(s.duration);
 
       const tdSize = document.createElement('td');
-      tdSize.className = 'mono';
+      tdSize.className = 'mono text-on-surface-variant';
       tdSize.textContent = formatBytes(s.total_bytes);
+
+      const tdStatus = document.createElement('td');
+      const dot = document.createElement('span');
+      dot.textContent = (s.end_reason === 'eof' || s.end_reason === 'rotated') ? '● CLOSED' : '● ACTIVE';
+      dot.className = (s.end_reason === 'eof' || s.end_reason === 'rotated') ? 'dot-closed' : 'dot-active';
+      tdStatus.appendChild(dot);
 
       const tdAction = document.createElement('td');
       const viewBtn = document.createElement('a');
@@ -69,10 +77,12 @@ async function initDashboard() {
       viewBtn.textContent = 'visibility';
       tdAction.appendChild(viewBtn);
 
-      tr.appendChild(tdId);
-      tr.appendChild(tdStatus);
+      tr.appendChild(tdUser);
+      tr.appendChild(tdHost);
+      tr.appendChild(tdTime);
       tr.appendChild(tdDur);
       tr.appendChild(tdSize);
+      tr.appendChild(tdStatus);
       tr.appendChild(tdAction);
       tbody.appendChild(tr);
     }
@@ -115,7 +125,7 @@ function buildDashboardDOM(container) {
 
   const thead = document.createElement('thead');
   const headerRow = document.createElement('tr');
-  ['SESSION_ID', 'STATUS', 'DURATION', 'DATA_VOL', 'ACTIONS'].forEach(h => {
+  ['USER', 'HOST', 'START_TIME', 'DURATION', 'SIZE', 'STATUS', 'ACTIONS'].forEach(h => {
     const th = document.createElement('th');
     th.textContent = h;
     headerRow.appendChild(th);
