@@ -79,6 +79,7 @@ async fn main() {
     });
 
     let app = Router::new()
+        .route("/api/info", get(api::info))
         .route("/api/stats", get(api::stats))
         .route("/api/activity", get(api::activity))
         .route("/api/sessions", get(api::sessions))

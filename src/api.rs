@@ -18,6 +18,18 @@ pub struct AppState {
     pub storage_mode: String,
 }
 
+pub async fn info(State(state): State<Arc<AppState>>) -> impl IntoResponse {
+    let idx = state.index.lock().unwrap();
+    let total = idx.stats().map(|s| s.total_sessions).unwrap_or(0);
+    Json(serde_json::json!({
+        "version": env!("CARGO_PKG_VERSION"),
+        "storage_dir": state.storage_dir.to_string_lossy(),
+        "storage_mode": state.storage_mode,
+        "total_sessions": total,
+    }))
+    .into_response()
+}
+
 pub async fn stats(State(state): State<Arc<AppState>>) -> impl IntoResponse {
     let idx = state.index.lock().unwrap();
     match idx.stats() {

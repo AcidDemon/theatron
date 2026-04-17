@@ -88,7 +88,7 @@ tailwind.config = {
     <div class="flex items-center gap-3">
       <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">notifications</span>
       <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">videocam</span>
-      <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">settings</span>
+      <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" onclick="toggleSettings()">settings</span>
       <div class="w-8 h-8 rounded-full bg-surface-high border border-outline-variant flex items-center justify-center">
         <span class="material-symbols-outlined text-sm">person</span>
       </div>
@@ -102,6 +102,17 @@ tailwind.config = {
   <div id="screen-exports" class="p-6" style="display:none"></div>
 </main>
 
+<!-- Settings slide-out panel -->
+<div id="settings-panel" style="position:fixed;top:0;right:0;width:360px;height:100vh;
+  background:var(--surface-container);border-left:1px solid var(--outline-variant);
+  z-index:100;transform:translateX(100%);transition:transform 0.2s ease;
+  overflow-y:auto;padding:1.5rem">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+    <span class="text-lg font-semibold" style="font-family:'Space Grotesk'">SETTINGS</span>
+    <span class="material-symbols-outlined cursor-pointer hover:text-primary" onclick="toggleSettings()">close</span>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.min.js"></script>
 <script src="app.js"></script>
@@ -109,5 +120,6 @@ tailwind.config = {
 <script src="browser.js"></script>
 <script src="terminal.js"></script>
 <script src="exports.js"></script>
+<script src="settings.js"></script>
 </body>
 </html>

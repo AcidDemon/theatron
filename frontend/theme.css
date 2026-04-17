@@ -18,6 +18,25 @@
   --error-container: #93000a;
 }
 
+/* Light mode override */
+:root.light {
+  --surface: #f5f5f3;
+  --surface-container: #eaeae8;
+  --surface-container-high: #e0e0de;
+  --surface-container-highest: #d5d5d3;
+  --surface-bright: #ccccca;
+  --primary: #006e16;
+  --primary-dim: #005311;
+  --primary-container: #b8f5b0;
+  --secondary: #2d7830;
+  --on-surface: #1a1c19;
+  --on-surface-variant: #3a4d36;
+  --outline: #6b7d66;
+  --outline-variant: #c1d4ba;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+}
+
 body {
   background: var(--surface);
   color: var(--on-surface);
