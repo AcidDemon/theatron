@@ -33,11 +33,19 @@ function buildSettingsPanel() {
   themeToggle.id = 'theme-toggle';
   themeToggle.className = 'btn-outline';
   themeToggle.style.cssText = 'padding:0.3rem 0.8rem;font-size:0.7rem';
-  themeToggle.textContent = getCurrentTheme() === 'dark' ? 'DARK_MODE' : 'LIGHT_MODE';
+  const updateThemeBtn = () => {
+    const t = getCurrentTheme();
+    themeToggle.textContent = t === 'dark' ? '☀ LIGHT_MODE' : '☾ DARK_MODE';
+    // Ensure visibility in both modes
+    themeToggle.style.background = t === 'dark' ? 'transparent' : 'var(--primary)';
+    themeToggle.style.color = t === 'dark' ? 'var(--primary)' : '#fff';
+    themeToggle.style.borderColor = 'var(--primary)';
+  };
+  updateThemeBtn();
   themeToggle.onclick = () => {
     const next = getCurrentTheme() === 'dark' ? 'light' : 'dark';
     setTheme(next);
-    themeToggle.textContent = next === 'dark' ? 'DARK_MODE' : 'LIGHT_MODE';
+    updateThemeBtn();
   };
   themeRow.appendChild(themeLabel);
   themeRow.appendChild(themeToggle);
