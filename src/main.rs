@@ -80,6 +80,7 @@ async fn main() {
 
     let app = Router::new()
         .route("/api/stats", get(api::stats))
+        .route("/api/activity", get(api::activity))
         .route("/api/sessions", get(api::sessions))
         .route("/api/sessions/{session_id}", get(api::session_detail))
         .route(

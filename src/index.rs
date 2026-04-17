@@ -338,6 +338,35 @@ impl Index {
                 _ => Err(format!("get_session: {e}")),
             })
     }
+
+    /// Sessions per hour for the last 24 hours. Returns 24 buckets
+    /// ordered oldest→newest, each with the hour's unix timestamp
+    /// and the session count.
+    pub fn activity_24h(&self) -> Result<Vec<(i64, i64)>, String> {
+        let now = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_secs() as i64)
+            .unwrap_or(0);
+        let start = now - 86400;
+        // Round start down to the hour boundary.
+        let start_hour = start - (start % 3600);
+
+        let mut buckets = Vec::with_capacity(24);
+        for i in 0..24 {
+            let bucket_start = start_hour + i * 3600;
+            let bucket_end = bucket_start + 3600;
+            let count: i64 = self
+                .conn
+                .query_row(
+                    "SELECT COUNT(*) FROM sessions WHERE started >= ?1 AND started < ?2",
+                    params![bucket_start as f64, bucket_end as f64],
+                    |r| r.get(0),
+                )
+                .unwrap_or(0);
+            buckets.push((bucket_start, count));
+        }
+        Ok(buckets)
+    }
 }
 
 /// Scan a directory tree for .manifest.json files and index them.

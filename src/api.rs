@@ -26,6 +26,22 @@ pub async fn stats(State(state): State<Arc<AppState>>) -> impl IntoResponse {
     }
 }
 
+pub async fn activity(State(state): State<Arc<AppState>>) -> impl IntoResponse {
+    let idx = state.index.lock().unwrap();
+    match idx.activity_24h() {
+        Ok(buckets) => {
+            let data: Vec<serde_json::Value> = buckets
+                .into_iter()
+                .map(|(ts, count)| {
+                    serde_json::json!({ "hour": ts, "count": count })
+                })
+                .collect();
+            Json(serde_json::json!({ "buckets": data })).into_response()
+        }
+        Err(e) => (StatusCode::INTERNAL_SERVER_ERROR, e).into_response(),
+    }
+}
+
 #[derive(Deserialize, Default)]
 pub struct SessionsQuery {
     pub q: Option<String>,

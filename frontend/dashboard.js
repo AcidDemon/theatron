@@ -24,6 +24,14 @@ async function initDashboard() {
     console.error('dashboard stats:', e);
   }
 
+  // Activity chart
+  try {
+    const activity = await apiGet('/activity');
+    renderActivityChart(activity.buckets);
+  } catch (e) {
+    console.error('dashboard activity:', e);
+  }
+
   // Recent sessions
   try {
     const data = await apiGet('/sessions?per_page=5&sort=started&order=desc');
@@ -120,12 +128,73 @@ function buildDashboardDOM(container) {
   table.appendChild(thead);
   table.appendChild(tbody);
 
+  // Activity chart
+  const chartTitle = document.createElement('div');
+  chartTitle.className = 'label mb-2 mt-6';
+  chartTitle.textContent = 'NETWORK_ACTIVITY_METRIC';
+
+  const chartSubtitle = document.createElement('div');
+  chartSubtitle.className = 'text-xs text-on-surface-variant mb-3';
+  chartSubtitle.textContent = 'REAL_TIME_NODE_TRAFFIC_LOGGING';
+
+  const chartContainer = document.createElement('div');
+  chartContainer.id = 'activity-chart';
+  chartContainer.className = 'card p-4 mb-6';
+  chartContainer.style.minHeight = '180px';
+
   container.appendChild(title);
   container.appendChild(subtitle);
   container.appendChild(statsRow);
   container.appendChild(usersHidden);
+  container.appendChild(chartTitle);
+  container.appendChild(chartSubtitle);
+  container.appendChild(chartContainer);
   container.appendChild(recentTitle);
   container.appendChild(table);
+}
+
+function renderActivityChart(buckets) {
+  const container = document.getElementById('activity-chart');
+  if (!container) return;
+  container.textContent = '';
+
+  if (!buckets || buckets.length === 0) {
+    container.textContent = 'NO_DATA';
+    return;
+  }
+
+  const maxCount = Math.max(...buckets.map(b => b.count), 1);
+
+  // Chart wrapper: flex row of bars
+  const chart = document.createElement('div');
+  chart.style.cssText = 'display:flex;align-items:flex-end;gap:3px;height:140px;padding-top:10px';
+
+  for (const bucket of buckets) {
+    const col = document.createElement('div');
+    col.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;height:100%';
+
+    // Bar
+    const barWrap = document.createElement('div');
+    barWrap.style.cssText = 'flex:1;display:flex;align-items:flex-end;width:100%';
+    const bar = document.createElement('div');
+    const heightPct = maxCount > 0 ? (bucket.count / maxCount) * 100 : 0;
+    bar.style.cssText = `width:100%;background:var(--primary);border-radius:2px 2px 0 0;min-height:2px;height:${heightPct}%;opacity:${bucket.count > 0 ? 0.8 : 0.15}`;
+    bar.title = `${bucket.count} session(s)`;
+    barWrap.appendChild(bar);
+
+    // Hour label
+    const label = document.createElement('div');
+    const d = new Date(bucket.hour * 1000);
+    label.className = 'mono';
+    label.style.cssText = 'font-size:0.55rem;color:var(--on-surface-variant);margin-top:4px';
+    label.textContent = String(d.getHours()).padStart(2, '0') + ':00';
+
+    col.appendChild(barWrap);
+    col.appendChild(label);
+    chart.appendChild(col);
+  }
+
+  container.appendChild(chart);
 }
 
 function makeStatCard(label, valueId, initial) {
