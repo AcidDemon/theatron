@@ -5,19 +5,21 @@ let settingsBuilt = false;
 
 function toggleSettings() {
   const panel = document.getElementById('settings-panel');
-  if (!panel) return;
+  if (!panel) { console.error('settings: no panel'); return; }
   settingsOpen = !settingsOpen;
   panel.style.transform = settingsOpen ? 'translateX(0)' : 'translateX(100%)';
-  if (settingsOpen && !settingsBuilt) {
-    settingsBuilt = true;
-    buildSettingsPanel();
+  if (settingsOpen) {
+    if (!settingsBuilt) {
+      settingsBuilt = true;
+      buildSettingsPanel();
+    }
+    refreshSettingsData().catch(function(e) { console.error('settings refresh:', e); });
   }
-  if (settingsOpen) refreshSettingsData();
 }
 
 function buildSettingsPanel() {
-  const panel = document.getElementById('settings-panel');
-  if (!panel) return;
+  const panel = document.getElementById('settings-content');
+  if (!panel) { console.error('settings: no settings-content div'); return; }
 
   // --- APPEARANCE ---
   const appearanceSection = makeSection('APPEARANCE');
