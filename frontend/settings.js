@@ -209,11 +209,15 @@ function storageSet(key, value) {
   try { localStorage.setItem(key, value); } catch (_) { /* insecure context */ }
 }
 
+// In-memory theme state — source of truth when localStorage is blocked.
+let _currentTheme = storageGet('theatron_theme', 'dark');
+
 function getCurrentTheme() {
-  return storageGet('theatron_theme', 'dark');
+  return _currentTheme;
 }
 
 function setTheme(theme) {
+  _currentTheme = theme;
   storageSet('theatron_theme', theme);
   if (theme === 'light') {
     document.documentElement.classList.add('light');
@@ -224,8 +228,7 @@ function setTheme(theme) {
 
 // Apply saved theme on load
 (function () {
-  const saved = getCurrentTheme();
-  if (saved === 'light') {
+  if (_currentTheme === 'light') {
     document.documentElement.classList.add('light');
   }
 })();
