@@ -86,12 +86,13 @@ function escapeHtml(str) {
 }
 
 // Age identity management (sessionStorage)
+// Wrapped in try/catch: some browsers block storage on http://
 function getAgeIdentity() {
-  return sessionStorage.getItem('age_identity');
+  try { return sessionStorage.getItem('age_identity'); } catch(_) { return null; }
 }
 
 function setAgeIdentity(identity) {
-  sessionStorage.setItem('age_identity', identity);
+  try { sessionStorage.setItem('age_identity', identity); } catch(_) { /* insecure context */ }
 }
 
 function showIdentityModal(onSubmit) {

@@ -5,7 +5,7 @@ let viewerTerm = null;
 let viewerFit = null;
 let viewerEvents = [];
 let viewerPlaying = false;
-let viewerSpeed = parseFloat(localStorage.getItem('theatron_default_speed') || '1');
+let viewerSpeed = (function() { try { return parseFloat(localStorage.getItem('theatron_default_speed') || '1'); } catch(_) { return 1.0; } })();
 let viewerIndex = 0;
 let viewerTimeout = null;
 let viewerSessionId = null;
@@ -150,7 +150,7 @@ function playNextEvent() {
   if (viewerIndex < viewerEvents.length) {
     const nextEvt = viewerEvents[viewerIndex];
     const delay = ((nextEvt.t - evt.t) / viewerSpeed) * 1000;
-    const maxDelay = parseInt(localStorage.getItem('theatron_max_delay') || '5000', 10);
+    const maxDelay = (function() { try { return parseInt(localStorage.getItem('theatron_max_delay') || '5000', 10); } catch(_) { return 5000; } })();
     const clampedDelay = Math.min(Math.max(delay, 0), maxDelay);
     viewerTimeout = setTimeout(playNextEvent, clampedDelay);
   } else {

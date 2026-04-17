@@ -93,7 +93,7 @@ function buildSettingsPanel() {
   speedLabel.textContent = 'Default speed';
   const speedSelect = document.createElement('select');
   speedSelect.className = 'bg-surface border border-outline-variant text-sm mono px-2 py-1';
-  const currentSpeed = localStorage.getItem('theatron_default_speed') || '1';
+  const currentSpeed = storageGet('theatron_default_speed', '1');
   [0.5, 1, 2, 4].forEach(s => {
     const opt = document.createElement('option');
     opt.value = s;
@@ -102,7 +102,7 @@ function buildSettingsPanel() {
     speedSelect.appendChild(opt);
   });
   speedSelect.onchange = () => {
-    localStorage.setItem('theatron_default_speed', speedSelect.value);
+    storageSet('theatron_default_speed', speedSelect.value);
   };
   speedRow.appendChild(speedLabel);
   speedRow.appendChild(speedSelect);
@@ -117,10 +117,10 @@ function buildSettingsPanel() {
   delayInput.min = 100;
   delayInput.max = 30000;
   delayInput.step = 100;
-  delayInput.value = localStorage.getItem('theatron_max_delay') || '5000';
+  delayInput.value = storageGet('theatron_max_delay', '5000');
   delayInput.className = 'bg-surface border border-outline-variant text-sm mono px-2 py-1 w-20 text-right';
   delayInput.onchange = () => {
-    localStorage.setItem('theatron_max_delay', delayInput.value);
+    storageSet('theatron_max_delay', delayInput.value);
   };
   delayRow.appendChild(delayLabel);
   delayRow.appendChild(delayInput);
@@ -193,12 +193,20 @@ function refreshKeyStatus() {
 
 // --- Theme management ---
 
+// Safe localStorage wrapper — some browsers block storage on http://
+function storageGet(key, fallback) {
+  try { return localStorage.getItem(key) || fallback; } catch (_) { return fallback; }
+}
+function storageSet(key, value) {
+  try { localStorage.setItem(key, value); } catch (_) { /* insecure context */ }
+}
+
 function getCurrentTheme() {
-  return localStorage.getItem('theatron_theme') || 'dark';
+  return storageGet('theatron_theme', 'dark');
 }
 
 function setTheme(theme) {
-  localStorage.setItem('theatron_theme', theme);
+  storageSet('theatron_theme', theme);
   if (theme === 'light') {
     document.documentElement.classList.add('light');
   } else {
