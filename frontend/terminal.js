@@ -267,35 +267,36 @@ function renderViewerProperties(meta) {
   });
 }
 
-let viewerFullscreen = false;
-
 function toggleViewerFullscreen() {
-  viewerFullscreen = !viewerFullscreen;
-  const screen = document.getElementById('screen-viewer');
-  if (!screen) return;
+  const termCol = document.querySelector('.viewer-term-col');
+  if (!termCol) return;
 
-  if (viewerFullscreen) {
-    screen.classList.add('viewer-fullscreen');
+  if (!document.fullscreenElement) {
+    termCol.requestFullscreen().then(() => {
+      updateFullscreenBtn(true);
+      setTimeout(() => { if (viewerFit) viewerFit.fit(); }, 100);
+    }).catch(() => {});
   } else {
-    screen.classList.remove('viewer-fullscreen');
+    document.exitFullscreen().then(() => {
+      updateFullscreenBtn(false);
+      setTimeout(() => { if (viewerFit) viewerFit.fit(); }, 100);
+    }).catch(() => {});
   }
-
-  // Update button icon
-  const btn = screen.querySelector('[title="FULLSCREEN"], [title="EXIT_FULLSCREEN"]');
-  if (btn) {
-    btn.textContent = viewerFullscreen ? 'fullscreen_exit' : 'fullscreen';
-    btn.title = viewerFullscreen ? 'EXIT_FULLSCREEN' : 'FULLSCREEN';
-  }
-
-  // Refit terminal after layout change
-  setTimeout(() => { if (viewerFit) viewerFit.fit(); }, 100);
 }
 
-// Exit fullscreen on Escape
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && viewerFullscreen) {
-    toggleViewerFullscreen();
+function updateFullscreenBtn(isFs) {
+  const btn = document.querySelector('[title="FULLSCREEN"], [title="EXIT_FULLSCREEN"]');
+  if (btn) {
+    btn.textContent = isFs ? 'fullscreen_exit' : 'fullscreen';
+    btn.title = isFs ? 'EXIT_FULLSCREEN' : 'FULLSCREEN';
   }
+}
+
+// Sync button state when user exits fullscreen via Escape (browser-native)
+document.addEventListener('fullscreenchange', () => {
+  const isFs = !!document.fullscreenElement;
+  updateFullscreenBtn(isFs);
+  setTimeout(() => { if (viewerFit) viewerFit.fit(); }, 100);
 });
 
 function buildViewerDOM(container) {
