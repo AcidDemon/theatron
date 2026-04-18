@@ -232,6 +232,34 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
+/* Viewer fullscreen mode — applied to #screen-viewer */
+.viewer-fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 500 !important;
+  background: var(--surface) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+.viewer-fullscreen .viewer-layout {
+  height: 100vh !important;
+  flex-direction: column !important;
+}
+.viewer-fullscreen .viewer-term-col {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.viewer-fullscreen .terminal-container {
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+.viewer-fullscreen .viewer-right-col,
+.viewer-fullscreen .viewer-top-bar {
+  display: none !important;
+}
+
 /* Modal overlay */
 .modal-overlay {
   position: fixed;

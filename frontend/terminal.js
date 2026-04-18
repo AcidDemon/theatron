@@ -268,44 +268,23 @@ function renderViewerProperties(meta) {
 }
 
 let viewerFullscreen = false;
-let savedTermColStyle = '';
-let savedTermContainerStyle = '';
-let savedLayoutDisplay = '';
 
-function toggleViewerFullscreen(termCol) {
+function toggleViewerFullscreen() {
   viewerFullscreen = !viewerFullscreen;
-  const btn = termCol.querySelector('[title="FULLSCREEN"]');
-  const termContainer = termCol.querySelector('.terminal-container');
-  const layout = termCol.parentElement; // the flex row holding termCol + rightCol
-  const topBar = layout.previousElementSibling; // the title/status bar above
-  const rightCol = termCol.nextElementSibling; // the properties panel
+  const screen = document.getElementById('screen-viewer');
+  if (!screen) return;
 
   if (viewerFullscreen) {
-    // Save original styles
-    savedTermColStyle = termCol.getAttribute('style') || '';
-    savedTermContainerStyle = termContainer.getAttribute('style') || '';
-    savedLayoutDisplay = layout.getAttribute('style') || '';
-
-    // Hide sibling elements
-    if (rightCol) rightCol.style.display = 'none';
-    if (topBar) topBar.style.display = 'none';
-
-    // Make layout fill the screen
-    layout.style.cssText = 'position:fixed;inset:0;z-index:500;background:var(--surface);padding:0';
-    termCol.style.cssText = 'flex:1;display:flex;flex-direction:column;height:100vh';
-    termContainer.style.cssText = 'flex:1;min-height:0';
-
-    if (btn) { btn.textContent = 'fullscreen_exit'; btn.title = 'EXIT_FULLSCREEN'; }
+    screen.classList.add('viewer-fullscreen');
   } else {
-    // Restore everything
-    layout.setAttribute('style', savedLayoutDisplay);
-    termCol.setAttribute('style', savedTermColStyle);
-    termContainer.setAttribute('style', savedTermContainerStyle);
+    screen.classList.remove('viewer-fullscreen');
+  }
 
-    if (rightCol) rightCol.style.display = '';
-    if (topBar) topBar.style.display = '';
-
-    if (btn) { btn.textContent = 'fullscreen'; btn.title = 'FULLSCREEN'; }
+  // Update button icon
+  const btn = screen.querySelector('[title="FULLSCREEN"], [title="EXIT_FULLSCREEN"]');
+  if (btn) {
+    btn.textContent = viewerFullscreen ? 'fullscreen_exit' : 'fullscreen';
+    btn.title = viewerFullscreen ? 'EXIT_FULLSCREEN' : 'FULLSCREEN';
   }
 
   // Refit terminal after layout change
@@ -315,15 +294,14 @@ function toggleViewerFullscreen(termCol) {
 // Exit fullscreen on Escape
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && viewerFullscreen) {
-    const termCol = document.querySelector('#viewer-terminal').parentElement;
-    if (termCol) toggleViewerFullscreen(termCol);
+    toggleViewerFullscreen();
   }
 });
 
 function buildViewerDOM(container) {
   // Top bar
   const topBar = document.createElement('div');
-  topBar.className = 'flex items-center justify-between mb-4';
+  topBar.className = 'flex items-center justify-between mb-4 viewer-top-bar';
 
   const titleDiv = document.createElement('div');
   const title = document.createElement('h2');
@@ -341,10 +319,11 @@ function buildViewerDOM(container) {
 
   // Main layout: terminal left, properties right
   const layout = document.createElement('div');
-  layout.className = 'flex gap-4';
+  layout.className = 'flex gap-4 viewer-layout';
 
   // Terminal column (60%)
   const termCol = document.createElement('div');
+  termCol.className = 'viewer-term-col';
   termCol.style.flex = '3';
 
   const termContainer = document.createElement('div');
@@ -403,7 +382,7 @@ function buildViewerDOM(container) {
   fullscreenBtn.className = 'material-symbols-outlined';
   fullscreenBtn.textContent = 'fullscreen';
   fullscreenBtn.title = 'FULLSCREEN';
-  fullscreenBtn.onclick = () => toggleViewerFullscreen(termCol);
+  fullscreenBtn.onclick = () => toggleViewerFullscreen();
 
   controls.appendChild(playBtn);
   controls.appendChild(seekSlider);
@@ -419,6 +398,7 @@ function buildViewerDOM(container) {
 
   // Right panel (40%)
   const rightCol = document.createElement('div');
+  rightCol.className = 'viewer-right-col';
   rightCol.style.flex = '2';
 
   const propsTitle = document.createElement('div');
