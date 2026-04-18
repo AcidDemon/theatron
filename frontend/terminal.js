@@ -267,6 +267,35 @@ function renderViewerProperties(meta) {
   });
 }
 
+let viewerFullscreen = false;
+
+function toggleViewerFullscreen(termCol) {
+  viewerFullscreen = !viewerFullscreen;
+  const btn = termCol.querySelector('.material-symbols-outlined[title="FULLSCREEN"]');
+
+  if (viewerFullscreen) {
+    termCol.style.cssText = 'position:fixed;inset:0;z-index:500;background:var(--surface);display:flex;flex-direction:column';
+    termCol.querySelector('.terminal-container').style.flex = '1';
+    if (btn) btn.textContent = 'fullscreen_exit';
+  } else {
+    termCol.style.cssText = 'flex:3';
+    termCol.querySelector('.terminal-container').style.flex = '';
+    termCol.querySelector('.terminal-container').style.minHeight = '400px';
+    if (btn) btn.textContent = 'fullscreen';
+  }
+
+  // Refit the terminal after layout change
+  setTimeout(() => { if (viewerFit) viewerFit.fit(); }, 50);
+}
+
+// Exit fullscreen on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && viewerFullscreen) {
+    const termCol = document.querySelector('#viewer-terminal').parentElement;
+    if (termCol) toggleViewerFullscreen(termCol);
+  }
+});
+
 function buildViewerDOM(container) {
   // Top bar
   const topBar = document.createElement('div');
@@ -346,6 +375,12 @@ function buildViewerDOM(container) {
   });
   speedSelect.onchange = () => { viewerSpeed = parseFloat(speedSelect.value); };
 
+  const fullscreenBtn = document.createElement('button');
+  fullscreenBtn.className = 'material-symbols-outlined';
+  fullscreenBtn.textContent = 'fullscreen';
+  fullscreenBtn.title = 'FULLSCREEN';
+  fullscreenBtn.onclick = () => toggleViewerFullscreen(termCol);
+
   controls.appendChild(playBtn);
   controls.appendChild(seekSlider);
   controls.appendChild(currentTime);
@@ -353,6 +388,7 @@ function buildViewerDOM(container) {
   controls.appendChild(totalTime);
   controls.appendChild(speedLabel);
   controls.appendChild(speedSelect);
+  controls.appendChild(fullscreenBtn);
 
   termCol.appendChild(termContainer);
   termCol.appendChild(controls);
