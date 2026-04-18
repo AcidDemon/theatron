@@ -147,5 +147,132 @@ function showIdentityModal(onSubmit) {
   document.body.appendChild(overlay);
 }
 
+// --- Notifications dropdown ---
+let notifOpen = false;
+
+async function toggleNotifications() {
+  notifOpen = !notifOpen;
+  const dd = document.getElementById('notif-dropdown');
+  if (!dd) return;
+  dd.style.display = notifOpen ? 'block' : 'none';
+  if (notifOpen) {
+    try {
+      const data = await apiGet('/sessions?per_page=10&sort=started&order=desc');
+      const list = document.getElementById('notif-list');
+      if (!list) return;
+      list.textContent = '';
+      if (data.sessions.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'text-xs text-on-surface-variant p-2';
+        empty.textContent = 'NO_RECENT_EVENTS';
+        list.appendChild(empty);
+        return;
+      }
+      for (const s of data.sessions) {
+        const item = document.createElement('a');
+        item.href = '#/viewer/' + s.session_id;
+        item.className = 'flex items-center gap-3 p-2 hover:bg-surface-high cursor-pointer';
+        item.style.borderBottom = '1px solid var(--outline-variant)';
+        item.onclick = () => { notifOpen = false; dd.style.display = 'none'; };
+
+        const icon = document.createElement('span');
+        icon.className = 'material-symbols-outlined text-sm';
+        icon.style.color = 'var(--primary)';
+        icon.textContent = 'terminal';
+
+        const info = document.createElement('div');
+        info.style.flex = '1';
+        const line1 = document.createElement('div');
+        line1.className = 'mono text-xs';
+        line1.textContent = s.user + '@' + s.host;
+        const line2 = document.createElement('div');
+        line2.className = 'text-xs';
+        line2.style.color = 'var(--on-surface-variant)';
+        line2.textContent = formatTime(s.started) + ' · ' + formatDuration(s.duration);
+
+        info.appendChild(line1);
+        info.appendChild(line2);
+        item.appendChild(icon);
+        item.appendChild(info);
+        list.appendChild(item);
+      }
+    } catch (e) {
+      console.error('notifications:', e);
+    }
+  }
+}
+
+// Close notifications when clicking elsewhere
+document.addEventListener('click', (e) => {
+  if (notifOpen && !e.target.closest('#notif-dropdown') && e.target.textContent !== 'notifications') {
+    notifOpen = false;
+    const dd = document.getElementById('notif-dropdown');
+    if (dd) dd.style.display = 'none';
+  }
+});
+
+// --- Docs overlay ---
+let docsOpen = false;
+
+function toggleDocs() {
+  docsOpen = !docsOpen;
+  let overlay = document.getElementById('docs-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'docs-overlay';
+    overlay.className = 'modal-overlay';
+
+    const box = document.createElement('div');
+    box.className = 'modal-box';
+    box.style.maxWidth = '600px';
+
+    const title = document.createElement('div');
+    title.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem';
+    const h = document.createElement('span');
+    h.className = 'text-lg font-semibold';
+    h.style.fontFamily = 'Space Grotesk';
+    h.textContent = 'DOCUMENTATION';
+    const closeBtn = document.createElement('span');
+    closeBtn.className = 'material-symbols-outlined cursor-pointer hover:text-primary';
+    closeBtn.textContent = 'close';
+    closeBtn.onclick = () => { docsOpen = false; overlay.style.display = 'none'; };
+    title.appendChild(h);
+    title.appendChild(closeBtn);
+
+    const content = document.createElement('div');
+    content.className = 'mono text-sm';
+    content.style.color = 'var(--on-surface-variant)';
+
+    const sections = [
+      ['KEYBOARD_SHORTCUTS', 'Enter in search bar → jump to session browser with query\nSpace → play/pause in viewer\n← / → → seek in viewer'],
+      ['SESSION_BROWSER', 'Search by user, host, or session ID.\nClick column headers to sort.\nUse timeframe dropdown to filter.'],
+      ['SESSION_VIEWER', 'Paste your age decryption key when prompted.\nUse speed dropdown (0.5x–4x) to control playback.\nSeek slider jumps to any point in the session.'],
+      ['SETTINGS', 'Click the gear icon to open settings.\nToggle dark/light mode.\nManage your decryption key.\nSet default playback speed.'],
+      ['ARCHITECTURE', 'theatron reads session recordings from the\nepitropos-collector storage directory.\nNo data is modified. Read-only access.'],
+    ];
+
+    sections.forEach(([heading, body]) => {
+      const sec = document.createElement('div');
+      sec.style.marginBottom = '1rem';
+      const lbl = document.createElement('div');
+      lbl.className = 'label mb-1';
+      lbl.style.color = 'var(--primary)';
+      lbl.textContent = heading;
+      const txt = document.createElement('pre');
+      txt.style.cssText = 'white-space:pre-wrap;font-size:0.8rem;line-height:1.5';
+      txt.textContent = body;
+      sec.appendChild(lbl);
+      sec.appendChild(txt);
+      content.appendChild(sec);
+    });
+
+    box.appendChild(title);
+    box.appendChild(content);
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+  }
+  overlay.style.display = docsOpen ? 'flex' : 'none';
+}
+
 // Boot
 document.addEventListener('DOMContentLoaded', () => navigate());
