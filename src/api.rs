@@ -153,17 +153,21 @@ pub async fn raw_recording(
     AxumPath((session_id, part)): AxumPath<(String, u32)>,
 ) -> impl IntoResponse {
     let rec_path = find_recording(&state.storage_dir, &state.storage_mode, &session_id, part);
+    let filename = format!("{session_id}.part{part}.kgv1.age");
     match rec_path {
         Some(p) => match std::fs::read(&p) {
-            Ok(bytes) => (
-                StatusCode::OK,
-                [
-                    (header::CONTENT_TYPE, "application/octet-stream"),
-                    (header::CONTENT_DISPOSITION, "attachment"),
-                ],
-                bytes,
-            )
-                .into_response(),
+            Ok(bytes) => {
+                let mut headers = axum::http::HeaderMap::new();
+                headers.insert(
+                    header::CONTENT_TYPE,
+                    "application/octet-stream".parse().unwrap(),
+                );
+                headers.insert(
+                    header::CONTENT_DISPOSITION,
+                    format!("attachment; filename=\"{filename}\"").parse().unwrap(),
+                );
+                (StatusCode::OK, headers, bytes).into_response()
+            }
             Err(e) => (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()).into_response(),
         },
         None => StatusCode::NOT_FOUND.into_response(),

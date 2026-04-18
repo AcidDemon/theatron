@@ -37,7 +37,7 @@ function renderExportTable(sessions) {
 
     const tdFile = document.createElement('td');
     tdFile.className = 'mono';
-    tdFile.textContent = s.session_id.slice(0, 20) + '.kgv1.age';
+    tdFile.textContent = s.session_id + '.part0.kgv1.age';
 
     const tdTime = document.createElement('td');
     tdTime.className = 'mono text-on-surface-variant';
