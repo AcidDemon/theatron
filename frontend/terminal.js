@@ -268,24 +268,48 @@ function renderViewerProperties(meta) {
 }
 
 let viewerFullscreen = false;
+let savedTermColStyle = '';
+let savedTermContainerStyle = '';
+let savedLayoutDisplay = '';
 
 function toggleViewerFullscreen(termCol) {
   viewerFullscreen = !viewerFullscreen;
-  const btn = termCol.querySelector('.material-symbols-outlined[title="FULLSCREEN"]');
+  const btn = termCol.querySelector('[title="FULLSCREEN"]');
+  const termContainer = termCol.querySelector('.terminal-container');
+  const layout = termCol.parentElement; // the flex row holding termCol + rightCol
+  const topBar = layout.previousElementSibling; // the title/status bar above
+  const rightCol = termCol.nextElementSibling; // the properties panel
 
   if (viewerFullscreen) {
-    termCol.style.cssText = 'position:fixed;inset:0;z-index:500;background:var(--surface);display:flex;flex-direction:column';
-    termCol.querySelector('.terminal-container').style.flex = '1';
-    if (btn) btn.textContent = 'fullscreen_exit';
+    // Save original styles
+    savedTermColStyle = termCol.getAttribute('style') || '';
+    savedTermContainerStyle = termContainer.getAttribute('style') || '';
+    savedLayoutDisplay = layout.getAttribute('style') || '';
+
+    // Hide sibling elements
+    if (rightCol) rightCol.style.display = 'none';
+    if (topBar) topBar.style.display = 'none';
+
+    // Make layout fill the screen
+    layout.style.cssText = 'position:fixed;inset:0;z-index:500;background:var(--surface);padding:0';
+    termCol.style.cssText = 'flex:1;display:flex;flex-direction:column;height:100vh';
+    termContainer.style.cssText = 'flex:1;min-height:0';
+
+    if (btn) { btn.textContent = 'fullscreen_exit'; btn.title = 'EXIT_FULLSCREEN'; }
   } else {
-    termCol.style.cssText = 'flex:3';
-    termCol.querySelector('.terminal-container').style.flex = '';
-    termCol.querySelector('.terminal-container').style.minHeight = '400px';
-    if (btn) btn.textContent = 'fullscreen';
+    // Restore everything
+    layout.setAttribute('style', savedLayoutDisplay);
+    termCol.setAttribute('style', savedTermColStyle);
+    termContainer.setAttribute('style', savedTermContainerStyle);
+
+    if (rightCol) rightCol.style.display = '';
+    if (topBar) topBar.style.display = '';
+
+    if (btn) { btn.textContent = 'fullscreen'; btn.title = 'FULLSCREEN'; }
   }
 
-  // Refit the terminal after layout change
-  setTimeout(() => { if (viewerFit) viewerFit.fit(); }, 50);
+  // Refit terminal after layout change
+  setTimeout(() => { if (viewerFit) viewerFit.fit(); }, 100);
 }
 
 // Exit fullscreen on Escape
