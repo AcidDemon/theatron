@@ -274,12 +274,12 @@ function toggleViewerFullscreen() {
   if (!document.fullscreenElement) {
     termCol.requestFullscreen().then(() => {
       updateFullscreenBtn(true);
-      setTimeout(() => { if (viewerFit) viewerFit.fit(); }, 100);
+      refitTerminal();
     }).catch(() => {});
   } else {
     document.exitFullscreen().then(() => {
       updateFullscreenBtn(false);
-      setTimeout(() => { if (viewerFit) viewerFit.fit(); }, 100);
+      refitTerminal();
     }).catch(() => {});
   }
 }
@@ -296,8 +296,19 @@ function updateFullscreenBtn(isFs) {
 document.addEventListener('fullscreenchange', () => {
   const isFs = !!document.fullscreenElement;
   updateFullscreenBtn(isFs);
-  setTimeout(() => { if (viewerFit) viewerFit.fit(); }, 100);
+  refitTerminal();
 });
+
+function refitTerminal() {
+  if (!viewerTerm || !viewerFit) return;
+  // xterm.js canvas holds its old dimensions after fullscreen exit.
+  // Force a minimal resize first to collapse the canvas, then fit
+  // to the actual container after the browser finishes reflowing.
+  viewerTerm.resize(1, 1);
+  setTimeout(() => {
+    viewerFit.fit();
+  }, 150);
+}
 
 function buildViewerDOM(container) {
   // Top bar
